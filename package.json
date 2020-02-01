@@ -1,0 +1,37 @@
+{
+  "name": "cups",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r </p>\r <h1 align=\"center\">\r   CUPS\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "test": "jest -i --verbose --coverage --runInBand",
+    "start": "node index.js",
+    "dboff": "killall mongod",
+    "watch": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jordanxliu/cups.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/jordanxliu/cups/issues"
+  },
+  "homepage": "https://gitlab.com/jordanxliu/cups#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "mongoose": "^5.8.11",
+    "superagent": "^5.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0"
+  }
+}
