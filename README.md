@@ -6,7 +6,6 @@
 
 CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey, Tarique Jemison and Jordan Liu.
 
-
 ## Quick start
 
 1.  **Start developing.**
@@ -16,12 +15,9 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey,
     ```shell
     cd cups/
     npm i
-    npm start
+    npm run dev
     ```
 
 1.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:3000`!
-
-
-
