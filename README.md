@@ -15,12 +15,13 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey,
 
     ```shell
     cd cups/
-    npm run dev
+    npm i
+    npm start
     ```
 
 1.  **Open the source code and start editing!**
 
-    Your site is now running at `http://localhost:4000`!
+    Your site is now running at `http://localhost:3000`!
 
 
 
