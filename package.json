@@ -8,7 +8,7 @@
         "test": "jest -i --verbose --coverage --runInBand",
         "start": "node server.js",
         "dboff": "killall mongod",
-        "dev": "nodemon server.js"
+        "dev": "nodemon server.js -V"
     },
     "repository": {
         "type": "git",

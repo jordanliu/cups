@@ -17,6 +17,8 @@ mongoose.connect(uri, {
     useCreateIndex: true,
 });
 
+app.get('/', (req, res) => res.send('cups!'))
+
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
 
