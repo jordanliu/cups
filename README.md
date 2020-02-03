@@ -8,7 +8,7 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey 
 <br>
 
 ## Project Description
-1.  **Description**
+1.  **Overview**
 
     **Title:** Enabling Services for the Disabled: A Cup of Uplifting Coffee (C.U.P) <br><br>
     Cups is a local coffee shop that provides a relaxing getaway in the middle of the city for the disabled community. They are also a wonderful example of a [Social Enterprise Boost Initiative ](https://www.micaf.gov.jm/msme-initiatives/`social-enterprise-boost-initiative-sebi)
