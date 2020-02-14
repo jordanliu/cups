@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Portal from './pages/portal/Portal';
 import Login from './pages/login/Login';
+import PortalMenu from './pages/portalMenu/PortalMenu';
 
 const App = () => {
     return (
@@ -14,6 +15,9 @@ const App = () => {
                     </Route>
                     <Route path="/portal">
                         <Portal />
+                    </Route>
+                    <Route path="/portal-menu">
+                        <PortalMenu />
                     </Route>
                 </Switch>
             </div>
