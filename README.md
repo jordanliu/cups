@@ -21,7 +21,7 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey 
     Link to [ERD](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_ERD.pdf) <br>
     Link to [Wireframe](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_WIREFRAME.pdf) <br>
     <br>
-    Group Lead: Jordan Liu
+    Group Lead: Jordan Liu<br>
     Integration Lead: Jordan Liu
 
 ## Quick start
@@ -31,9 +31,9 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey 
     Navigate into the site’s directory and start it up.
 
     ```shell
-    cd cups/
-    npm i
     cd cups/client
+    npm i
+    cd cups/
     npm i
     npm run dev //runs client and server concurrently
     npm run client //runs client only
