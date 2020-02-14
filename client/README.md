@@ -1,101 +1,45 @@
-# Use antd in create-react-app ✨
+<p align="center">
+</p>
+<h1 align="center">
+  CUPS
+</h1>
 
-[Create React App](https://facebook.github.io/create-react-app/) + [Ant Design](https://ant.design).
+CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey (1701406), Tarique Jemison (1703228) and Jordan Liu (1506757).
+<br>
 
-## Step by Step Documentation
+## Project Description
 
-- 🇺🇸 English: https://ant.design/docs/react/use-with-create-react-app
-- 🇨🇳 中文：https://ant.design/docs/react/use-with-create-react-app-cn
+1.  **Overview**
 
-## Preview
+    **Title:** Enabling Services for the Disabled: A Cup of Uplifting Coffee (C.U.P) <br><br>
+    Cups is a local coffee shop that provides a relaxing getaway in the middle of the city for the disabled community. They are also a wonderful example of a [Social Enterprise Boost Initiative ](https://www.micaf.gov.jm/msme-initiatives/`social-enterprise-boost-initiative-sebi)
+    similar to [DeafCan coffee](https://www.deafcancoffee.com/). Kat, the manager, has been encouraged by her mentor to establish another store at
+    95 Moolean Avenue in the heart of Montego Bay. Kat would like to encourage an empowering environment through self service. Your consulting team providing pro bono services has
+    considered to incorporate Artificial Intelligence through Computer Vision and Speech Processing to accomplish this. The touch-screen self service kiosk will allow customers to
+    order their favourite treats and verify using their Digital Id.
+    <br><br>
+    Link to [ERD](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_ERD.pdf) <br>
+    Link to [Wireframe](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_WIREFRAME.pdf) <br>
+    <br>
+    Group Lead: Jordan Liu<br>
+    Integration Lead: Jordan Liu
 
-```bash
-$ npm install
-$ npm start
-```
+## Quick start
 
-or:
+1.  **Start developing.**
 
-```bash
-$ yarn
-$ yarn start
-```
+    Navigate into the site’s directory and start it up.
 
-## See more
+    ```shell
+    cd cups/client
+    npm i
+    cd cups/
+    npm i
+    npm run dev //runs client and server concurrently
+    npm run client //runs client only
+    npm run server //runs server only
+    ```
 
-- [antd](http://github.com/ant-design/ant-design/)
-- [babel-plugin-import](http://github.com/ant-design/babel-plugin-import/)
-- [create-react-app](https://github.com/facebookincubator/create-react-app)
-- [react-app-rewired](https://github.com/timarney/react-app-rewired)
-- [less-loader](https://github.com/webpack/less-loader)
+2.  **Open the source code and start editing!**
 
----
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    Your client is now running at `http://localhost:3000`! <br>
