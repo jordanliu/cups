@@ -1,16 +1,76 @@
 import React from 'react';
-import { Layout } from 'antd';
+import ReactDOM from 'react-dom';
+import { Layout, Form, Select, Button, Input } from 'antd';
 import './MenuAdd.css';
 import PortalNav from '../../portalNav/PortalNav';
 
 const { Content } = Layout;
+const { Option } = Select;
+const FormItem = Form.Item;
 
-const MenuAdd = () => {
-    return (
-        <Layout style={{ minHeight: '100vh' }}>
+function onChange(value){
+    console.log(`selected ${value}`);
+}
+
+function onBlur() {
+    console.log('blur');
+}
+
+function onFocus() {
+    console.log('focus');
+}  
+
+const MenuAdd = () => {    
+    return (               
+        <Layout style={{ minHeight: '100vh'}}>
             <PortalNav />
-            <Layout>
-                <Content style={{ margin: '16px 16px' }}>Menu Add</Content>
+            <Layout>                
+                <Content style={{ margin: '16px 16px', align: 'middle' }}><h1>Add Item</h1>                
+                <Form className="add-item-form">
+                    <FormItem>
+                    <Input style={{ width: 200 }} 
+                    id ="item-name" 
+                    placeholder ="Item Name" />
+                    </FormItem>
+                    <FormItem>
+                        <Select
+                        style={{ width: 200 }}
+                        placeholder="Category"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onFocus={onFocus}
+                        onBlur={onBlur}                
+                        filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        >
+                            <Option value = "beverage">Beverage</Option>
+                            <Option value = "snack">Snack</Option>
+                            <Option value = "daily-surprise">Daily Surprise</Option>
+                        </Select>
+                    </FormItem>
+                    <FormItem>                      
+                    <Input
+                    type ="number" 
+                    style={{ width: 200 }} 
+                    id ="stock-quantity" 
+                    placeholder ="Stock Quantity" />
+                    </FormItem>
+                    <FormItem>
+                    <Input style={{ width: 200 }} 
+                    id ="cost" 
+                    placeholder ="Item Cost" />
+                    </FormItem>
+                    <FormItem>
+                        <Button
+                        type="primary"
+                        htmlType = "submit"
+                        className ="sumbit-new-item">
+                        Add Item    
+                        </Button>
+                    </FormItem>
+                </Form>                
+                </Content>                
             </Layout>
         </Layout>
     );
