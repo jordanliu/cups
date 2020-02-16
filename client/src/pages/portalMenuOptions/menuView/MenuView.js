@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Form, Button } from 'antd';
 import './MenuView.css';
 import PortalNav from '../../portalNav/PortalNav';
 
@@ -10,7 +10,16 @@ const MenuView = () => {
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
             <Layout>
-                <Content style={{ margin: '16px 16px' }}>Menu View</Content>
+                <Content style={{ align: 'middle', margin: '16px 16px' }}>
+                    <h1>Menu View </h1>
+                    <Form>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                                Cancel Order
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Content>
             </Layout>
         </Layout>
     );
