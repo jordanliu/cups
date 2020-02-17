@@ -8,15 +8,15 @@ import PortalNav from '../../portalNav/PortalNav';
 const { SubMenu } = Menu;
 const { Content } = Layout;
 
-const list = [{
-    snackName: 'Honey Bun',
-    snackType: 'bun',
-},
-{
-    bevName: 'Pepsi',
-    bevType: 'soda',
-}
-]
+// const list = [{
+//     snackName: 'Honey Bun',
+//     snackType: 'bun',
+// },
+// {
+//     bevName: 'Pepsi',
+//     bevType: 'soda',
+// }
+// ]
 
 const MenuView = () => {
     
