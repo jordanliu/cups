@@ -1,0 +1,22 @@
+.menu-wrapper {
+    width: 900px;
+    margin: auto;
+    padding: 10px;
+}
+
+.menu-header {
+    padding-bottom: 25px;
+}
+
+.menu-details {
+    font-size: 20px;
+    border-radius: 15px;
+    position: fixed;
+    bottom: -15px;
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    height: 100px;
+    background-color: rgb(226, 226, 226);
+    text-align: center;
+}
