@@ -48,7 +48,11 @@ const Order = () => {
                         </List.Item>
                     )}
                 />
+                <div className="order-details">
+                    <h3>Total: $6000</h3>
+                </div>
             </div>
+
             <div className="order-cta">
                 <Button>Cancel Order</Button>
                 <Button>Confirm Order</Button>

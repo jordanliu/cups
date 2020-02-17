@@ -20,3 +20,7 @@
 .order-cta button {
     margin: 10px;
 }
+
+.order-details h3 {
+    text-align: right;
+}

@@ -12,10 +12,10 @@ const Menu = () => {
                 align="middle"
                 className="menu-header"
             >
-                <Col span={4}>
+                <Col span={2}>
                     <h1>Menu</h1>
                 </Col>
-                <Col span={4}>
+                <Col span={2}>
                     <Button>Search</Button>
                 </Col>
             </Row>

@@ -10,7 +10,10 @@ const PortalMenu = () => {
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
             <Layout>
-                <Content style={{ margin: '16px 16px' }} className="links">
+                <Content
+                    style={{ margin: '16px 16px' }}
+                    className="portal-menu-links"
+                >
                     <Link to="/portal-menu/add">Add Menu Item</Link>
                     <Link to="/portal-menu/view">View Menu</Link>
                     <Link to="/portal-menu/update">Update Menu</Link>
