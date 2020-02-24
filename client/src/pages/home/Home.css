@@ -8,6 +8,8 @@
 
 .home-right {
     background-color: #cccccc;
+    overflow: hidden;
+    margin: 0;
     height: 100vh;
     background-image: url('../../images//home-bg-min.jpg');
     background-position: center; /* Center the image */
