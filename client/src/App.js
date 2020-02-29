@@ -12,10 +12,12 @@ import MenuView from './pages/portalMenuOptions/menuView/MenuView';
 import Menu from './pages/menu/Menu';
 import Order from './pages/order/Order';
 
+import { GlobalProvider } from './context/GlobalState';
+
 const App = () => {
     return (
-        <Router>
-            <div>
+        <GlobalProvider>
+            <Router>
                 <Switch>
                     <Route path="/" exact component={Home}></Route>
                     <Route path="/login" exact component={Login}></Route>
@@ -41,8 +43,8 @@ const App = () => {
                         component={MenuUpdate}
                     ></Route>
                 </Switch>
-            </div>
-        </Router>
+            </Router>
+        </GlobalProvider>
     );
 };
 

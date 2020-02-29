@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
 import MenuCard from '../menuCard/MenuCard';
-import { menuItems } from '../../data/menuItems';
+import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
+    const { menuItems } = useContext(GlobalContext);
     return (
         <div className="menu-wrapper">
             <Row
