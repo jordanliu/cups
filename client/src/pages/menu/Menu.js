@@ -1,7 +1,9 @@
 import React from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
-import { Card, Col, Row, Button } from 'antd';
+import { Col, Row, Button } from 'antd';
+import MenuCard from '../menuCard/MenuCard';
+import { menuItems } from '../../data/menuItems';
 
 const Menu = () => {
     return (
@@ -21,26 +23,9 @@ const Menu = () => {
             </Row>
             <div>
                 <Row type="flex" justify="space-around" align="middle">
-                    <Col span={4}>
-                        <Card title="Card title" bordered={true}>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card title="Card title" bordered={true}>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card title="Card title" bordered={true}>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={4}>
-                        <Card title="Card title" bordered={true}>
-                            Card content
-                        </Card>
-                    </Col>
+                    {menuItems.map(item => (
+                        <MenuCard menu={item} key={item.id} />
+                    ))}
                 </Row>
             </div>
             <div className="menu-details">
