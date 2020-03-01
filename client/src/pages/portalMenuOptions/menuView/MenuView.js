@@ -4,7 +4,6 @@ import { Layout, Menu, Icon } from 'antd';
 import './MenuView.css';
 import PortalNav from '../../portalNav/PortalNav';
 
-
 const { SubMenu } = Menu;
 const { Content } = Layout;
 
