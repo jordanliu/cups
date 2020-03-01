@@ -1,0 +1,26 @@
+.order-wrapper h2 {
+    padding: 15px;
+    text-align: center;
+}
+
+.order-lists {
+    margin: auto;
+    width: 75%;
+    max-width: 750px;
+    padding: 10px;
+}
+
+.order-cta {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+
+.order-cta button {
+    margin: 10px;
+}
+
+.order-details h3 {
+    text-align: right;
+}

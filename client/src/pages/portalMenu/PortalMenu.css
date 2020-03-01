@@ -1,6 +1,16 @@
-.links a {
-    padding: 10px;
+.portal-menu-links a {
+    padding: 20px;
     background-color: #1890ff;
     color: white;
     margin-left: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.portal-menu-links a:hover {
+    background-color: #1983e6;
+}
+
+.portal-menu-links {
+    padding: 100px;
+    text-align: center;
 }
