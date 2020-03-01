@@ -1,0 +1,28 @@
+.orderComplete {
+    text-align: center;
+    margin-top: 5%;
+    padding: 25px;
+}
+
+.orderComplete-title {
+    font-size: 50px;
+}
+
+.orderComplete-num {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 22px;
+}
+
+.orderComplete-footer {
+    display: block;
+    font-size: 11px;
+}
+
+.orderComplete button {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Order.css';
+import { Link } from 'react-router-dom';
 import { List, Avatar, Button } from 'antd';
 
 const data = [
@@ -55,7 +56,9 @@ const Order = () => {
 
             <div className="order-cta">
                 <Button>Cancel Order</Button>
-                <Button>Confirm Order</Button>
+                <Link to="/order-confirmed">
+                    <Button>Confirm Order</Button>
+                </Link>
             </div>
         </div>
     );

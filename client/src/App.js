@@ -11,6 +11,7 @@ import MenuUpdate from './pages/portalMenuOptions/menuUpdate/MenuUpdate';
 import MenuView from './pages/portalMenuOptions/menuView/MenuView';
 import Menu from './pages/menu/Menu';
 import Order from './pages/order/Order';
+import OrderComplete from './pages/orderComplete/OrderComplete';
 
 import { GlobalProvider } from './context/GlobalState';
 
@@ -24,6 +25,11 @@ const App = () => {
                     <Route path="/menu" exact component={Menu}></Route>
                     <Route path="/portal" exact component={Portal}></Route>
                     <Route path="/order" exact component={Order}></Route>
+                    <Route
+                        path="/order-confirmed"
+                        component={OrderComplete}
+                    ></Route>
+
                     <Route
                         path="/portal-menu"
                         exact
