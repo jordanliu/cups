@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 //import ReactDOM from 'react-dom';
 import { Layout, Menu, Icon } from 'antd';
+import { Table } from 'antd';
 import './MenuView.css';
 import PortalNav from '../../portalNav/PortalNav';
+import { GlobalContext } from '../../../context/GlobalState';
+
 
 const { SubMenu } = Menu;
 const { Content } = Layout;
+const columns = [
+    {
+        title : 'Item Name',
+        dataIndex : 'title',
+    },
+    {
+        title : 'Item Price',
+        dataIndex : 'price',
+    },
+    {
+        title : 'Description',
+        dataIndex : 'description',
+    },
+];
+
+//const data = [];
+
 
 const MenuView = () => {
-    
+    const {menuItems} = useContext(GlobalContext);        
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
@@ -44,8 +64,14 @@ const MenuView = () => {
                             <Menu.Item key = "something4">Something 6</Menu.Item>
                         </Menu.ItemGroup>                 
                     </SubMenu>          
-                </Menu>
-                
+                </Menu>               
+               {/* {menuItems.map(item=>(
+               <a key = {item.id}>{item.title}</a>
+               ))}                */}
+               <div>
+                   <Table columns = {columns} dataSource = {menuItems} size = "middle"/>
+               </div>
+
                 </Content>
             </Layout>
         </Layout>

@@ -1,7 +1,23 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
-const initialState = {
+const initialState = {   
+    listItems: [
+        {
+            id : 1,
+            name: 'gummy',
+            desc : 'this taste good',
+            image : 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541'
+        },
+        {
+            id : 1,
+            name: 'gummy',
+            desc : 'this taste good',
+            image : 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541'
+        },       
+
+    ], 
+   
     menuItems: [
         {
             id: 1,

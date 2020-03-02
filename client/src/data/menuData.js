@@ -32,3 +32,4 @@ export const menuData = [
         price: 330,
     },
 ];
+
