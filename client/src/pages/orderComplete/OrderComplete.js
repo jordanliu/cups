@@ -7,9 +7,8 @@ const OrderComplete = () => {
         <div className="orderComplete">
             <h3 className="orderComplete-title"> Order Complete </h3>
             <h4 className="orderComplete-num">Order #0000000 </h4>
-
-            <Button>Confirm Order </Button>
-            <h5 className=" orderComplete-footer">THANK YOU !</h5>
+            <Button>Continue</Button>
+            <h5 className=" orderComplete-footer">THANK YOU!</h5>
         </div>
     );
 };

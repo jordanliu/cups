@@ -22,7 +22,6 @@ const MenuCard = item => {
                     }
                 />
             </Card>
-            ,
         </Col>
     );
 };
