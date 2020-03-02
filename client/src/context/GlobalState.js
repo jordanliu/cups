@@ -2,22 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
 const initialState = {   
-    listItems: [
-        {
-            id : 1,
-            name: 'gummy',
-            desc : 'this taste good',
-            image : 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541'
-        },
-        {
-            id : 1,
-            name: 'gummy',
-            desc : 'this taste good',
-            image : 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541'
-        },       
-
-    ], 
-   
+       
     menuItems: [
         {
             id: 1,
@@ -25,7 +10,7 @@ const initialState = {
             description: 'yummy',
             image:
                 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541',
-            price: 550.5,
+            price: 550.50,
         },
         {
             id: 2,
@@ -33,7 +18,7 @@ const initialState = {
             description: 'yummy',
             image:
                 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541',
-            price: 800,
+            price: 800.00,
         },
         {
             id: 3,
@@ -41,7 +26,7 @@ const initialState = {
             description: 'yummy',
             image:
                 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541',
-            price: 50.5,
+            price: 50.50,
         },
         {
             id: 4,
@@ -49,7 +34,7 @@ const initialState = {
             description: 'yummy',
             image:
                 'https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg?w=1155&h=1541',
-            price: 330,
+            price: 330.90,
         },
     ],
 };
