@@ -1,7 +1,9 @@
 import React from 'react';
 import './Order.css';
-import { Link } from 'react-router-dom';
-import { List, Avatar, Button } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { List, Avatar, Button, Modal } from 'antd';
+
+const { confirm } = Modal;
 
 const data = [
     {
@@ -19,6 +21,26 @@ const data = [
 ];
 
 const Order = () => {
+    let history = useHistory();
+    function showCancelConfirm() {
+        function handleOk() {
+            return history.push('/');
+        }
+
+        confirm({
+            title: 'Are you sure you want to cancel this order?',
+            content:
+                'If yes, you will be redirected to the homepage and your order will be cancelled.',
+            okText: 'Yes',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                handleOk();
+            },
+            onCancel() {},
+        });
+    }
+
     return (
         <div className="order-wrapper">
             <h2>Order Details</h2>
@@ -55,7 +77,7 @@ const Order = () => {
             </div>
 
             <div className="order-cta">
-                <Button>Cancel Order</Button>
+                <Button onClick={showCancelConfirm}>Cancel Order</Button>
                 <Link to="/order-confirmed">
                     <Button>Confirm Order</Button>
                 </Link>
