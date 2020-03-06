@@ -26,6 +26,9 @@ const OrderComplete = lazy(() =>
     import('./components/orderComplete/OrderComplete')
 );
 
+const Register = lazy(() => import('./components/register/Register'));
+const Search = lazy(() => import('./components/search/Search'));
+
 const App = () => {
     return (
         <GlobalProvider>
@@ -34,6 +37,12 @@ const App = () => {
                     <Switch>
                         <Route path="/" exact component={Home}></Route>
                         <Route path="/login" exact component={Login}></Route>
+                        <Route
+                            path="/register"
+                            exact
+                            component={Register}
+                        ></Route>
+                        <Route path="/search" exact component={Search}></Route>
                         <Route path="/menu" exact component={Menu}></Route>
                         <Route path="/portal" exact component={Portal}></Route>
                         <Route path="/order" exact component={Order}></Route>

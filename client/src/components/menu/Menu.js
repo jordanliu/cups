@@ -19,7 +19,9 @@ const Menu = () => {
                     <h1>Menu</h1>
                 </Col>
                 <Col span={2}>
-                    <Button>Search</Button>
+                    <Link to="/search">
+                        <Button>Search</Button>
+                    </Link>
                 </Col>
             </Row>
             <div>
