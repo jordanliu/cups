@@ -2,25 +2,29 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import { GlobalProvider } from './context/GlobalState';
-import Loader from './pages/loader/Loader';
+import Loader from './components/loader/Loader';
 
-const Portal = lazy(() => import('./pages/portal/Portal'));
-const Login = lazy(() => import('./pages/login/Login'));
-const Home = lazy(() => import('./pages/home/Home'));
-const PortalMenu = lazy(() => import('./pages/portalMenu/PortalMenu'));
-const MenuAdd = lazy(() => import('./pages/portalMenuOptions/menuAdd/MenuAdd'));
+const Portal = lazy(() => import('./components/portal/Portal'));
+const Login = lazy(() => import('./components/login/Login'));
+const Home = lazy(() => import('./components/home/Home'));
+const PortalMenu = lazy(() => import('./components/portalMenu/PortalMenu'));
+const MenuAdd = lazy(() =>
+    import('./components/portalMenuOptions/menuAdd/MenuAdd')
+);
 const MenuRemove = lazy(() =>
-    import('./pages/portalMenuOptions/menuRemove/MenuRemove')
+    import('./components/portalMenuOptions/menuRemove/MenuRemove')
 );
 const MenuUpdate = lazy(() =>
-    import('./pages/portalMenuOptions/menuUpdate/MenuUpdate')
+    import('./components/portalMenuOptions/menuUpdate/MenuUpdate')
 );
 const MenuView = lazy(() =>
-    import('./pages/portalMenuOptions/menuView/MenuView')
+    import('./components/portalMenuOptions/menuView/MenuView')
 );
-const Menu = lazy(() => import('./pages/menu/Menu'));
-const Order = lazy(() => import('./pages/order/Order'));
-const OrderComplete = lazy(() => import('./pages/orderComplete/OrderComplete'));
+const Menu = lazy(() => import('./components/menu/Menu'));
+const Order = lazy(() => import('./components/order/Order'));
+const OrderComplete = lazy(() =>
+    import('./components/orderComplete/OrderComplete')
+);
 
 const App = () => {
     return (
