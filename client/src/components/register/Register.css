@@ -1,0 +1,30 @@
+.register-wrapper {
+    text-align: center;
+    margin-top: 5%;
+    padding: 25px;
+}
+
+.register-title {
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.register-wrapper input {
+    max-width: 300px;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.register-wrapper form {
+    max-height: 500px;
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgb(238, 237, 237);
+}
+
+.register-wrapper button {
+    display: block;
+    margin: auto;
+}
