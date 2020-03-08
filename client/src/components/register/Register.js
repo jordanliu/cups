@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import './Register.css';
-
+import { Link } from 'react-router-dom';
 const layout = {
     labelCol:{ span : 8,},
     wrapperCol:{ span : 16, },    
@@ -24,51 +24,26 @@ const Register = () => {
     }
     return (        
         <div>
-            <h1 className="login-title">CUPS</h1>            
+            <h1 className="register-title">CUPS</h1>            
             <div className = "register-wrapper">  
-            <h2 className = "registration">Registration Form</h2>            
-                <Form
-                    {...layout}
-                    name = "basic"
-                    initialValues = {{
-                        remember: true,
-                    }}
-                    onFinish = { onFinish }
-                    onFinishFailed = { onFinishFailed }
-                >          
-                    <Form.Item
-                        label = "Username"
-                        name = "username"
-                        rules = {[
-                        {
-                            required : true,
-                            message : 'Please input your name!',
-                        },
-                    ]}         
-                    >
-                        <Input />
-                    </Form.Item>
+                <h2 className = "registration">Registration Form</h2>            
+                    <form>
+                        <label for = "fname">First Name: </label>
+                        <Input placeholder = "First Name" />
+                        <br />
+                        <label for = "lname">Last Name: </label>
+                        <Input placeholder = "Last Name" />
+                        <br />
+                        <label for = "email">Email Address: </label>
+                        <Input placeholder = "your-email@email.com" />
+                        <br />
+                        <label for = "password">Password: </label>
+                        <Input placeholder = "Password" type = "password" />
 
-                    <Form.Item
-                        label = "Password"
-                        name = "password"
-                        rules = {[
-                        {
-                            required : true,
-                            message : 'Please input your password!',
-                        },
-                    ]}         
-                    >
-                        <Input.Password />
-                    </Form.Item>
-                    <div>
-                        <Form.Item {...tailLayout}>
-                            <Button type = "primary" htmlType = "submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </div>
-                </Form>
+                        <Link to="/menu">
+                        <Button type="primary">Submit</Button>
+                        </Link>
+                    </form>
             </div>
         </div>  
         
