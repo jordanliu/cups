@@ -1,6 +1,6 @@
 .register-wrapper {
     text-align: center;
-    margin-top: 3%;
+    margin-top: 5%;
     padding: 25px;
 }
 
@@ -10,12 +10,16 @@
 }
 
 .register-wrapper form {
-    max-height: 500px;
+    max-height: 530px;
     max-width: 500px;
     margin: auto;
     padding: 15px;
     border-radius: 5px;
     background-color: rgb(238, 237, 237);
+}
+
+.register-wrapper .ant-row {
+    margin: 5px;
 }
 
 .register-wrapper button {

@@ -1,26 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Order.css';
 import { Link, useHistory } from 'react-router-dom';
+import { GlobalContext } from '../../context/GlobalState';
 import { List, Avatar, Button, Modal } from 'antd';
 
 const { confirm } = Modal;
 
-const data = [
-    {
-        title: 'order 1',
-    },
-    {
-        title: 'order 2',
-    },
-    {
-        title: 'order 3',
-    },
-    {
-        title: 'order 4',
-    },
-];
-
 const Order = () => {
+    const { orderItems } = useContext(GlobalContext);
     let history = useHistory();
     function showCancelConfirm() {
         function handleOk() {
@@ -47,11 +34,11 @@ const Order = () => {
             <div className="order-lists">
                 <List
                     itemLayout="horizontal"
-                    dataSource={data}
+                    dataSource={orderItems}
                     renderItem={item => (
                         <List.Item
                             actions={[
-                                'Quantity: 1',
+                                <span>Quantity: {item.quantity}</span>,
                                 <a key="1" href="localhost:3000/order">
                                     Edit
                                 </a>,
@@ -78,7 +65,7 @@ const Order = () => {
 
             <div className="order-cta">
                 <Button onClick={showCancelConfirm}>Cancel Order</Button>
-                <Link to="/order-confirmed">
+                <Link to="/login">
                     <Button>Confirm Order</Button>
                 </Link>
             </div>

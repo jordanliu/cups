@@ -12,8 +12,8 @@ const Home = () => {
                     <div>
                         <h1>CUPS</h1>
                         <h3>Select an option below to start ordering!</h3>
-                        <Link to="/login">
-                            <button>LOGIN</button>
+                        <Link to="/menu">
+                            <button>ORDER</button>
                         </Link>
                         <Link to="/register">
                             <button>REGISTER</button>
