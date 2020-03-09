@@ -7,7 +7,7 @@ import { List, Avatar, Button, Modal } from 'antd';
 const { confirm } = Modal;
 
 const Order = () => {
-    const { orderItems } = useContext(GlobalContext);
+    const { order } = useContext(GlobalContext);
     let history = useHistory();
     function showCancelConfirm() {
         function handleOk() {
@@ -34,11 +34,11 @@ const Order = () => {
             <div className="order-lists">
                 <List
                     itemLayout="horizontal"
-                    dataSource={orderItems}
+                    dataSource={order}
                     renderItem={item => (
                         <List.Item
                             actions={[
-                                <span>Quantity: {item.quantity}</span>,
+                                <span>Quantity: </span>,
                                 <a key="1" href="localhost:3000/order">
                                     Edit
                                 </a>,
@@ -53,7 +53,7 @@ const Order = () => {
                                         {item.title}
                                     </a>
                                 }
-                                description="Order description?"
+                                description={item.description}
                             />
                         </List.Item>
                     )}

@@ -7,6 +7,14 @@ import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
     const { menuItems } = useContext(GlobalContext);
+    const { order } = useContext(GlobalContext);
+
+    const orderAmount = order.map(order => order.price);
+    const orderTotal = orderAmount
+        .reduce((acc, item) => (acc += item), 0)
+        .toFixed(2);
+    const orderCount = order.length;
+
     return (
         <div className="menu-wrapper">
             <Row
@@ -34,7 +42,7 @@ const Menu = () => {
             <div className="menu-details">
                 <Row type="flex" justify="space-around" align="middle">
                     <Col span={4}>
-                        <h4>Items added</h4>
+                        <h4>{orderCount} items added</h4>
                     </Col>
                     <Col span={4}>
                         <Link to="/order">
@@ -42,7 +50,7 @@ const Menu = () => {
                         </Link>
                     </Col>
                     <Col span={4}>
-                        <h4>$500</h4>
+                        <h4>${orderTotal}</h4>
                     </Col>
                 </Row>
             </div>

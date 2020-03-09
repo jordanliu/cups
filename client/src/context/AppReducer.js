@@ -7,6 +7,11 @@ export default (state, action) => {
                     menuItem => menuItem.id !== action.payload
                 ),
             };
+        case 'ADD_ORDER':
+            return {
+                ...state,
+                order: [action.payload, ...state.order],
+            };
         default:
             return state;
     }

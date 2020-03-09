@@ -36,27 +36,7 @@ const initialState = {
             price: 330.9,
         },
     ],
-
-    orderItems: [
-        {
-            id: 1,
-            title: 'Food',
-            cost: 150,
-            quantity: 1,
-        },
-        {
-            id: 4,
-            title: 'Snack',
-            cost: 550,
-            quantity: 2,
-        },
-        {
-            id: 6,
-            title: 'Tea',
-            cost: 650,
-            quantity: 1,
-        },
-    ],
+    order: [],
 };
 
 //Context
@@ -74,11 +54,20 @@ export const GlobalProvider = ({ children }) => {
             payload: id,
         });
     }
+
+    function addOrder(order) {
+        dispatch({
+            type: 'ADD_ORDER',
+            payload: order,
+        });
+    }
     return (
         <GlobalContext.Provider
             value={{
                 menuItems: state.menuItems,
                 orderItems: state.orderItems,
+                order: state.order,
+                addOrder,
                 deleteMenu,
             }}
         >
