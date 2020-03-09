@@ -1,52 +1,163 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
-import FormItem from 'antd/lib/form/FormItem';
+import { Form, Input, Tooltip, Select, Row, Col, Checkbox, AutoComplete, InputNumber, Button } from 'antd';
+import FormItem from 'antd/lib/form/FormItem'; 
 import './Register.css';
 import { Link } from 'react-router-dom';
-const layout = {
-    labelCol:{ span : 8,},
-    wrapperCol:{ span : 16, },    
-};
-const tailLayout = {
-    wrapperCol : {
-        offset : 8,
-        span : 16,
+
+const { Option } = Select;
+const AutoCompleteOption = AutoComplete.Option;
+
+const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 8,
+      },
     },
-};
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 16,
+      },
+    },
+  };
 
-const Register = () => {
-    const onFinish = value => {
-        console.log('Success:', value);
-    }
-    const onFinishFailed = value =>{
-        console.log('Failed:', value);
-    }
-    return (        
-        <div>
-            <h1 className="register-title">CUPS</h1>            
-            <div className = "register-wrapper">  
-                <h2 className = "registration">Registration Form</h2>            
-                    <form>
-                        <label for = "fname">First Name: </label>
-                        <Input placeholder = "First Name" />
-                        <br />
-                        <label for = "lname">Last Name: </label>
-                        <Input placeholder = "Last Name" />
-                        <br />
-                        <label for = "email">Email Address: </label>
-                        <Input placeholder = "your-email@email.com" />
-                        <br />
-                        <label for = "password">Password: </label>
-                        <Input placeholder = "Password" type = "password" />
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };  
 
-                        <Link to="/menu">
-                        <Button type="primary">Submit</Button>
-                        </Link>
-                    </form>
-            </div>
-        </div>  
-        
+const Register = () => {    
+
+    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+    return ( 
+        <div>   
+            <h1 className="register-title">CUPS</h1>   
+            <div className = "register-wrapper">
+                <h2>Registration Form</h2>
+                <Form
+                    {...formItemLayout}                
+                    name="registeration-form"                
+                    initialValues={{                   
+                        prefix: '876',
+                    }}
+                    scrollToFirstError
+                    >
+
+                    <Form.Item
+                        name={['user', 'fname']}
+                        label="First Name"
+                        rules={[
+                        {
+                            required: true,
+                        },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>  
+
+                    <Form.Item
+                        name={['user', 'lname']}
+                        label="Last Name"
+                        rules={[
+                        {
+                            required: true,
+                        },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="email"
+                        label="E-mail"
+                        rules={[
+                        {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                        },
+                        ]}
+                    >
+                        <Input placeholder = "cupofupliftingcoffee@cups.com"/>
+                    </Form.Item>
+
+                    <Form.Item
+                        name="password"
+                        label="Password"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                        ]}
+                        hasFeedback
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="confirm"
+                        label="Confirm Password"
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please confirm your password!',
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject('The two passwords that you entered do not match!');
+                            },
+                        }),
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                                
+                    <Form.Item
+                        name="phone"
+                        label="Phone Number"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your phone number!',
+                        },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>                                
+                    
+                    <Form.Item {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">
+                        Register
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </div>  
+        </div>         
     );
 };
 

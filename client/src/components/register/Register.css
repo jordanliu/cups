@@ -1,18 +1,12 @@
 .register-wrapper {
     text-align: center;
-    margin-top: 5%;
+    margin-top: 3%;
     padding: 25px;
 }
 
 .register-title {
     padding-left: 15px;
     padding-top: 10px;
-}
-
-.register-wrapper input {
-    max-width: 300px;
-    width: 50%;
-    margin-bottom: 10px;
 }
 
 .register-wrapper form {
