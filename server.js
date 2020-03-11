@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI;
@@ -17,7 +18,10 @@ mongoose.connect(uri, {
     useCreateIndex: true,
 });
 
-app.get('/', (req, res) => res.send('cups!'));
+const customerRouter = require('./routes/customer');
+app.use('/register', customerRouter);
+
+//app.get('/', (req, res) => res.send('cups!'));
 
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));

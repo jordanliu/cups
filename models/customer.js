@@ -26,8 +26,10 @@ const customerSchema = new Schema({
         minlength: 15,
     },
     digitalID: {
-        //
-        //
+        type: String,
+        minlength: 10,
+        required: true,
+        trim: true,
     },
     Balance: {
         type: Number,
