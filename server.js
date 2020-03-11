@@ -21,7 +21,7 @@ mongoose.connect(uri, {
 const customerRouter = require('./routes/customer');
 app.use('/register', customerRouter);
 
-//app.get('/', (req, res) => res.send('cups!'));
+app.get('/', (req, res) => res.send('cups!'));
 
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
