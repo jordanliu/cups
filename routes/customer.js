@@ -20,11 +20,11 @@ router.get('/:id', getCustomer, (req, res) => {
 //Creating one
 router.post('/', async (req, res) => {
     const customer = new Customer({
-        customerID: req.body.customerID,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        digitalID: req.body.digitalID,
-        Balance: req.body.Balance,
+        email: req.body.email,
+        password: req.body.password,
+        phoneNumber: req.body.phoneNumber,
     });
     try {
         const newCustomer = await customer.save();
@@ -36,20 +36,20 @@ router.post('/', async (req, res) => {
 
 //Updating one
 router.patch('/:id', getCustomer, async (req, res) => {
-    if (req.body.customerID != null) {
-        res.customer.customerID = req.body.customerID;
-    }
     if (req.body.firstName != null) {
         res.customer.firstName = req.body.firstName;
     }
     if (req.body.lastName != null) {
         res.customer.lastName = req.body.lastName;
     }
-    if (req.body.digitalID != null) {
-        res.customer.digitalID = req.body.digitalID;
+    if (req.body.email != null) {
+        res.customer.email = req.body.email;
     }
-    if (req.body.Balance != null) {
-        res.customer.Balance = req.body.Balance;
+    if (req.body.password != null) {
+        res.customer.password = req.body.password;
+    }
+    if (req.body.phoneNumber != null) {
+        res.customer.phoneNumber = req.body.phoneNumber;
     }
 
     try {
@@ -75,7 +75,7 @@ async function getCustomer(req, res, next) {
     try {
         customer = await Customer.findById(req.params.id);
         if (customer == null) {
-            return res.status(404).json({ message: 'cannot find customer' });
+            return res.status(404).json({ message: 'Cannot find customer' });
         }
     } catch (err) {
         res.status(500).json({ message: err.message });

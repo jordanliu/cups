@@ -21,6 +21,13 @@ mongoose.connect(uri, {
 const customerRouter = require('./routes/customer');
 app.use('/register', customerRouter);
 
+const categoryRouter = require('./routes/category');
+
+const itemRouter = require('./routes/item');
+app.use('/portal-menu', itemRouter);
+
+const orderRouter = require('./routes/order');
+
 app.get('/', (req, res) => res.send('cups!'));
 
 const connection = mongoose.connection;
