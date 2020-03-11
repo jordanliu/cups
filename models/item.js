@@ -24,7 +24,7 @@ var itemSchema = new Schema({
     },
     Photo: {
         required: true,
-        //type: ,
+        type: String,
     },
     stockQuantity: {
         required: true,
