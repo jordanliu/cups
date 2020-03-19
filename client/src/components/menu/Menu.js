@@ -2,11 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
+import Loader from '../loader/Loader';
 import MenuCard from '../menuCard/MenuCard';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
-    const { menuItems, getMenuItems } = useContext(GlobalContext);
+    const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
     const { order } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -39,6 +40,7 @@ const Menu = () => {
             </Row>
             <div>
                 <Row type="flex" justify="space-around" align="middle">
+                    {loading ? <Loader /> : null}
                     {menuItems.map(item => (
                         <MenuCard menu={item} key={item._id} />
                     ))}
