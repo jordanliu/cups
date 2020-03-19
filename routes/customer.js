@@ -22,9 +22,8 @@ router.post('/', async (req, res) => {
     const customer = new Customer({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        phoneNumber: req.body.phoneNumber,
+        digitalID: req.body.digitalID,
+        balance: req.body.balance,
     });
     try {
         const newCustomer = await customer.save();
@@ -42,14 +41,11 @@ router.patch('/:id', getCustomer, async (req, res) => {
     if (req.body.lastName != null) {
         res.customer.lastName = req.body.lastName;
     }
-    if (req.body.email != null) {
-        res.customer.email = req.body.email;
+    if (req.body.digitalID != null) {
+        res.customer.digitalID = req.body.digitalID;
     }
-    if (req.body.password != null) {
-        res.customer.password = req.body.password;
-    }
-    if (req.body.phoneNumber != null) {
-        res.customer.phoneNumber = req.body.phoneNumber;
+    if (req.body.balance != null) {
+        res.customer.balance = req.body.balance;
     }
 
     try {

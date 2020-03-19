@@ -20,10 +20,11 @@ router.get('/:id', getItem, (req, res) => {
 //Creating one
 router.post('/', async (req, res) => {
     const item = new Item({
-        systemID: req.body.systemID,
-        Cost: req.body.Cost,
-        Category: req.body.Category,
-        Photo: req.body.Photo,
+        name: req.body.name,
+        cost: req.body.cost,
+        description: req.body.description,
+        category: req.body.category,
+        photo: req.body.photo,
         stockQuantity: req.body.stockQuantity,
     });
     try {
@@ -36,16 +37,22 @@ router.post('/', async (req, res) => {
 
 //Updating one
 router.patch('/:id', getItem, async (req, res) => {
+    if (req.body.name != null) {
+        res.item.name = req.body.name;
+    }
+    if (req.body.description != null) {
+        res.item.description = req.body.description;
+    }
     if (req.body.systemID != null) {
         res.item.systemID = req.body.systemID;
     }
-    if (req.body.Cost != null) {
+    if (req.body.cost != null) {
         res.item.Cost = req.body.Cost;
     }
-    if (req.body.Category != null) {
+    if (req.body.category != null) {
         res.item.Category = req.body.Category;
     }
-    if (req.body.Photo != null) {
+    if (req.body.photo != null) {
         res.item.Photo = req.body.Photo;
     }
 

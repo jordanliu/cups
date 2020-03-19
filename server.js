@@ -18,17 +18,21 @@ mongoose.connect(uri, {
     useCreateIndex: true,
 });
 
+// ROUTES
+//=============================================================
+const router = express.Router();
+
 const customerRouter = require('./routes/customer');
-app.use('/register', customerRouter);
+router.use('/customer', customerRouter);
 
 const categoryRouter = require('./routes/category');
+router.use('/category', categoryRouter);
 
 const itemRouter = require('./routes/item');
-app.use('/portal-menu', itemRouter);
+router.use('/item', itemRouter);
 
 const orderRouter = require('./routes/order');
-
-app.get('/', (req, res) => res.send('cups!'));
+router.use('/order', orderRouter);
 
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
@@ -42,3 +46,5 @@ app.listen(port, () => {
         `Server is running on port: ${port} | http://localhost:${port}`
     );
 });
+
+app.use('/api', router);

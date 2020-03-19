@@ -6,13 +6,6 @@ const Schema = mongoose.Schema;
 const customerSchema = new Schema({
     //Balance, CustomerID,firstName,lastName,digitalID
 
-    customerID: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minlength: 5,
-    },
     firstName: {
         type: String,
         required: true,
@@ -31,7 +24,7 @@ const customerSchema = new Schema({
         required: true,
         trim: true,
     },
-    Balance: {
+    balance: {
         type: Number,
         required: true,
         trim: true,
