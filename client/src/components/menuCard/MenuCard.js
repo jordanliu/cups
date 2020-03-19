@@ -20,10 +20,11 @@ const MenuCard = item => {
     return (
         <Col span={4} className="menu-card">
             <Card
+                onClick={handleClick}
                 hoverable
                 bordered={true}
                 cover={<img alt="Item" src={item.menu.image} />}
-                actions={[<Icon type={iconType} onClick={handleClick} />]}
+                actions={[<Icon type={iconType} />]}
             >
                 <Meta
                     title={item.menu.title}

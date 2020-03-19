@@ -1,6 +1,10 @@
 .menu-card {
     width: 200px;
-    height: 200px;
+    height: 250px;
+}
+
+.menu-card .ant-card-meta-description {
+    height: 50px;
 }
 
 .menu-card img {
