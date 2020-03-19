@@ -4,27 +4,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
-    //orderNumber, dateOrder, timeOrder, totalCost
-    orderNumber: {
-        type: Number,
+    item: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
         required: true,
-        trim: true,
     },
-    dateOrder: {
+    quantity: {
+        type: Number,
+        default: 1,
+    },
+    created: {
         type: Date,
         default: Date.now,
-        required: true,
-        trim: true,
-    },
-    timeOrder: {
-        type: Date,
-        default: Date.now,
-        required: true,
-    },
-    totalCost: {
-        type: Number,
-        required: true,
-        trim: true,
     },
 });
 

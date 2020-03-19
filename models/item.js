@@ -6,25 +6,29 @@ var Schema = mongoose.Schema;
 
 var itemSchema = new Schema({
     //Category, Cost, systemID, Photo, Name, stockQuantity, ASLPhoto,audioFile
-    systemID: {
-        unique: true,
+    name: {
         required: true,
         trim: true,
         type: String,
     },
-    Cost: {
+    cost: {
         required: true,
         trim: true,
         type: Number,
     },
-    Category: {
+    description: {
+        required: true,
+        trim: true,
+        type: String,
+    },
+    category: {
         required: true,
         type: String,
         trim: true,
     },
-    Photo: {
+    photo: {
         required: true,
-        //type: ,
+        type: String,
     },
     stockQuantity: {
         required: true,
