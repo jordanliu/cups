@@ -8,6 +8,10 @@ const { confirm } = Modal;
 
 const Order = () => {
     const { order } = useContext(GlobalContext);
+    const orderAmount = order.map(order => order.cost);
+    const orderTotal = orderAmount
+        .reduce((acc, item) => (acc += item), 0)
+        .toFixed(2);
     let history = useHistory();
     function showCancelConfirm() {
         function handleOk() {
@@ -50,7 +54,7 @@ const Order = () => {
                                 }
                                 title={
                                     <a href="localhost:3000/order">
-                                        {item.title}
+                                        {item.name}
                                     </a>
                                 }
                                 description={item.description}
@@ -59,7 +63,7 @@ const Order = () => {
                     )}
                 />
                 <div className="order-details">
-                    <h3>Total: $6000</h3>
+                    <h3>Total: ${orderTotal}</h3>
                 </div>
             </div>
 
