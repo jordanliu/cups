@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
@@ -6,10 +6,15 @@ import MenuCard from '../menuCard/MenuCard';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
-    const { menuItems } = useContext(GlobalContext);
+    const { menuItems, getMenuItems } = useContext(GlobalContext);
     const { order } = useContext(GlobalContext);
 
-    const orderAmount = order.map(order => order.price);
+    useEffect(() => {
+        getMenuItems();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const orderAmount = order.map(order => order.cost);
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
@@ -35,7 +40,7 @@ const Menu = () => {
             <div>
                 <Row type="flex" justify="space-around" align="middle">
                     {menuItems.map(item => (
-                        <MenuCard menu={item} key={item.id} />
+                        <MenuCard menu={item} key={item._id} />
                     ))}
                 </Row>
             </div>

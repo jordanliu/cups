@@ -6,30 +6,25 @@ const Schema = mongoose.Schema;
 const customerSchema = new Schema({
     //Balance, CustomerID,firstName,lastName,digitalID
 
-    customerID: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minlength: 10,
-    },
     firstName: {
         type: String,
         required: true,
         trim: true,
-        minlength: 15,
+        minlength: 5,
     },
     lastName: {
         type: String,
         required: true,
         trim: true,
-        minlength: 15,
+        minlength: 5,
     },
     digitalID: {
-        //
-        //
+        type: String,
+        minlength: 4,
+        required: true,
+        trim: true,
     },
-    Balance: {
+    balance: {
         type: Number,
         required: true,
         trim: true,

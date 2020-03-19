@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 require('dotenv').config();
 
@@ -8,16 +9,40 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-});
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
-app.get('/', (req, res) => res.send('cups!'));
+try {
+    const uri = process.env.MONGODB_URI;
+    mongoose.connect(uri, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+    });
+} catch (err) {
+    console.log('Error: ${err.message}');
+    process.exit(1);
+}
+
+// ROUTES
+//=============================================================
+const router = express.Router();
+
+const customerRouter = require('./routes/customer');
+router.use('/customer', customerRouter);
+
+const categoryRouter = require('./routes/category');
+router.use('/category', categoryRouter);
+
+const itemRouter = require('./routes/item');
+router.use('/item', itemRouter);
+
+const orderRouter = require('./routes/order');
+router.use('/order', orderRouter);
 
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
@@ -31,3 +56,5 @@ app.listen(port, () => {
         `Server is running on port: ${port} | http://localhost:${port}`
     );
 });
+
+app.use('/api', router);
