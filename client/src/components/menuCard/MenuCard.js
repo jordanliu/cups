@@ -14,6 +14,7 @@ const MenuCard = item => {
         e.preventDefault();
         setIconType(iconType === 'plus' ? 'close' : 'plus');
         addOrder(item.menu);
+        console.log(item.menu._id);
     }
 
     return (
@@ -28,7 +29,7 @@ const MenuCard = item => {
                     title={item.menu.title}
                     description={
                         <span>
-                            ${item.menu.price} - {item.menu.description}
+                            ${item.menu.cost} - {item.menu.description}
                         </span>
                     }
                 />

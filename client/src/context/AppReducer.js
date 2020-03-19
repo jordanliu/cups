@@ -1,5 +1,11 @@
 export default (state, action) => {
     switch (action.type) {
+        case 'GET_MENU':
+            return {
+                ...state,
+                loading: false,
+                menuItems: action.payload,
+            };
         case 'DELETE_MENU':
             return {
                 ...state,
@@ -11,6 +17,11 @@ export default (state, action) => {
             return {
                 ...state,
                 order: [action.payload, ...state.order],
+            };
+        case 'MENU_ERROR':
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;

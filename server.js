@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 require('dotenv').config();
 
@@ -11,12 +12,21 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-});
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
+try {
+    const uri = process.env.MONGODB_URI;
+    mongoose.connect(uri, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+    });
+} catch (err) {
+    console.log('Error: ${err.message}');
+    process.exit(1);
+}
 
 // ROUTES
 //=============================================================

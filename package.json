@@ -30,6 +30,7 @@
         "express": "^4.17.1",
         "http-errors": "^1.7.3",
         "mongoose": "^5.8.11",
+        "morgan": "^1.9.1",
         "superagent": "^5.2.1"
     },
     "devDependencies": {
