@@ -12,8 +12,8 @@ const PortalMenu = () => {
     const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
     const [visible, setVisible] = useState(false);
 
-    const handleDelete = () => {
-        console.log(menuItems.name);
+    const handleDelete = record => {
+        console.log(record._id);
     };
 
     const showDrawer = () => {
@@ -67,19 +67,15 @@ const PortalMenu = () => {
             title: 'Actions',
             dataIndex: '',
             key: 'x',
-            render: () => (
-                <span>
-                    <a href="/" style={{ marginRight: 16 }}>
-                        Edit
-                    </a>
+            render: (text, record) =>
+                menuItems.length >= 1 ? (
                     <Popconfirm
-                        title="Sure you want to delete this item?"
-                        onConfirm={handleDelete}
+                        title="Sure to delete?"
+                        onConfirm={() => handleDelete(record)}
                     >
-                        <a href="/">Delete</a>
+                        <a>Delete</a>
                     </Popconfirm>
-                </span>
-            ),
+                ) : null,
         },
     ];
     return (
