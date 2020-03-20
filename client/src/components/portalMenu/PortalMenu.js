@@ -13,16 +13,31 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: 'Price (in $)',
+        title: 'Price',
         dataIndex: 'cost',
+        render: text => <span>${text}</span>,
     },
     {
         title: 'Description',
         dataIndex: 'description',
     },
     {
-        title: 'Stock Quantity',
+        title: 'Quantity',
         dataIndex: 'stockQuantity',
+    },
+
+    {
+        title: 'Photo',
+        dataIndex: 'photo',
+    },
+    {
+        title: 'ASL',
+        dataIndex: 'photo',
+    },
+
+    {
+        title: 'Audio',
+        dataIndex: 'photo',
     },
     {
         title: 'Actions',
