@@ -4,13 +4,17 @@
     padding: 25px;
 }
 
+.register-add-upload {
+    display: inline-flex;
+}
+
 .register-title {
     padding-left: 15px;
     padding-top: 10px;
 }
 
 .register-wrapper form {
-    max-height: 530px;
+    max-height: 590px;
     max-width: 500px;
     margin: auto;
     padding: 15px;
