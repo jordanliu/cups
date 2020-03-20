@@ -4,65 +4,17 @@ import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
 import { GlobalContext } from '../../context/GlobalState';
 
-import MenuAdd1 from '../portalMenuOptions/menuAdd/MenuAdd1';
+import MenuAdd from '../portalMenuOptions/menuAdd/MenuAdd';
 
 const { Content } = Layout;
 
-const columns = [
-    {
-        title: 'Item Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'Price',
-        dataIndex: 'cost',
-        render: text => <span>${text}</span>,
-    },
-    {
-        title: 'Description',
-        dataIndex: 'description',
-    },
-    {
-        title: 'Quantity',
-        dataIndex: 'stockQuantity',
-    },
-
-    {
-        title: 'Photo',
-        dataIndex: 'photo',
-    },
-    {
-        title: 'ASL',
-        dataIndex: 'url',
-    },
-
-    {
-        title: 'Audio',
-        dataIndex: 'url1',
-    },
-    {
-        title: 'Actions',
-        dataIndex: '',
-        key: 'x',
-        render: () => (
-            <span>
-                <a href="/" style={{ marginRight: 16 }}>
-                    Edit
-                </a>
-                <Popconfirm
-                    title="Sure you want to delete this item?"
-                    onConfirm={console.log('deleted')}
-                >
-                    <a href="/">Delete</a>
-                </Popconfirm>
-            </span>
-        ),
-    },
-];
-
 const PortalMenu = () => {
     const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
+
+    const handleDelete = () => {
+        console.log(menuItems.name);
+    };
 
     const showDrawer = () => {
         setVisible(true);
@@ -70,7 +22,6 @@ const PortalMenu = () => {
 
     const onClose = useCallback(
         event => {
-            event.preventDefault();
             setVisible(!visible);
         },
         [visible]
@@ -79,6 +30,58 @@ const PortalMenu = () => {
         getMenuItems();
         // eslint-disable-next-line
     }, []);
+
+    const columns = [
+        {
+            title: 'Item Name',
+            dataIndex: 'name',
+        },
+        {
+            title: 'Price',
+            dataIndex: 'cost',
+            render: text => <span>${text}</span>,
+        },
+        {
+            title: 'Description',
+            dataIndex: 'description',
+        },
+        {
+            title: 'Quantity',
+            dataIndex: 'stockQuantity',
+        },
+
+        {
+            title: 'Photo',
+            dataIndex: 'photo',
+        },
+        {
+            title: 'ASL',
+            dataIndex: 'url',
+        },
+
+        {
+            title: 'Audio',
+            dataIndex: 'url1',
+        },
+        {
+            title: 'Actions',
+            dataIndex: '',
+            key: 'x',
+            render: () => (
+                <span>
+                    <a href="/" style={{ marginRight: 16 }}>
+                        Edit
+                    </a>
+                    <Popconfirm
+                        title="Sure you want to delete this item?"
+                        onConfirm={handleDelete}
+                    >
+                        <a href="/">Delete</a>
+                    </Popconfirm>
+                </span>
+            ),
+        },
+    ];
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
@@ -96,7 +99,7 @@ const PortalMenu = () => {
                                 <Icon type="plus" /> Add an item
                             </Button>
 
-                            <MenuAdd1 visible={visible} onClose={onClose} />
+                            <MenuAdd visible={visible} toggleClose={onClose} />
                             <Table
                                 columns={columns}
                                 dataSource={menuItems}
