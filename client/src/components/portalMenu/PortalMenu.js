@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { Layout, Table, Button, Popconfirm } from 'antd';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
+import { Layout, Table, Button, Popconfirm, Skeleton, Icon } from 'antd';
 import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
-import Loader from '../loader/Loader';
 import { GlobalContext } from '../../context/GlobalState';
+
+import MenuAdd1 from '../portalMenuOptions/menuAdd/MenuAdd1';
 
 const { Content } = Layout;
 
@@ -32,12 +33,12 @@ const columns = [
     },
     {
         title: 'ASL',
-        dataIndex: 'photo',
+        dataIndex: 'url',
     },
 
     {
         title: 'Audio',
-        dataIndex: 'photo',
+        dataIndex: 'url1',
     },
     {
         title: 'Actions',
@@ -61,7 +62,19 @@ const columns = [
 
 const PortalMenu = () => {
     const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
+    const [visible, setVisible] = useState(true);
 
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClose = useCallback(
+        event => {
+            event.preventDefault();
+            setVisible(!visible);
+        },
+        [visible]
+    );
     useEffect(() => {
         getMenuItems();
         // eslint-disable-next-line
@@ -71,22 +84,27 @@ const PortalMenu = () => {
             <PortalNav />
             <Layout>
                 <Content style={{ margin: '16px 16px' }}>
-                    <div>
-                        {loading ? <Loader /> : null}
-                        <Button
-                            type="primary"
-                            style={{ marginBottom: 16 }}
-                            href="/portal-menu/add"
-                        >
-                            Add an item
-                        </Button>
-                        <Table
-                            columns={columns}
-                            dataSource={menuItems}
-                            size="middle"
-                            rowKey={menuItems => menuItems._id}
-                        />
-                    </div>
+                    {loading ? <Skeleton active /> : null}
+
+                    {!loading && (
+                        <div>
+                            <Button
+                                type="primary"
+                                style={{ marginBottom: 16 }}
+                                onClick={showDrawer}
+                            >
+                                <Icon type="plus" /> Add an item
+                            </Button>
+
+                            <MenuAdd1 visible={visible} onClose={onClose} />
+                            <Table
+                                columns={columns}
+                                dataSource={menuItems}
+                                size="middle"
+                                rowKey={menuItems => menuItems._id}
+                            />
+                        </div>
+                    )}
                 </Content>
             </Layout>
         </Layout>
