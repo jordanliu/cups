@@ -63,6 +63,19 @@ const Register = props => {
                     </Form.Item>
 
                     <Form.Item
+                        name="phone"
+                        label="Phone Number"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your phone number!',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Phone Number" />
+                    </Form.Item>
+
+                    <Form.Item
                         name="password"
                         label="Password"
                         rules={[
@@ -105,8 +118,8 @@ const Register = props => {
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
 
-                    <div className="register-add-upload">                     
-                                                   
+                    <div className="register-add-upload">              
+                                                 
                         <Form.Item >
                             <Upload {...props}>
                                 <Button>
@@ -128,20 +141,7 @@ const Register = props => {
                                 </Button>
                             </Upload>
                         </Form.Item>                                                     
-                   </div>
-
-                    <Form.Item
-                        name="phone"
-                        label="Phone Number"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your phone number!',
-                            },
-                        ]}
-                    >
-                        <Input placeholder="Phone Number" />
-                    </Form.Item>
+                   </div>                  
 
                     <Form.Item>
                         <Link to="/">
