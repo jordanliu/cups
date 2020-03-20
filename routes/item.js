@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
+const multer = require('multer');
+const uploads = multer({ dest: 'uploads/' });
 
 //Retrieving all
 router.get('/', async (req, res) => {
@@ -18,7 +20,8 @@ router.get('/:id', getItem, (req, res) => {
 });
 
 //Creating one
-router.post('/', async (req, res) => {
+router.post('/', uploads.single('itemImage'), async (req, res) => {
+    console.log(req.file);
     const item = new Item({
         name: req.body.name,
         cost: req.body.cost,
