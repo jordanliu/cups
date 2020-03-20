@@ -34,6 +34,31 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+
+    async function addMenuItem(menuItem) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const res = await axios
+                .post('/api/item', menuItem, config)
+                .catch(error => console.log(error.message));
+
+            dispatch({
+                type: 'ADD_MENU',
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'MENU_ERROR',
+                payload: err.response,
+            });
+        }
+    }
+
     function deleteMenu(id) {
         dispatch({
             type: 'DELETE_MENU',
@@ -47,6 +72,7 @@ export const GlobalProvider = ({ children }) => {
             payload: order,
         });
     }
+
     return (
         <GlobalContext.Provider
             value={{
@@ -56,6 +82,7 @@ export const GlobalProvider = ({ children }) => {
                 error: state.error,
                 loading: state.loading,
                 getMenuItems,
+                addMenuItem,
                 addOrder,
                 deleteMenu,
             }}

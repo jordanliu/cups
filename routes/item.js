@@ -43,12 +43,11 @@ router.patch('/:id', getItem, async (req, res) => {
     if (req.body.description != null) {
         res.item.description = req.body.description;
     }
-    if (req.body.systemID != null) {
-        res.item.systemID = req.body.systemID;
-    }
+
     if (req.body.cost != null) {
         res.item.Cost = req.body.Cost;
     }
+
     if (req.body.category != null) {
         res.item.Category = req.body.Category;
     }

@@ -1,25 +1,54 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Layout, Form, Select, Button, Input, Upload, Icon } from 'antd';
 import './MenuAdd.css';
 import PortalNav from '../../portalNav/PortalNav';
+import { GlobalContext } from '../../../context/GlobalState';
 
 const { Content } = Layout;
 const { Option } = Select;
 const FormItem = Form.Item;
 
-function onChange(value) {
-    console.log(`selected ${value}`);
-}
-
-function onBlur() {
-    console.log('blur');
-}
-
-function onFocus() {
-    console.log('focus');
-}
+const options = [
+    {
+        value: 'Beverage',
+    },
+    {
+        value: 'Snack',
+    },
+    {
+        value: 'Daily Surprise',
+    },
+];
 
 const MenuAdd = props => {
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState(options[0].value);
+    const [description, setDescription] = useState('');
+    const [stockQuantity, setstockQuantity] = useState(0);
+    const [cost, setCost] = useState(0);
+    const [photo, setPhoto] = useState('url');
+    const { addMenuItem } = useContext(GlobalContext);
+
+    const handleOnSubmit = e => {
+        e.preventDefault();
+
+        setPhoto('url');
+        const newMenuItem = {
+            name,
+            cost,
+            description,
+            category,
+            photo,
+            stockQuantity,
+        };
+
+        try {
+            addMenuItem(newMenuItem);
+        } catch (err) {
+            console.log(err.message);
+        }
+        // eslint-disable-next-line
+    };
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
@@ -29,12 +58,23 @@ const MenuAdd = props => {
                     className="menu-add-wrapper"
                 >
                     <h1>Add Item</h1>
-                    <Form className="add-item-form">
+                    <Form className="add-item-form" onSubmit={handleOnSubmit}>
                         <FormItem>
                             <Input
                                 style={{ width: 200 }}
-                                id="item-name"
+                                id="name"
                                 placeholder="Item Name"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </FormItem>
+                        <FormItem>
+                            <Input.TextArea
+                                style={{ width: 200 }}
+                                id="description"
+                                placeholder="Item Description"
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
                             />
                         </FormItem>
                         <FormItem>
@@ -42,28 +82,27 @@ const MenuAdd = props => {
                                 style={{ width: 200 }}
                                 placeholder="Category"
                                 optionFilterProp="children"
-                                onChange={onChange}
-                                onFocus={onFocus}
-                                onBlur={onBlur}
+                                onChange={value => setCategory(value)}
                                 filterOption={(input, option) =>
                                     option.props.children
                                         .toLowerCase()
                                         .indexOf(input.toLowerCase()) >= 0
                                 }
                             >
-                                <Option value="beverage">Beverage</Option>
-                                <Option value="snack">Snack</Option>
-                                <Option value="daily-surprise">
-                                    Daily Surprise
-                                </Option>
+                                {options.map(o => (
+                                    <Option key={o.value} value={o.value}>
+                                        {o.value}
+                                    </Option>
+                                ))}
                             </Select>
                         </FormItem>
                         <FormItem>
                             <Input
                                 type="number"
                                 style={{ width: 200 }}
-                                id="stock-quantity"
+                                id="stockQuantity"
                                 placeholder="Stock Quantity"
+                                onChange={e => setstockQuantity(e.target.value)}
                             />
                         </FormItem>
                         <FormItem>
@@ -71,6 +110,7 @@ const MenuAdd = props => {
                                 style={{ width: 200 }}
                                 id="cost"
                                 placeholder="Item Cost"
+                                onChange={e => setCost(e.target.value)}
                             />
                         </FormItem>
                         <div className="menu-add-upload">
