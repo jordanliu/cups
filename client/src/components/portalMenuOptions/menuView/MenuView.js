@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Layout, Table } from 'antd';
+import { Layout, Table, Button } from 'antd';
 import './MenuView.css';
 import PortalNav from '../../portalNav/PortalNav';
 import Loader from '../../loader/Loader';
 import { GlobalContext } from '../../../context/GlobalState';
 
 const { Content } = Layout;
+
 const columns = [
     {
         title: 'Item Name',
@@ -23,6 +24,19 @@ const columns = [
         title: 'Stock Quantity',
         dataIndex: 'stockQuantity',
     },
+    {
+        title: 'Action',
+        dataIndex: '',
+        key: 'x',
+        render: () => (
+            <span>
+                <a href="/" style={{ marginRight: 16 }}>
+                    Edit
+                </a>
+                <a href="/">Delete</a>
+            </span>
+        ),
+    },
 ];
 
 const MenuView = () => {
@@ -37,9 +51,11 @@ const MenuView = () => {
             <PortalNav />
             <Layout>
                 <Content style={{ margin: '16px 16px' }}>
-                    <h1>Menu View</h1>
                     <div>
                         {loading ? <Loader /> : null}
+                        <Button type="primary" style={{ marginBottom: 16 }}>
+                            Add an item
+                        </Button>
                         <Table
                             columns={columns}
                             dataSource={menuItems}
