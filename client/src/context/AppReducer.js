@@ -6,6 +6,11 @@ export default (state, action) => {
                 loading: false,
                 menuItems: action.payload,
             };
+        case 'ADD_MENU':
+            return {
+                ...state,
+                menuItems: [...state.menuItems, action.payload],
+            };
         case 'DELETE_MENU':
             return {
                 ...state,

@@ -12,7 +12,7 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: 'Item Price',
+        title: 'Price (in $)',
         dataIndex: 'cost',
     },
     {
