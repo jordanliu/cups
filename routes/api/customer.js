@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
+
 //Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -44,7 +45,53 @@ router.post("/register", (req, res) => {
                         .then(customer => res.json(customer))
                         .catch(err => console.log(err));
                 });
-              });
+             });
         }
     });
 });
+
+//@route POST api/customer/login
+//@desc Login customer and return JWT token
+//access Public
+router.post("/login", (req, res)=>{
+    //Form validation
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    //Check validation
+    if (!isValid){
+        return res.status(400).json(errors);
+    }
+
+    const password = req.body.password;
+
+    //Check password
+    bcrypt.compare(password, user.password).then(isMatch =>{
+        if(isMatch){
+            //User match
+            //create JWT payload
+            const payload = {
+                id: customer.id,
+                fname: customer.fname,
+                lname: customer.lname
+            };
+            //Sign token
+            jwt.sign(
+                payload, 
+                keys.secretOrKey,
+                { expiresIn: 31556926 },//1 year in seconds
+                (err, token)=> {
+                    res.json({
+                        success:true,
+                        token: "Bearer" + token
+                    });
+                }
+            );
+        } else {
+            return res
+                .status(400)
+                .json({ passwordincorrect: "Password incorrect" });
+        }
+    })
+})
+
+module.exports = router;
