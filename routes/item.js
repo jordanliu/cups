@@ -2,7 +2,28 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
 const multer = require('multer');
-const uploads = multer({ dest: 'uploads/' });
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        const now = new Date().toISOString();
+        const date = now.replace(/:/g, '-');
+        cb(null, date + file.originalname);
+    },
+});
+
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+const uploads = multer({ storage: storage, fileFilter: fileFilter });
 
 //Retrieving all
 router.get('/', async (req, res) => {
@@ -20,14 +41,14 @@ router.get('/:id', getItem, (req, res) => {
 });
 
 //Creating one
-router.post('/', uploads.single('itemImage'), async (req, res) => {
+router.post('/', uploads.single('photo'), async (req, res) => {
     console.log(req.file);
     const item = new Item({
         name: req.body.name,
         cost: req.body.cost,
         description: req.body.description,
         category: req.body.category,
-        photo: req.body.photo,
+        photo: req.file.path,
         stockQuantity: req.body.stockQuantity,
     });
     try {
