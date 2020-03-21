@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Card, Col, Icon } from 'antd';
+import { Card, Col } from 'antd';
 import { GlobalContext } from '../../context/GlobalState';
 import './MenuCard.css';
 
@@ -8,11 +8,11 @@ const { Meta } = Card;
 const MenuCard = item => {
     const { addOrder } = useContext(GlobalContext);
 
-    const [iconType, setIconType] = useState('plus');
+    const [iconType, setIconType] = useState('Add');
 
     function handleClick(e) {
         e.preventDefault();
-        setIconType(iconType === 'plus' ? 'close' : 'plus');
+        setIconType(iconType === 'Add' ? 'Remove' : 'Add');
         addOrder(item.menu);
         console.log(item.menu._id);
     }
@@ -24,7 +24,7 @@ const MenuCard = item => {
                 hoverable
                 bordered={true}
                 cover={<img alt="Item" src={item.menu.image} />}
-                actions={[<Icon type={iconType} />]}
+                actions={[<span>{iconType}</span>]}
             >
                 <Meta
                     title={item.menu.title}
