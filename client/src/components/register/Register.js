@@ -130,13 +130,6 @@ const Register = props => {
                         <Form.Item>
                             <Upload {...props}>
                                 <Button>
-                                    <Icon type="upload" /> Upload ASL
-                                </Button>
-                            </Upload>
-                        </Form.Item>
-                        <Form.Item>
-                            <Upload {...props}>
-                                <Button>
                                     <Icon type="upload" /> Upload Audio
                                 </Button>
                             </Upload>
