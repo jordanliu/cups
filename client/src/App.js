@@ -52,24 +52,24 @@ const App = () => {
                         ></Route>
 
                         <Route
-                            path="/portal-menu"
+                            path="/portal/menu"
                             exact
                             component={PortalMenu}
                         ></Route>
                         <Route
-                            path="/portal-menu/add"
+                            path="/portal/menu/add"
                             component={MenuAdd}
                         ></Route>
                         <Route
-                            path="/portal-menu/view"
+                            path="/portal/menu/view"
                             component={MenuView}
                         ></Route>
                         <Route
-                            path="/portal-menu/remove"
+                            path="/portal/menu/remove"
                             component={MenuRemove}
                         ></Route>
                         <Route
-                            path="/portal-menu/update"
+                            path="/portal/menu/update"
                             component={MenuUpdate}
                         ></Route>
                     </Switch>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
 import Loader from '../loader/Loader';
 import MenuCard from '../menuCard/MenuCard';
+import { SearchOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
@@ -34,7 +35,10 @@ const Menu = () => {
                 </Col>
                 <Col span={2}>
                     <Link to="/search">
-                        <Button>Search</Button>
+                        <Button>
+                            <SearchOutlined key="search" />
+                            Search
+                        </Button>
                     </Link>
                 </Col>
             </Row>

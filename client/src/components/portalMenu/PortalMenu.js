@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { Layout, Table, Button, Popconfirm, Skeleton, Icon } from 'antd';
 import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
+import { PlusOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 import MenuAdd from '../portalMenuOptions/menuAdd/MenuAdd';
@@ -92,7 +93,7 @@ const PortalMenu = () => {
                                 style={{ marginBottom: 16 }}
                                 onClick={showDrawer}
                             >
-                                <Icon type="plus" /> Add an item
+                                <PlusOutlined /> Add an item
                             </Button>
 
                             <MenuAdd visible={visible} toggleClose={onClose} />
