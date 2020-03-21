@@ -34,13 +34,9 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.8.11",
         "morgan": "^1.9.1",
-<<<<<<< HEAD
-        "superagent": "^5.2.1",
-        "validator": "^13.0.0"
-=======
+        "validator": "^13.0.0",
         "multer": "^1.4.2",
         "superagent": "^5.2.1"
->>>>>>> origin/add-media
     },
     "devDependencies": {
         "concurrently": "^5.1.0",
