@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Upload, Icon } from 'antd';
+import React from 'react';
+import { Form, Input, Button, Upload } from 'antd';
 import './Register.css';
 import { Link } from 'react-router-dom';
 
 const formItemLayout = null;
 
 const Register = props => {
-    const [photo, setPhoto] = useState('url');
+    // const [photo, setPhoto] = useState('url');
     return (
         <div>
             <h1 className="register-title">CUPS</h1>
@@ -118,23 +118,18 @@ const Register = props => {
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
 
-                    <div className="register-add-upload">              
-                                                 
-                        <Form.Item >
+                    <div className="register-add-upload">
+                        <Form.Item>
                             <Upload {...props}>
-                                <Button>
-                                     <Icon type="upload" /> Upload Photo
-                                </Button>
+                                <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item>
                             <Upload {...props}>
-                                <Button>
-                                    <Icon type="upload" /> Upload Audio
-                                </Button>
+                                <Button>Upload Audio</Button>
                             </Upload>
-                        </Form.Item>                                                     
-                   </div>                  
+                        </Form.Item>
+                    </div>
 
                     <Form.Item>
                         <Link to="/">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { HomeOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import './PortalNav.css';

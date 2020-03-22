@@ -34,6 +34,21 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+    async function deleteMenuItem(id) {
+        try {
+            await axios.delete(`/api/item/${id}`);
+
+            dispatch({
+                type: 'DELETE_MENU',
+                payload: id,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'TRANSACTION_ERROR',
+                payload: err.response,
+            });
+        }
+    }
 
     async function addMenuItem(menuItem) {
         const config = {
@@ -59,13 +74,6 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    function deleteMenu(id) {
-        dispatch({
-            type: 'DELETE_MENU',
-            payload: id,
-        });
-    }
-
     function addOrder(order) {
         dispatch({
             type: 'ADD_ORDER',
@@ -84,7 +92,7 @@ export const GlobalProvider = ({ children }) => {
                 getMenuItems,
                 addMenuItem,
                 addOrder,
-                deleteMenu,
+                deleteMenuItem,
             }}
         >
             {children}

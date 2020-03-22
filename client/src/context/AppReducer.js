@@ -15,7 +15,7 @@ export default (state, action) => {
             return {
                 ...state,
                 menuItems: state.menuItems.filter(
-                    menuItem => menuItem.id !== action.payload
+                    menuItems => menuItems._id !== action.payload
                 ),
             };
         case 'ADD_ORDER':

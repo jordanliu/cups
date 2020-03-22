@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { Layout, Table, Button, Popconfirm, Skeleton, Icon } from 'antd';
+import { Layout, Table, Button, Popconfirm, Skeleton, message } from 'antd';
 import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
 import { PlusOutlined } from '@ant-design/icons';
@@ -10,11 +10,22 @@ import MenuAdd from '../portalMenuOptions/menuAdd/MenuAdd';
 const { Content } = Layout;
 
 const PortalMenu = () => {
-    const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
+    const { menuItems, getMenuItems, deleteMenuItem, loading } = useContext(
+        GlobalContext
+    );
     const [visible, setVisible] = useState(false);
 
     const handleDelete = record => {
-        console.log(record._id);
+        try {
+            message.success({ content: 'Item deleted', duration: 2 });
+            deleteMenuItem(record._id);
+        } catch (err) {
+            console.log(err);
+            message.error({
+                content: 'Error occurred, please try again later',
+                duration: 2,
+            });
+        }
     };
 
     const showDrawer = () => {
@@ -74,7 +85,7 @@ const PortalMenu = () => {
                         title="Sure to delete?"
                         onConfirm={() => handleDelete(record)}
                     >
-                        <a>Delete</a>
+                        <a href="/">Delete</a>
                     </Popconfirm>
                 ) : null,
         },
