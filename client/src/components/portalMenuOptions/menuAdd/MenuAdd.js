@@ -59,8 +59,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
             onSuccess('Ok');
             resData = res.data.image;
         } catch (err) {
-            console.log('Eroor: ', err);
-            const error = new Error('Some error');
+            console.log('Error: ', err);
             onError({ err });
         }
         setPhoto(resData);

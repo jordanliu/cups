@@ -77,18 +77,38 @@ const PortalMenu = () => {
         },
         {
             title: 'Actions',
-            dataIndex: '',
-            key: 'x',
-            render: (text, record) => (
-                <Popconfirm
-                    title="Sure to delete?"
-                    onConfirm={() => handleDelete(record)}
-                >
-                    <a href="/">Delete</a>
-                </Popconfirm>
-            ),
+            dataIndex: 'actions',
+            render: (_, record) => {
+                return (
+                    <span>
+                        <a
+                            href="/"
+                            style={{
+                                marginRight: 8,
+                            }}
+                        >
+                            Edit
+                        </a>
+                        <Popconfirm
+                            title="Sure to delete?"
+                            onConfirm={() => handleDelete(record)}
+                        >
+                            <a href="/">Delete</a>
+                        </Popconfirm>
+                    </span>
+                );
+            },
         },
     ];
+
+    /*
+    <Popconfirm
+                    title="Sure to delete?"
+                    onConfirm={() => console.log(record)}
+                >
+                    <a href="/">Edit</a>
+                </Popconfirm>
+    */
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />
