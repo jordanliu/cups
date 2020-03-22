@@ -27,7 +27,7 @@ const options = [
     },
 ];
 
-const MenuAdd1 = ({ visible, toggleClose, ...props }) => {
+const MenuAdd1 = ({ visible, toggleClose }) => {
     const [name, setName] = useState('');
     const [category, setCategory] = useState(options[0].value);
     const [description, setDescription] = useState('');
@@ -36,9 +36,27 @@ const MenuAdd1 = ({ visible, toggleClose, ...props }) => {
     const [photo, setPhoto] = useState('url');
     const { addMenuItem } = useContext(GlobalContext);
 
-    const handleOnSubmit = () => {
-        setPhoto('url');
+    const props = {
+        name: 'photo',
+        multiple: false,
+        action: 'http://localhost:6000/api/photo',
+        onChange(info) {
+            const { status } = info.file;
+            if (status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
 
+            if (status === 'done') {
+                message.success(
+                    `${info.file.name} file uploaded successfully.`
+                );
+            } else if (status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
+    const handleOnSubmit = () => {
         const newMenuItem = {
             name,
             cost,
@@ -189,7 +207,7 @@ const MenuAdd1 = ({ visible, toggleClose, ...props }) => {
                 <Row gutter={16}>
                     <Col span={6}>
                         <Form.Item>
-                            <Upload>
+                            <Upload {...props}>
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
