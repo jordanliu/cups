@@ -7,6 +7,7 @@ const { Meta } = Card;
 
 const MenuCard = item => {
     const { addOrder } = useContext(GlobalContext);
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const [iconType, setIconType] = useState('Add');
 
@@ -23,7 +24,7 @@ const MenuCard = item => {
                 onClick={handleClick}
                 hoverable
                 bordered={true}
-                cover={<img alt="Item" src={item.menu.image} />}
+                cover={<img alt="Item" src={API_URL + item.menu.photo} />}
                 actions={[<span>{iconType}</span>]}
             >
                 <Meta

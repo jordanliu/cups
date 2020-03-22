@@ -79,15 +79,14 @@ const PortalMenu = () => {
             title: 'Actions',
             dataIndex: '',
             key: 'x',
-            render: (text, record) =>
-                menuItems.length >= 1 ? (
-                    <Popconfirm
-                        title="Sure to delete?"
-                        onConfirm={() => handleDelete(record)}
-                    >
-                        <a href="/">Delete</a>
-                    </Popconfirm>
-                ) : null,
+            render: (text, record) => (
+                <Popconfirm
+                    title="Sure to delete?"
+                    onConfirm={() => handleDelete(record)}
+                >
+                    <a href="/">Delete</a>
+                </Popconfirm>
+            ),
         },
     ];
     return (

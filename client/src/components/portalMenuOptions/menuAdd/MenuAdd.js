@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import {
     Drawer,
     Form,
@@ -27,36 +28,51 @@ const options = [
     },
 ];
 
-const MenuAdd1 = ({ visible, toggleClose }) => {
+const MenuAdd = ({ visible, toggleClose }) => {
     const [name, setName] = useState('');
     const [category, setCategory] = useState(options[0].value);
     const [description, setDescription] = useState('');
     const [stockQuantity, setstockQuantity] = useState(0);
     const [cost, setCost] = useState(0);
-    const [photo, setPhoto] = useState('url');
+    const [photo, setPhoto] = useState('');
     const { addMenuItem } = useContext(GlobalContext);
+    var resData;
 
-    const props = {
-        name: 'photo',
-        multiple: false,
-        action: 'http://localhost:6000/api/photo',
-        onChange(info) {
-            const { status } = info.file;
-            if (status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
+    const [defaultFileList, setDefaultFileList] = useState([]);
 
-            if (status === 'done') {
-                message.success(
-                    `${info.file.name} file uploaded successfully.`
-                );
-            } else if (status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
+    //setPhoto('test');
+    const uploadImage = async options => {
+        const { onSuccess, onError, file } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        };
+        fmData.append('photo', file);
+        try {
+            const res = await axios.post(
+                'http://localhost:5000/api/photo',
+                fmData,
+                config
+            );
+
+            onSuccess('Ok');
+            resData = res.data.image;
+        } catch (err) {
+            console.log('Eroor: ', err);
+            const error = new Error('Some error');
+            onError({ err });
+        }
+        setPhoto(resData);
+    };
+
+    const handleOnChange = ({ file, fileList, event }) => {
+        setDefaultFileList(fileList);
     };
 
     const handleOnSubmit = () => {
+        setPhoto(resData);
+        console.log('photo:', photo);
         const newMenuItem = {
             name,
             cost,
@@ -207,7 +223,16 @@ const MenuAdd1 = ({ visible, toggleClose }) => {
                 <Row gutter={16}>
                     <Col span={6}>
                         <Form.Item>
-                            <Upload {...props}>
+                            <Upload
+                                accept="image/*"
+                                name="photo"
+                                customRequest={uploadImage}
+                                onChange={handleOnChange}
+                                //action="http://localhost:5000/api/photo"
+                                //onChange={handleOnChange}
+                                //customRequest={uploadImage}
+                                defaultFileList={defaultFileList}
+                            >
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
@@ -244,4 +269,4 @@ const MenuAdd1 = ({ visible, toggleClose }) => {
     );
 };
 
-export default MenuAdd1;
+export default MenuAdd;

@@ -64,5 +64,5 @@ app.listen(port, () => {
     );
 });
 
-app.use('/static', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 app.use('/api', router);
