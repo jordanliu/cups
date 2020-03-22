@@ -18,4 +18,4 @@ install_dependencies:
 
 test_with_lab:
     stage: test
-    script: npm run server
+    script: echo "Console log"
