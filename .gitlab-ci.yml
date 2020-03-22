@@ -23,8 +23,6 @@ step-uat:
         - export DYNAMIC_ENV_VAR=UAT
     script:
         - echo setting up env $DYNAMIC_ENV_VAR
-        - sudo apt-get install -y python-pip
-        - sudo pip install docker-compose
         - sudo docker image prune -f
         - sudo docker-compose -f docker-compose.yml build --no-cache
         - sudo docker-compose -f docker-compose.yml up -d
