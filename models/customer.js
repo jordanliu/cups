@@ -6,27 +6,42 @@ const Schema = mongoose.Schema;
 const customerSchema = new Schema({
     //Balance, CustomerID,firstName,lastName,digitalID
 
-    firstName: {
+    fname: {
         type: String,
         required: true,
         trim: true,
-        minlength: 5,
     },
-    lastName: {
+    lname: {
         type: String,
         required: true,
         trim: true,
-        minlength: 5,
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    confirm: {
+        type: String,
+        required: true,
+        trim: true,
     },
     digitalID: {
         type: String,
-        minlength: 4,
-        required: true,
         trim: true,
     },
     balance: {
         type: Number,
-        required: true,
         trim: true,
     },
 });

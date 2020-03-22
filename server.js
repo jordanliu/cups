@@ -33,8 +33,8 @@ try {
 // ROUTES
 //=============================================================
 
-const customer = require('./routes/api/customer');
-router.use('/api/customer', customer); //route ???
+const authRouter = require('./routes/api/customer');
+router.use('/auth', authRouter); //route ???
 
 const customerRouter = require('./routes/customer');
 router.use('/customer', customerRouter);
