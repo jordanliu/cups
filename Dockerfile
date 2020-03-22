@@ -2,7 +2,7 @@ FROM node:alpine
 
 LABEL gitlab=https://gitlab.com/jordanxliu/cups
 
-COPY / /nodejs/src
+COPY / /nodejs
 COPY package.json /nodejs/package.json
 
 WORKDIR /nodejs
