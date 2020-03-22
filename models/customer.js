@@ -31,6 +31,14 @@ const customerSchema = new Schema({
         required: true,
         trim: true,
     },
+<<<<<<< HEAD
+=======
+    confirm: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+>>>>>>> af7024614d265cd3f30492285e41743b712f49dc
     digitalID: {
         type: String,
         trim: true,
