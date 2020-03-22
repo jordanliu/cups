@@ -1,21 +1,28 @@
-image: node:latest
+image: docker
+
+services:
+    - docker:dind
 
 stages:
-    - build
     - test
+    - deploy
 
-cache:
-    paths:
-        - node_modules/
+test:
+    stage: test
+    only:
+        - master
+    script:
+        - echo run tests in this section
 
-install_dependencies:
-    stage: build
+step-deploy-prod:
+    stage: deploy
+    only:
+        - production
     script:
         - npm install
-    artifacts:
-        paths:
-            - node_modules/
-
-test_with_lab:
-    stage: test
-    script: echo "Console log"
+        - sudo docker image prune -f
+        - sudo pip3 install docker-compose
+        - docker-compose build --no-cache
+        - docker-compose up -d
+    environment: production
+    when: manual

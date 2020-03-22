@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+    api:
+        build:
+            context: .
+            dockerfile: .docker/Dockerfile
+        expose:
+            - '5000'
+        #volumes:
+        #  - ./PythonAPI:/PythonAPI
+        command: npm run server
