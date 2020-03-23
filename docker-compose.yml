@@ -18,11 +18,9 @@ services:
             - '5000'
         command: npm start
 
-
     react:
         build:
-          context: .
+            context: .
             dockerfile: client/Dockerfile
 
         command: npm run build
-    
