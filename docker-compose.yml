@@ -1,14 +1,14 @@
 version: '2'
 services:
-    web:
+    nginx:
         build:
             context: nginx
+            dockerfile: Dockerfile
         ports:
             - '80:80'
         command: nginx -g "daemon off";
         depends_on:
             - nodejs
-            - react
 
     nodejs:
         build:
@@ -17,10 +17,3 @@ services:
         expose:
             - '5000'
         command: npm start
-
-    react:
-        build:
-            context: .
-            dockerfile: client/Dockerfile
-
-        command: npm run build
