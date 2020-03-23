@@ -47,7 +47,7 @@ const App = () => {
                         <Route path="/portal" exact component={Portal}></Route>
                         <Route path="/order" exact component={Order}></Route>
                         <Route
-                            path="/order-confirmed"
+                            path="/order/confirmed"
                             component={OrderComplete}
                         ></Route>
 

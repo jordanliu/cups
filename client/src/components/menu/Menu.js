@@ -43,7 +43,12 @@ const Menu = () => {
                 </Col>
             </Row>
             <div>
-                <Row type="flex" justify="space-around" align="middle">
+                <Row
+                    // type="block"
+                    // justify="space-between"
+                    // align="middle"
+                    gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+                >
                     {loading ? <Loader /> : null}
                     {menuItems.map(item => (
                         <MenuCard menu={item} key={item._id} />

@@ -1,5 +1,13 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { Layout, Table, Button, Popconfirm, Skeleton, message } from 'antd';
+import {
+    Layout,
+    Table,
+    Button,
+    Popconfirm,
+    Skeleton,
+    message,
+    Modal,
+} from 'antd';
 import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
 import { PlusOutlined } from '@ant-design/icons';
@@ -13,8 +21,35 @@ const PortalMenu = () => {
     const { menuItems, getMenuItems, deleteMenuItem, loading } = useContext(
         GlobalContext
     );
-    const [visible, setVisible] = useState(false);
+    const [visibleDrawer, setVisibleDrawer] = useState(false);
+    const [visibleModal, setVisibleModal] = useState(false);
+    const [record, setRecord] = useState([]);
 
+    const handleOk = e => {
+        setVisibleModal(false);
+    };
+
+    const handleCancel = e => {
+        setVisibleModal(false);
+    };
+    const showModal = () => {
+        setVisibleModal(true);
+    };
+    const showDrawer = () => {
+        setVisibleDrawer(true);
+    };
+
+    const onClose = useCallback(
+        event => {
+            setVisibleDrawer(!visibleDrawer);
+        },
+        [visibleDrawer]
+    );
+
+    useEffect(() => {
+        getMenuItems();
+        // eslint-disable-next-line
+    }, []);
     const handleDelete = record => {
         try {
             message.success({ content: 'Item deleted', duration: 2 });
@@ -28,20 +63,10 @@ const PortalMenu = () => {
         }
     };
 
-    const showDrawer = () => {
-        setVisible(true);
+    const handleUpdate = record => {
+        setRecord(record);
+        showModal();
     };
-
-    const onClose = useCallback(
-        event => {
-            setVisible(!visible);
-        },
-        [visible]
-    );
-    useEffect(() => {
-        getMenuItems();
-        // eslint-disable-next-line
-    }, []);
 
     const columns = [
         {
@@ -81,14 +106,13 @@ const PortalMenu = () => {
             render: (_, record) => {
                 return (
                     <span>
-                        <a
-                            href="/"
-                            style={{
-                                marginRight: 8,
-                            }}
+                        <Popconfirm
+                            title="Sure to edit?"
+                            onConfirm={() => handleUpdate(record)}
                         >
-                            Edit
-                        </a>
+                            <a href="/">Edit</a>
+                        </Popconfirm>
+                        <span> | </span>
                         <Popconfirm
                             title="Sure to delete?"
                             onConfirm={() => handleDelete(record)}
@@ -126,7 +150,19 @@ const PortalMenu = () => {
                                 <PlusOutlined /> Add an item
                             </Button>
 
-                            <MenuAdd visible={visible} toggleClose={onClose} />
+                            <Modal
+                                title="Edit Item "
+                                visible={visibleModal}
+                                onOk={handleOk}
+                                onCancel={handleCancel}
+                            >
+                                <p>{record._id}</p>
+                                <p>{record.name}</p>
+                            </Modal>
+                            <MenuAdd
+                                visible={visibleDrawer}
+                                toggleClose={onClose}
+                            />
                             <Table
                                 columns={columns}
                                 dataSource={menuItems}

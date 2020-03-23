@@ -11,7 +11,7 @@ const Login = () => {
                 <h2>Log in</h2>
                 <form>
                     <Input placeholder="Digital ID" />
-                    <Link to="/order-confirmed">
+                    <Link to="/order/confirmed">
                         <Button type="primary">Login</Button>
                     </Link>
                 </form>

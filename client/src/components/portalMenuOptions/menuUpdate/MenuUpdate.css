@@ -1,5 +1,13 @@
-.menu-update-wrapper {
+.menu-add-wrapper {
     margin: auto;
     padding: 10px;
     text-align: center;
+}
+
+.menu-add-upload {
+    display: inline-flex;
+}
+
+.ant-row {
+    margin: 5px;
 }

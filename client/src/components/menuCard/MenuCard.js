@@ -19,12 +19,19 @@ const MenuCard = item => {
     }
 
     return (
-        <Col span={4} className="menu-card">
+        <Col span={6}>
             <Card
                 onClick={handleClick}
                 hoverable
                 bordered={true}
-                cover={<img alt="Item" src={API_URL + item.menu.photo} />}
+                className="menu-card"
+                cover={
+                    <img
+                        className="menu-image"
+                        alt="Item"
+                        src={API_URL + item.menu.photo}
+                    />
+                }
                 actions={[<span>{iconType}</span>]}
             >
                 <Meta
