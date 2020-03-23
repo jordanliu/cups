@@ -12,6 +12,13 @@ const Order = () => {
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
+
+    const cart = {
+        name: 'name',
+        date: 'date',
+        items: [order],
+    };
+    console.log(cart);
     let history = useHistory();
     function showCancelConfirm() {
         function handleOk() {
