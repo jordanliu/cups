@@ -29,9 +29,8 @@ const MenuUpdate = ({ visible, onCreate, onCancel, record }) => {
                 form.validateFields()
                     .then(values => {
                         form.resetFields();
-                        console.log(record._id);
                         onCreate(values);
-                        message.success('Item edited');
+                        message.success({ content: 'Edited!', duration: 2 });
                     })
                     .catch(info => {
                         console.log('Validate Failed:', info);
@@ -46,9 +45,9 @@ const MenuUpdate = ({ visible, onCreate, onCancel, record }) => {
                 initialValues={{
                     name: record.name,
                     cost: record.cost,
-                    stockQuantity: record.stockQuantity,
                     description: record.description,
                     category: record.category,
+                    stockQuantity: record.stockQuantity,
                 }}
             >
                 <Form.Item name="name" label="Name">

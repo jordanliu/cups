@@ -49,6 +49,29 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+    async function editMenuItem(id, menuItem) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const res = await axios
+                .patch(`/api/item/${id}`, menuItem, config)
+                .catch(error => console.log(error.message));
+
+            dispatch({
+                type: 'EDIT_MENU',
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'MENU_ERROR',
+                payload: err.response,
+            });
+        }
+    }
 
     async function addMenuItem(menuItem) {
         const config = {
@@ -91,6 +114,7 @@ export const GlobalProvider = ({ children }) => {
                 loading: state.loading,
                 getMenuItems,
                 addMenuItem,
+                editMenuItem,
                 addOrder,
                 deleteMenuItem,
             }}

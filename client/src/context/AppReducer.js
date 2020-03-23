@@ -11,6 +11,16 @@ export default (state, action) => {
                 ...state,
                 menuItems: [...state.menuItems, action.payload],
             };
+        case 'EDIT_MENU':
+            return {
+                ...state,
+                menuItems: state.menuItems.map(menuItems => {
+                    if (menuItems._id === action.payload._id) {
+                        return action.payload;
+                    }
+                    return menuItems;
+                }),
+            };
         case 'DELETE_MENU':
             return {
                 ...state,

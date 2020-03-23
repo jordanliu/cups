@@ -11,15 +11,19 @@ import MenuUpdate from '../portalMenuOptions/menuUpdate/MenuUpdate';
 const { Content } = Layout;
 
 const PortalMenu = () => {
-    const { menuItems, getMenuItems, deleteMenuItem, loading } = useContext(
-        GlobalContext
-    );
+    const {
+        menuItems,
+        getMenuItems,
+        deleteMenuItem,
+        editMenuItem,
+        loading,
+    } = useContext(GlobalContext);
     const [visibleDrawer, setVisibleDrawer] = useState(false);
     const [visibleModal, setVisibleModal] = useState(false);
     const [record, setRecord] = useState([]);
 
     const onCreate = values => {
-        console.log('Received values of form: ', values);
+        editMenuItem(record._id, values);
         setVisibleModal(false);
     };
 

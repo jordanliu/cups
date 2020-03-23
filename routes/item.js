@@ -46,14 +46,11 @@ router.patch('/:id', getItem, async (req, res) => {
     }
 
     if (req.body.cost != null) {
-        res.item.Cost = req.body.Cost;
+        res.item.cost = req.body.cost;
     }
 
     if (req.body.category != null) {
-        res.item.Category = req.body.Category;
-    }
-    if (req.body.photo != null) {
-        res.item.Photo = req.body.Photo;
+        res.item.category = req.body.category;
     }
 
     if (req.body.stockQuantity != null) {
