@@ -2,10 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require("passport");
 
+// const customer = require(".routes/api/auth");
 require('dotenv').config();
 
 const app = express();
+
 const port = process.env.PORT || 5000;
 const router = express.Router();
 
@@ -58,6 +61,10 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully');
 });
 
+app.use(passport.initialize());//passport middleware
+require("./config/passport")(passport); //passport config
+app.use("/api/auth", authRouter)//hmm?
+
 app.listen(port, () => {
     console.log(
         `Server is running on port: ${port} | http://localhost:${port}`
@@ -66,3 +73,4 @@ app.listen(port, () => {
 
 app.use('/uploads', express.static('uploads'));
 app.use('/api', router);
+

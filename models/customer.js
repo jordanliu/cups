@@ -39,6 +39,10 @@ const customerSchema = new Schema({
         type: Number,
         trim: true,
     },
+    date:{
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model('Customer', customerSchema);

@@ -11,7 +11,7 @@ const validateLoginInput = require('../../validation/login');
 //Load customer model
 const Customer = require('../../models/customer');
 
-// @route POST api/customer/register
+// @route POST api/auth/register
 // @desc Register customer
 // @access Public
 router.post('/register', (req, res) => {
@@ -50,11 +50,12 @@ router.post('/register', (req, res) => {
     });
 });
 
-//@route POST api/customer/login
+//@route POST api/auth/login
 //@desc Login customer and return JWT token
 //access Public
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
     //Form validation
+
     const { errors, isValid } = validateLoginInput(req.body);
 
     //Check validation
@@ -62,36 +63,45 @@ router.post('/login', (req, res) => {
         return res.status(400).json(errors);
     }
 
+    const email = req.body.email;
     const password = req.body.password;
 
-    //Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-        if (isMatch) {
-            //User match
-            //create JWT payload
-            const payload = {
-                id: customer.id,
-                fname: customer.fname,
-                lname: customer.lname,
-            };
-            //Sign token
-            jwt.sign(
-                payload,
-                keys.secretOrKey,
-                { expiresIn: 31556926 }, //1 year in seconds
-                (err, token) => {
-                    res.json({
-                        success: true,
-                        token: 'Bearer' + token,
-                    });
-                }
-            );
-        } else {
-            return res
-                .status(400)
-                .json({ passwordincorrect: 'Password incorrect' });
-        }
-    });
+    //Find by email
+    Customer.findOne({ email }).then(customer => {
+        //checkiing if the user exist
+        if(!customer){
+            return res.status(404).json({ emailnotfound: "Email not found" });
+        };
+
+        //Check password
+        bcrypt.compare(password, customer.password).then(isMatch => {
+            if (isMatch) {
+                //customer match
+                //create JWT payload
+                const payload = {
+                    id: customer.id,
+                    fname: customer.fname,
+                    // lname: customer.lname,
+                };
+                //Sign token
+                jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    { expiresIn: 31556926 }, //1 year in seconds
+                    (err, token) => {
+                        res.json({
+                            success: true,
+                            token: "Bearer : " + token
+                        });
+                    }
+                );
+                } else {
+                return res
+                    .status(400)
+                    .json({ passwordincorrect: "Password incorrect" });
+            }
+        });
+    });    
 });
 
 module.exports = router;
