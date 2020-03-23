@@ -1,18 +1,5 @@
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
-import {
-    Drawer,
-    Form,
-    Button,
-    Col,
-    Row,
-    Input,
-    Select,
-    Upload,
-    message,
-} from 'antd';
-
-import { GlobalContext } from '../../../context/GlobalState';
+import React from 'react';
+import { Modal, Form, Input, Select, message } from 'antd';
 
 const { Option } = Select;
 
@@ -28,243 +15,73 @@ const options = [
     },
 ];
 
-const MenuUpdate = ({ visible, toggleClose }) => {
-    const [name, setName] = useState('');
-    const [category, setCategory] = useState(options[0].value);
-    const [description, setDescription] = useState('');
-    const [stockQuantity, setstockQuantity] = useState(0);
-    const [cost, setCost] = useState(0);
-    const [photo, setPhoto] = useState('');
-    const { addMenuItem } = useContext(GlobalContext);
-    var resData;
-
-    const [defaultFileList, setDefaultFileList] = useState([]);
-
-    //setPhoto('test');
-    const uploadImage = async options => {
-        const { onSuccess, onError, file } = options;
-
-        const fmData = new FormData();
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-        };
-        fmData.append('photo', file);
-        try {
-            const res = await axios.post(
-                'http://localhost:5000/api/photo',
-                fmData,
-                config
-            );
-
-            onSuccess('Ok');
-            resData = res.data.image;
-        } catch (err) {
-            console.log('Error: ', err);
-            onError({ err });
-        }
-        setPhoto(resData);
-    };
-
-    const handleOnChange = ({ file, fileList, event }) => {
-        setDefaultFileList(fileList);
-    };
-
-    const handleOnSubmit = () => {
-        setPhoto(resData);
-        console.log('photo:', photo);
-        const newMenuItem = {
-            name,
-            cost,
-            description,
-            category,
-            photo,
-            stockQuantity,
-        };
-
-        try {
-            addMenuItem(newMenuItem);
-            toggleClose();
-            message.success({ content: 'Added!', duration: 2 });
-            window.location.reload();
-        } catch (err) {
-            console.log(err.message);
-            message.error({ content: err.message, duration: 2 });
-        }
-        // eslint-disable-next-line
-    };
+const MenuUpdate = ({ visible, onCreate, onCancel, record }) => {
+    const [form] = Form.useForm();
 
     return (
-        <Drawer
-            title="Edit a menu item"
-            width={720}
-            onClose={toggleClose}
+        <Modal
             visible={visible}
+            title="Edit a menu item"
+            okText="Edit"
+            cancelText="Cancel"
+            onCancel={onCancel}
+            onOk={() => {
+                form.validateFields()
+                    .then(values => {
+                        form.resetFields();
+                        console.log(record._id);
+                        onCreate(values);
+                        message.success('Item edited');
+                    })
+                    .catch(info => {
+                        console.log('Validate Failed:', info);
+                        message.error('Error, please try again later!');
+                    });
+            }}
         >
             <Form
-                name="add-menu-item"
-                onFinish={handleOnSubmit}
+                form={form}
                 layout="vertical"
+                name="form_in_modal"
+                initialValues={{
+                    name: record.name,
+                    cost: record.cost,
+                    stockQuantity: record.stockQuantity,
+                    description: record.description,
+                    category: record.category,
+                }}
             >
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <Form.Item
-                            name="name"
-                            label="Name"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please enter item name',
-                                },
-                            ]}
-                        >
-                            <Input
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                                placeholder="Please enter item name"
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                        <Form.Item
-                            name="cost"
-                            label="Cost"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please enter cost',
-                                },
-                            ]}
-                        >
-                            <Input
-                                value={cost}
-                                type="number"
-                                style={{ width: '100%' }}
-                                onChange={e => setCost(e.target.value)}
-                                placeholder="Please enter cost"
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <Form.Item
-                            name="stockQuantity"
-                            label="Stock Quantity"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please enter stock quantity',
-                                },
-                            ]}
-                        >
-                            <Input
-                                value={stockQuantity}
-                                type="number"
-                                style={{ width: '100%' }}
-                                onChange={e => setstockQuantity(e.target.value)}
-                                placeholder="Please enter stock quantity"
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                        <Form.Item
-                            name="category"
-                            label="Category"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please select a category',
-                                },
-                            ]}
-                        >
-                            <Select
-                                style={{ width: 200 }}
-                                placeholder="Category"
-                                optionFilterProp="children"
-                                onChange={value => setCategory(value)}
-                                filterOption={(input, option) =>
-                                    option.children
-                                        .toLowerCase()
-                                        .indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {options.map(o => (
-                                    <Option key={o.value} value={o.value}>
-                                        {o.value}
-                                    </Option>
-                                ))}
-                            </Select>
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={24}>
-                        <Form.Item
-                            name="description"
-                            label="Description"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please enter item description',
-                                },
-                            ]}
-                        >
-                            <Input.TextArea
-                                value={description}
-                                rows={4}
-                                onChange={e => setDescription(e.target.value)}
-                                placeholder="Please enter item description"
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={6}>
-                        <Form.Item>
-                            <Upload
-                                accept="image/*"
-                                name="photo"
-                                customRequest={uploadImage}
-                                onChange={handleOnChange}
-                                //action="http://localhost:5000/api/photo"
-                                //onChange={handleOnChange}
-                                //customRequest={uploadImage}
-                                defaultFileList={defaultFileList}
-                            >
-                                <Button>Upload Photo</Button>
-                            </Upload>
-                        </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                        <Form.Item>
-                            <Upload>
-                                <Button>Upload ASL</Button>
-                            </Upload>
-                        </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                        <Form.Item>
-                            <Upload>
-                                <Button>Upload Audio</Button>
-                            </Upload>
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Form.Item
-                    style={{
-                        textAlign: 'right',
-                    }}
-                >
-                    <Button onClick={toggleClose} style={{ marginRight: 8 }}>
-                        Cancel
-                    </Button>
-                    <Button type="primary" htmlType="submit">
-                        Add Item
-                    </Button>
+                <Form.Item name="name" label="Name">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="cost" label="Cost">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="stockQuantity" label="Stock Quantity">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="description" label="Description">
+                    <Input type="textarea" />
+                </Form.Item>
+                <Form.Item name="category" label="Category">
+                    <Select
+                        style={{ width: 200 }}
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                            option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {options.map(o => (
+                            <Option key={o.value} value={o.value}>
+                                {o.value}
+                            </Option>
+                        ))}
+                    </Select>
                 </Form.Item>
             </Form>
-        </Drawer>
+        </Modal>
     );
 };
 

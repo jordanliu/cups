@@ -1,19 +1,12 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import {
-    Layout,
-    Table,
-    Button,
-    Popconfirm,
-    Skeleton,
-    message,
-    Modal,
-} from 'antd';
+import { Layout, Table, Button, Popconfirm, Skeleton, message } from 'antd';
 import './PortalMenu.css';
 import PortalNav from '../portalNav/PortalNav';
 import { PlusOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 import MenuAdd from '../portalMenuOptions/menuAdd/MenuAdd';
+import MenuUpdate from '../portalMenuOptions/menuUpdate/MenuUpdate';
 
 const { Content } = Layout;
 
@@ -25,13 +18,11 @@ const PortalMenu = () => {
     const [visibleModal, setVisibleModal] = useState(false);
     const [record, setRecord] = useState([]);
 
-    const handleOk = e => {
+    const onCreate = values => {
+        console.log('Received values of form: ', values);
         setVisibleModal(false);
     };
 
-    const handleCancel = e => {
-        setVisibleModal(false);
-    };
     const showModal = () => {
         setVisibleModal(true);
     };
@@ -74,6 +65,10 @@ const PortalMenu = () => {
             dataIndex: 'name',
         },
         {
+            title: 'Category',
+            dataIndex: 'category',
+        },
+        {
             title: 'Price',
             dataIndex: 'cost',
             render: text => <span>${text}</span>,
@@ -106,18 +101,18 @@ const PortalMenu = () => {
             render: (_, record) => {
                 return (
                     <span>
-                        <Popconfirm
-                            title="Sure to edit?"
-                            onConfirm={() => handleUpdate(record)}
+                        <span
+                            className="hyperlink"
+                            onClick={() => handleUpdate(record)}
                         >
-                            <a href="/">Edit</a>
-                        </Popconfirm>
+                            Edit
+                        </span>
                         <span> | </span>
                         <Popconfirm
                             title="Sure to delete?"
                             onConfirm={() => handleDelete(record)}
                         >
-                            <a href="/">Delete</a>
+                            <span className="hyperlink">Delete</span>
                         </Popconfirm>
                     </span>
                 );
@@ -149,16 +144,14 @@ const PortalMenu = () => {
                             >
                                 <PlusOutlined /> Add an item
                             </Button>
-
-                            <Modal
-                                title="Edit Item "
+                            <MenuUpdate
                                 visible={visibleModal}
-                                onOk={handleOk}
-                                onCancel={handleCancel}
-                            >
-                                <p>{record._id}</p>
-                                <p>{record.name}</p>
-                            </Modal>
+                                onCreate={onCreate}
+                                record={record}
+                                onCancel={() => {
+                                    setVisibleModal(false);
+                                }}
+                            />
                             <MenuAdd
                                 visible={visibleDrawer}
                                 toggleClose={onClose}
