@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Form, Input, Select, message } from 'antd';
 
 const { Option } = Select;
@@ -18,19 +18,31 @@ const options = [
 const MenuUpdate = ({ visible, onCreate, onCancel, record }) => {
     const [form] = Form.useForm();
 
+    useEffect(() => {
+        return () => {
+            form.resetFields();
+        };
+        // eslint-disable-next-line
+    });
+
     return (
         <Modal
+            forceRender
+            destroyOnClose={true}
             visible={visible}
             title="Edit a menu item"
             okText="Edit"
             cancelText="Cancel"
             onCancel={onCancel}
+            //onOpen={form.setFieldsValue(initialValues)}
             onOk={() => {
                 form.validateFields()
                     .then(values => {
-                        form.resetFields();
                         onCreate(values);
-                        message.success({ content: 'Edited!', duration: 2 });
+                        message.success({
+                            content: 'Item Edited',
+                            duration: 2,
+                        });
                     })
                     .catch(info => {
                         console.log('Validate Failed:', info);
@@ -51,7 +63,7 @@ const MenuUpdate = ({ visible, onCreate, onCancel, record }) => {
                 }}
             >
                 <Form.Item name="name" label="Name">
-                    <Input />
+                    <Input value="test" />
                 </Form.Item>
                 <Form.Item name="cost" label="Cost">
                     <Input />

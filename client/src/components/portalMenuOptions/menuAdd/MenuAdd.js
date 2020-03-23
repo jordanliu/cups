@@ -29,18 +29,15 @@ const options = [
 ];
 
 const MenuAdd = ({ visible, toggleClose }) => {
-    const [name, setName] = useState('');
-    const [category, setCategory] = useState(options[0].value);
-    const [description, setDescription] = useState('');
-    const [stockQuantity, setstockQuantity] = useState(0);
-    const [cost, setCost] = useState(0);
+    const [form] = Form.useForm();
     const [photo, setPhoto] = useState('');
+    const [aslPhoto, setAslPhoto] = useState('');
+    const [audio, setAudio] = useState('');
+    const [defaultFileList, setDefaultFileList] = useState([]);
     const { addMenuItem } = useContext(GlobalContext);
+
     var resData;
 
-    const [defaultFileList, setDefaultFileList] = useState([]);
-
-    //setPhoto('test');
     const uploadImage = async options => {
         const { onSuccess, onError, file } = options;
 
@@ -48,21 +45,79 @@ const MenuAdd = ({ visible, toggleClose }) => {
         const config = {
             headers: { 'content-type': 'multipart/form-data' },
         };
-        fmData.append('photo', file);
+        fmData.append('file', file);
         try {
             const res = await axios.post(
-                'http://localhost:5000/api/photo',
+                'http://localhost:5000/api/upload',
                 fmData,
                 config
             );
 
             onSuccess('Ok');
-            resData = res.data.image;
+            message.success(`${file.name} file uploaded successfully`);
+            resData = res.data.file;
         } catch (err) {
             console.log('Error: ', err);
+            message.error(`${file.name}  file upload failed.`);
             onError({ err });
         }
         setPhoto(resData);
+    };
+
+    const uploadAslImage = async options => {
+        const { onSuccess, onError, file } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        };
+        fmData.append('file', file);
+        console.log(file);
+        console.log(fmData);
+        try {
+            const res = await axios.post(
+                'http://localhost:5000/api/upload',
+                fmData,
+                config
+            );
+
+            onSuccess('Ok');
+            message.success(`${file.name} file uploaded successfully`);
+            resData = res.data.file;
+        } catch (err) {
+            console.log('Error: ', err);
+            message.error(`${file.name}  file upload failed.`);
+            onError({ err });
+        }
+        setAslPhoto(resData);
+    };
+
+    const uploadAudio = async options => {
+        const { onSuccess, onError, file } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        };
+        fmData.append('file', file);
+        console.log(file);
+        console.log(fmData);
+        try {
+            const res = await axios.post(
+                'http://localhost:5000/api/upload',
+                fmData,
+                config
+            );
+
+            message.success(`${file.name} file uploaded successfully`);
+            onSuccess('Ok');
+            resData = res.data.file;
+        } catch (err) {
+            console.log('Error: ', err);
+            message.error(`${file.name}  file upload failed.`);
+            onError({ err });
+        }
+        setAudio(resData);
     };
 
     const handleOnChange = ({ file, fileList, event }) => {
@@ -70,37 +125,32 @@ const MenuAdd = ({ visible, toggleClose }) => {
     };
 
     const handleOnSubmit = () => {
-        setPhoto(resData);
-        console.log('photo:', photo);
-        const newMenuItem = {
-            name,
-            cost,
-            description,
-            category,
-            photo,
-            stockQuantity,
-        };
-
-        try {
-            addMenuItem(newMenuItem);
-            toggleClose();
-            message.success({ content: 'Added!', duration: 2 });
-            window.location.reload();
-        } catch (err) {
-            console.log(err.message);
-            message.error({ content: err.message, duration: 2 });
-        }
-        // eslint-disable-next-line
+        form.validateFields()
+            .then(values => {
+                form.resetFields();
+                values.photo = photo;
+                values.aslPhoto = aslPhoto;
+                values.audio = audio;
+                console.log(values);
+                addMenuItem(values);
+                toggleClose();
+                message.success({ content: 'Item Added', duration: 2 });
+            })
+            .catch(info => {
+                console.log('Validate Failed:', info);
+                message.error('Error, please try again later');
+            });
     };
-
     return (
         <Drawer
             title="Create a new menu item"
             width={720}
             onClose={toggleClose}
             visible={visible}
+            destroyOnClose={true}
         >
             <Form
+                form={form}
                 name="add-menu-item"
                 onFinish={handleOnSubmit}
                 layout="vertical"
@@ -117,11 +167,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
                                 },
                             ]}
                         >
-                            <Input
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                                placeholder="Please enter item name"
-                            />
+                            <Input placeholder="Please enter item name" />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -136,10 +182,8 @@ const MenuAdd = ({ visible, toggleClose }) => {
                             ]}
                         >
                             <Input
-                                value={cost}
                                 type="number"
                                 style={{ width: '100%' }}
-                                onChange={e => setCost(e.target.value)}
                                 placeholder="Please enter cost"
                             />
                         </Form.Item>
@@ -159,10 +203,8 @@ const MenuAdd = ({ visible, toggleClose }) => {
                             ]}
                         >
                             <Input
-                                value={stockQuantity}
                                 type="number"
                                 style={{ width: '100%' }}
-                                onChange={e => setstockQuantity(e.target.value)}
                                 placeholder="Please enter stock quantity"
                             />
                         </Form.Item>
@@ -182,7 +224,6 @@ const MenuAdd = ({ visible, toggleClose }) => {
                                 style={{ width: 200 }}
                                 placeholder="Category"
                                 optionFilterProp="children"
-                                onChange={value => setCategory(value)}
                                 filterOption={(input, option) =>
                                     option.children
                                         .toLowerCase()
@@ -211,9 +252,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
                             ]}
                         >
                             <Input.TextArea
-                                value={description}
                                 rows={4}
-                                onChange={e => setDescription(e.target.value)}
                                 placeholder="Please enter item description"
                             />
                         </Form.Item>
@@ -221,15 +260,20 @@ const MenuAdd = ({ visible, toggleClose }) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Form.Item>
+                        <Form.Item
+                            name="photo"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please upload an image',
+                                },
+                            ]}
+                        >
                             <Upload
                                 accept="image/*"
                                 name="photo"
                                 customRequest={uploadImage}
                                 onChange={handleOnChange}
-                                //action="http://localhost:5000/api/photo"
-                                //onChange={handleOnChange}
-                                //customRequest={uploadImage}
                                 defaultFileList={defaultFileList}
                             >
                                 <Button>Upload Photo</Button>
@@ -237,15 +281,43 @@ const MenuAdd = ({ visible, toggleClose }) => {
                         </Form.Item>
                     </Col>
                     <Col span={6}>
-                        <Form.Item>
-                            <Upload>
+                        <Form.Item
+                            name="aslPhoto"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please upload an ASL image',
+                                },
+                            ]}
+                        >
+                            <Upload
+                                accept="image/*"
+                                name="aslPhoto"
+                                customRequest={uploadAslImage}
+                                onChange={handleOnChange}
+                                defaultFileList={defaultFileList}
+                            >
                                 <Button>Upload ASL</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
                     <Col span={6}>
-                        <Form.Item>
-                            <Upload>
+                        <Form.Item
+                            name="audio"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please upload audio',
+                                },
+                            ]}
+                        >
+                            <Upload
+                                accept="audio/*"
+                                name="audio"
+                                customRequest={uploadAudio}
+                                onChange={handleOnChange}
+                                defaultFileList={defaultFileList}
+                            >
                                 <Button>Upload Audio</Button>
                             </Upload>
                         </Form.Item>

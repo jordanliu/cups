@@ -26,6 +26,8 @@ router.post('/', async (req, res) => {
         description: req.body.description,
         category: req.body.category,
         photo: req.body.photo,
+        aslPhoto: req.body.aslPhoto,
+        audio: req.body.audio,
         stockQuantity: req.body.stockQuantity,
     });
     try {

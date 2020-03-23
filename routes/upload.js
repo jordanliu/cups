@@ -16,7 +16,11 @@ const fileFilter = (req, file, cb) => {
     if (
         file.mimetype === 'image/jpeg' ||
         file.mimetype === 'image/jpg' ||
-        file.mimetype === 'image/png'
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'audio/mpeg' ||
+        file.mimetype === 'audio/mp4' ||
+        file.mimetype === 'audio/m4a' ||
+        file.mimetype === 'audio/x-m4a'
     ) {
         cb(null, true);
     } else {
@@ -29,9 +33,9 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 const router = express.Router();
 
 // Upload Image
-router.post('/', upload.single('photo'), (req, res, next) => {
+router.post('/', upload.single('file'), (req, res, next) => {
     return res.json({
-        image: req.file.path,
+        file: req.file.path,
     });
 });
 

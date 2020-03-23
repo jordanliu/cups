@@ -21,6 +21,7 @@ const PortalMenu = () => {
     const [visibleDrawer, setVisibleDrawer] = useState(false);
     const [visibleModal, setVisibleModal] = useState(false);
     const [record, setRecord] = useState([]);
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const onCreate = values => {
         editMenuItem(record._id, values);
@@ -89,15 +90,42 @@ const PortalMenu = () => {
         {
             title: 'Photo',
             dataIndex: 'photo',
+            render: photo => (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={API_URL + photo}
+                >
+                    View Photo
+                </a>
+            ),
         },
         {
             title: 'ASL',
-            dataIndex: 'url',
+            dataIndex: 'aslPhoto',
+            render: aslPhoto => (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={API_URL + aslPhoto}
+                >
+                    View ASL
+                </a>
+            ),
         },
 
         {
             title: 'Audio',
-            dataIndex: 'url1',
+            dataIndex: 'audio',
+            render: audio => (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={API_URL + audio}
+                >
+                    View Audio
+                </a>
+            ),
         },
         {
             title: 'Actions',
@@ -124,14 +152,6 @@ const PortalMenu = () => {
         },
     ];
 
-    /*
-    <Popconfirm
-                    title="Sure to delete?"
-                    onConfirm={() => console.log(record)}
-                >
-                    <a href="/">Edit</a>
-                </Popconfirm>
-    */
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <PortalNav />

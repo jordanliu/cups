@@ -48,8 +48,8 @@ router.use('/item', itemRouter);
 const orderRouter = require('./routes/order');
 router.use('/order', orderRouter);
 
-const photoRouter = require('./routes/photo');
-router.use('/photo', photoRouter);
+const uploadRouter = require('./routes/upload');
+router.use('/upload', uploadRouter);
 
 const connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));

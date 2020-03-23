@@ -30,6 +30,12 @@ var itemSchema = new Schema({
         required: true,
         type: String,
     },
+    aslPhoto: {
+        type: String,
+    },
+    audio: {
+        type: String,
+    },
     stockQuantity: {
         required: true,
         type: Number,

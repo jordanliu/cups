@@ -11,7 +11,7 @@ const OrderComplete = () => {
                 title="Order #: 201712881"
                 subTitle="Order complete, thank you for making it CUPS!"
                 extra={[
-                    <Link to="/">
+                    <Link to="/" key={1}>
                         <Button type="primary" key="console">
                             Continue
                         </Button>
