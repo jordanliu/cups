@@ -1,94 +1,58 @@
-import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import React from 'react';
 import './Register.css';
-//import { GlobalContext } from '../../../context/GlobalState';
+import { useHistory } from 'react-router-dom';
 import { register } from '../../components/UserFunctions';
-import {    
-    Form,
-    Button,    
-    Input,    
-    Upload,    
-} from 'antd';
+import { Form, Button, Input, Upload, message } from 'antd';
 
-class Register extends Component{
-    constructor(){
-        super();
-        this.state = {
-            fname: "",
-            lname: "",
-            email: "",
-            phone: "",
-            password: "",
-            confirm: "",
-            errors: {}
-        };
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-    }
+const Register = () => {
+    const [form] = Form.useForm();
+    const history = useHistory();
+    const onFinish = values => {
+        form.validateFields().catch(() => {
+            message.error('Error, please try again later!');
+        });
 
-    onChange = e =>{
-        this.setState ({[e.target.id]: e.target.value});
+        register(values).then(res => {
+            if (res.status === 200) {
+                message.success({ content: 'Registered', duration: 2 });
+                return history.push('/menu');
+            }
+        });
     };
-    
 
-    onSubmit = e => {
-        e.preventDefault()
-        const user = {
-            fname: this.state.fname,
-            lname: this.statelfname,
-            email: this.state.email,
-            phone: this.state.phone,
-            password: this.state.password,
-            confirm: this.state.confirm
-        };
-
-        register(user).then(res => {        
-            this.props.history.push(`/login`)        
-    })
-}   
-    
-    render(){
-        const { errors } = this.state;
-
-        return(
-            <div>
-             <h1 className="register-title">CUPS</h1>
-             <div className="register-wrapper">
-                 <h2>Registration Form</h2>
-                 <Form
-                    //{...formItemLayout}
+    return (
+        <div>
+            <h1 className="register-title">CUPS</h1>
+            <div className="register-wrapper">
+                <h2>Registration Form</h2>
+                <Form
                     name="registeration-form"
                     layout="vertical"
                     scrollToFirstError
                     noValidate
-                    onSubmit = { this.onSubmit }
+                    form={form}
+                    onFinish={onFinish}
                 >
                     <Form.Item
-                        name="first name"
+                        name="fname"
                         label="First Name"
                         rules={[
                             {
                                 required: true,
                             },
                         ]}
-                        onChange = { this.onChange }
-                        value = { this.state.fname }
-                        error = { errors.fname }
                     >
                         <Input placeholder="First Name" />
                     </Form.Item>
 
                     <Form.Item
-                        name="last name"
+                        name="lname"
                         label="Last Name"
                         rules={[
                             {
                                 required: true,
                             },
                         ]}
-                        onChange = { this.onChange }
-                        value = { this.state.lname }
-                        error = { errors.lname }
                     >
                         <Input placeholder="Last Name" />
                     </Form.Item>
@@ -106,9 +70,6 @@ class Register extends Component{
                                 message: 'Please input your E-mail!',
                             },
                         ]}
-                        onChange = { this.onChange }
-                        value = { this.state.email }
-                        error = { errors.email }
                     >
                         <Input placeholder="email@cups.com" />
                     </Form.Item>
@@ -122,9 +83,6 @@ class Register extends Component{
                                 message: 'Please input your phone number!',
                             },
                         ]}
-                        onChange = { this.onChange }
-                        value = { this.state.phone }
-                        error = { errors.phone }
                     >
                         <Input placeholder="Phone Number" />
                     </Form.Item>
@@ -139,9 +97,6 @@ class Register extends Component{
                             },
                         ]}
                         hasFeedback
-                        onChange = { this.onChange }
-                        value = { this.state.password }
-                        error = { errors.password }
                     >
                         <Input.Password placeholder="Password" />
                     </Form.Item>
@@ -171,16 +126,13 @@ class Register extends Component{
                                 },
                             }),
                         ]}
-                        onChange = { this.onChange }
-                        value = { this.state.confirm }
-                        error = { errors.confirm }
                     >
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
 
                     <div className="register-add-upload">
                         <Form.Item>
-                            <Upload >
+                            <Upload>
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
@@ -199,7 +151,7 @@ class Register extends Component{
                 </Form>
             </div>
         </div>
-        );
-    }
-}
+    );
+};
+
 export default Register;

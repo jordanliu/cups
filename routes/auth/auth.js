@@ -11,6 +11,18 @@ const validateLoginInput = require('../../validation/login');
 //Load customer model
 const Customer = require('../../models/customer');
 
+// @route GET api/auth/
+// @desc Get all customers
+// @access Public
+router.get('/', async (req, res) => {
+    try {
+        const customers = await Customer.find();
+        res.json(customers);
+    } catch (err) {
+        res.status(500).json({ message: err.message }); //500 - something wrong on our [server] end
+    }
+});
+
 // @route POST api/auth/register
 // @desc Register customer
 // @access Public
@@ -25,7 +37,7 @@ router.post('/register', (req, res) => {
 
     Customer.findOne({ email: req.body.email }).then(customer => {
         if (customer) {
-            return res.status(400).json({ email: 'Email already exist' });
+            return res.status(400).json({ message: 'Email already exist' });
         } else {
             const newCustomer = new Customer({
                 fname: req.body.fname,
@@ -53,7 +65,7 @@ router.post('/register', (req, res) => {
 //@route POST api/auth/login
 //@desc Login customer and return JWT token
 //access Public
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
     //Form validation
 
     const { errors, isValid } = validateLoginInput(req.body);
@@ -69,9 +81,9 @@ router.post("/login", (req, res) => {
     //Find by email
     Customer.findOne({ email }).then(customer => {
         //checkiing if the user exist
-        if(!customer){
-            return res.status(404).json({ emailnotfound: "Email not found" });
-        };
+        if (!customer) {
+            return res.status(404).json({ message: 'Email not found' });
+        }
 
         //Check password
         bcrypt.compare(password, customer.password).then(isMatch => {
@@ -91,17 +103,15 @@ router.post("/login", (req, res) => {
                     (err, token) => {
                         res.json({
                             success: true,
-                            token: "Bearer : " + token
+                            token: 'Bearer : ' + token,
                         });
                     }
                 );
-                } else {
-                return res
-                    .status(400)
-                    .json({ passwordincorrect: "Password incorrect" });
+            } else {
+                return res.status(400).json({ message: 'Password incorrect' });
             }
         });
-    });    
+    });
 });
 
 module.exports = router;
