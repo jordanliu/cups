@@ -1,46 +1,94 @@
-import React from 'react';
-import { Form, Input, Button, Upload } from 'antd';
+import React, { Component } from "react";
+//import { Link } from "react-router-dom";
 import './Register.css';
-import { Link } from 'react-router-dom';
+//import { GlobalContext } from '../../../context/GlobalState';
+import { register } from '../../components/UserFunctions';
+import {    
+    Form,
+    Button,    
+    Input,    
+    Upload,    
+} from 'antd';
 
-const formItemLayout = null;
+class Register extends Component{
+    constructor(){
+        super();
+        this.state = {
+            fname: "",
+            lname: "",
+            email: "",
+            phone: "",
+            password: "",
+            confirm: "",
+            errors: {}
+        };
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
 
-const Register = props => {
-    // const [photo, setPhoto] = useState('url');
-    return (
-        <div>
-            <h1 className="register-title">CUPS</h1>
-            <div className="register-wrapper">
-                <h2>Registration Form</h2>
-                <Form
-                    {...formItemLayout}
+    onChange = e =>{
+        this.setState ({[e.target.id]: e.target.value});
+    };
+    
+
+    onSubmit = e => {
+        e.preventDefault()
+        const user = {
+            fname: this.state.fname,
+            lname: this.statelfname,
+            email: this.state.email,
+            phone: this.state.phone,
+            password: this.state.password,
+            confirm: this.state.confirm
+        };
+
+        register(user).then(res => {        
+            this.props.history.push(`/login`)        
+    })
+}   
+    
+    render(){
+        const { errors } = this.state;
+
+        return(
+            <div>
+             <h1 className="register-title">CUPS</h1>
+             <div className="register-wrapper">
+                 <h2>Registration Form</h2>
+                 <Form
+                    //{...formItemLayout}
                     name="registeration-form"
                     layout="vertical"
-                    initialValues={{
-                        prefix: '876',
-                    }}
                     scrollToFirstError
+                    noValidate
+                    onSubmit = { this.onSubmit }
                 >
                     <Form.Item
-                        name={['user', 'fname']}
+                        name="first name"
                         label="First Name"
                         rules={[
                             {
                                 required: true,
                             },
                         ]}
+                        onChange = { this.onChange }
+                        value = { this.state.fname }
+                        error = { errors.fname }
                     >
                         <Input placeholder="First Name" />
                     </Form.Item>
 
                     <Form.Item
-                        name={['user', 'lname']}
+                        name="last name"
                         label="Last Name"
                         rules={[
                             {
                                 required: true,
                             },
                         ]}
+                        onChange = { this.onChange }
+                        value = { this.state.lname }
+                        error = { errors.lname }
                     >
                         <Input placeholder="Last Name" />
                     </Form.Item>
@@ -58,6 +106,9 @@ const Register = props => {
                                 message: 'Please input your E-mail!',
                             },
                         ]}
+                        onChange = { this.onChange }
+                        value = { this.state.email }
+                        error = { errors.email }
                     >
                         <Input placeholder="email@cups.com" />
                     </Form.Item>
@@ -71,6 +122,9 @@ const Register = props => {
                                 message: 'Please input your phone number!',
                             },
                         ]}
+                        onChange = { this.onChange }
+                        value = { this.state.phone }
+                        error = { errors.phone }
                     >
                         <Input placeholder="Phone Number" />
                     </Form.Item>
@@ -85,6 +139,9 @@ const Register = props => {
                             },
                         ]}
                         hasFeedback
+                        onChange = { this.onChange }
+                        value = { this.state.password }
+                        error = { errors.password }
                     >
                         <Input.Password placeholder="Password" />
                     </Form.Item>
@@ -114,34 +171,35 @@ const Register = props => {
                                 },
                             }),
                         ]}
+                        onChange = { this.onChange }
+                        value = { this.state.confirm }
+                        error = { errors.confirm }
                     >
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
 
                     <div className="register-add-upload">
                         <Form.Item>
-                            <Upload {...props}>
+                            <Upload >
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item>
-                            <Upload {...props}>
+                            <Upload>
                                 <Button>Upload Audio</Button>
                             </Upload>
                         </Form.Item>
                     </div>
 
                     <Form.Item>
-                        <Link to="/">
-                            <Button type="primary" htmlType="submit">
-                                Register
-                            </Button>
-                        </Link>
+                        <Button type="submit" htmlType="submit">
+                            Register
+                        </Button>
                     </Form.Item>
                 </Form>
             </div>
         </div>
-    );
-};
-
+        );
+    }
+}
 export default Register;
