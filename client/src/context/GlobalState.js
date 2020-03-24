@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const initialState = {
     menuItems: [],
+    customers: [],
     order: [],
     error: null,
     loading: true,
@@ -17,6 +18,24 @@ export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     //Actions
+    async function getCustomers() {
+        try {
+            const res = await axios
+                .get('/api/auth/')
+                .catch(error => console.log(error.message));
+
+            dispatch({
+                type: 'GET_CUSTOMER',
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'MENU_ERROR',
+                payload: err.response,
+            });
+        }
+    }
+
     async function getMenuItems() {
         try {
             const res = await axios
@@ -34,6 +53,7 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+
     async function deleteMenuItem(id) {
         try {
             await axios.delete(`/api/item/${id}`);
@@ -108,6 +128,7 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider
             value={{
                 menuItems: state.menuItems,
+                customers: state.customers,
                 orderItems: state.orderItems,
                 order: state.order,
                 error: state.error,
@@ -115,6 +136,7 @@ export const GlobalProvider = ({ children }) => {
                 getMenuItems,
                 addMenuItem,
                 editMenuItem,
+                getCustomers,
                 addOrder,
                 deleteMenuItem,
             }}

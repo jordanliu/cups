@@ -13,7 +13,11 @@ const Login = () => {
         });
 
         login(values).then(res => {
-            if (res.status === 200) {
+            if (res.success === false) {
+                message.error(res.errorMesssages.message);
+            }
+
+            if (res.success === true) {
                 message.success({ content: 'Logged in', duration: 2 });
                 return history.push('/order/confirmed');
             }

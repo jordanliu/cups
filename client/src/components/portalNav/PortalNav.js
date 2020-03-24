@@ -23,9 +23,11 @@ const PortalNav = withRouter(props => {
                         Menu
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="9">
-                    <UserOutlined />
-                    <span>Customers</span>
+                <Menu.Item key="/portal/customers">
+                    <Link to="/portal/customers">
+                        <UserOutlined />
+                        Customers
+                    </Link>
                 </Menu.Item>
             </Menu>
         </Sider>

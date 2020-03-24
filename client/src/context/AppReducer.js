@@ -1,5 +1,11 @@
 export default (state, action) => {
     switch (action.type) {
+        case 'GET_CUSTOMER':
+            return {
+                ...state,
+                loading: false,
+                customers: action.payload,
+            };
         case 'GET_MENU':
             return {
                 ...state,

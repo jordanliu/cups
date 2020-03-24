@@ -11,10 +11,19 @@ export const register = async user => {
             confirm: user.confirm,
         })
         .then(res => {
-            return res;
+            return {
+                success: true,
+                data: res,
+            };
+            // return res;
         })
         .catch(err => {
-            return err;
+            return {
+                success: false,
+                data: null,
+                errorMesssages: err.response.data,
+            };
+            // return err;
         });
 };
 
@@ -25,9 +34,16 @@ export const login = async user => {
             password: user.password,
         })
         .then(res => {
-            return res;
+            return {
+                success: true,
+                data: res,
+            };
         })
         .catch(err => {
-            return err;
+            return {
+                success: false,
+                data: null,
+                errorMesssages: err.response.data,
+            };
         });
 };
