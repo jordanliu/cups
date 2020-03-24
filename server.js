@@ -2,10 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');
 
+// const customer = require(".routes/api/auth");
 require('dotenv').config();
 
 const app = express();
+
 const port = process.env.PORT || 5000;
 const router = express.Router();
 
@@ -33,8 +36,8 @@ try {
 // ROUTES
 //=============================================================
 
-const authRouter = require('./routes/api/auth');
-router.use('/auth', authRouter); //route ???
+const authRouter = require('./routes/auth/auth');
+router.use('/auth', authRouter);
 
 const customerRouter = require('./routes/customer');
 router.use('/customer', customerRouter);
@@ -57,6 +60,10 @@ connection.on('error', console.error.bind(console, 'connection error:'));
 connection.once('open', () => {
     console.log('MongoDB database connection established successfully');
 });
+
+app.use(passport.initialize()); //passport middleware
+require('./config/passport')(passport); //passport config
+app.use('/api/auth', authRouter); //hmm?
 
 app.listen(port, () => {
     console.log(

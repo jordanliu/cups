@@ -1,28 +1,40 @@
 import React from 'react';
-import { Form, Input, Button, Upload } from 'antd';
 import './Register.css';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { register } from '../../components/UserFunctions';
+import { Form, Button, Input, Upload, message } from 'antd';
 
-const formItemLayout = null;
+const Register = () => {
+    const [form] = Form.useForm();
+    const history = useHistory();
+    const onFinish = values => {
+        form.validateFields().catch(() => {
+            message.error('Error, please try again later!');
+        });
 
-const Register = props => {
-    // const [photo, setPhoto] = useState('url');
+        register(values).then(res => {
+            if (res.status === 200) {
+                message.success({ content: 'Registered', duration: 2 });
+                return history.push('/menu');
+            }
+        });
+    };
+
     return (
         <div>
             <h1 className="register-title">CUPS</h1>
             <div className="register-wrapper">
                 <h2>Registration Form</h2>
                 <Form
-                    {...formItemLayout}
                     name="registeration-form"
                     layout="vertical"
-                    initialValues={{
-                        prefix: '876',
-                    }}
                     scrollToFirstError
+                    noValidate
+                    form={form}
+                    onFinish={onFinish}
                 >
                     <Form.Item
-                        name={['user', 'fname']}
+                        name="fname"
                         label="First Name"
                         rules={[
                             {
@@ -34,7 +46,7 @@ const Register = props => {
                     </Form.Item>
 
                     <Form.Item
-                        name={['user', 'lname']}
+                        name="lname"
                         label="Last Name"
                         rules={[
                             {
@@ -120,23 +132,21 @@ const Register = props => {
 
                     <div className="register-add-upload">
                         <Form.Item>
-                            <Upload {...props}>
+                            <Upload>
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item>
-                            <Upload {...props}>
+                            <Upload>
                                 <Button>Upload Audio</Button>
                             </Upload>
                         </Form.Item>
                     </div>
 
                     <Form.Item>
-                        <Link to="/">
-                            <Button type="primary" htmlType="submit">
-                                Register
-                            </Button>
-                        </Link>
+                        <Button type="submit" htmlType="submit">
+                            Register
+                        </Button>
                     </Form.Item>
                 </Form>
             </div>

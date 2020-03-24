@@ -9,22 +9,21 @@
     padding-top: 10px;
 }
 
-.login-wrapper input {
-    max-width: 300px;
-    width: 50%;
-    margin-bottom: 10px;
-}
-
 .login-wrapper form {
     max-height: 500px;
     max-width: 500px;
     margin: auto;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     background-color: rgb(238, 237, 237);
 }
 
-.login-wrapper button {
+.login-wrapper .ant-form-item-control {
+    margin-bottom: 5px;
+}
+
+.login-button {
+    margin-top: 10px;
     display: block;
     margin: auto;
 }
