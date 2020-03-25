@@ -6,12 +6,33 @@ export default (state, action) => {
                 loading: false,
                 customers: action.payload,
             };
+
         case 'GET_MENU':
             return {
                 ...state,
                 loading: false,
                 menuItems: action.payload,
             };
+
+        case 'GET_ORDER_ITEMS':
+            return {
+                ...state,
+                loading: false,
+                orderItems: action.payload,
+            };
+
+        case 'ADD_ORDER_ITEMS':
+            return {
+                ...state,
+                orderItems: [...state.orderItems, action.payload],
+            };
+
+        case 'ADD_ORDER':
+            return {
+                ...state,
+                order: [action.payload, ...state.order],
+            };
+
         case 'ADD_MENU':
             return {
                 ...state,
@@ -33,11 +54,6 @@ export default (state, action) => {
                 menuItems: state.menuItems.filter(
                     menuItems => menuItems._id !== action.payload
                 ),
-            };
-        case 'ADD_ORDER':
-            return {
-                ...state,
-                order: [action.payload, ...state.order],
             };
         case 'MENU_ERROR':
             return {

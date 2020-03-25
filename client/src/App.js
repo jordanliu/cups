@@ -10,6 +10,7 @@ const Home = lazy(() => import('./components/home/Home'));
 const PortalCustomer = lazy(() =>
     import('./components/portalCustomer/PortalCustomer')
 );
+const PortalOrder = lazy(() => import('./components/portalOrder/PortalOrder'));
 const PortalMenu = lazy(() => import('./components/portalMenu/PortalMenu'));
 const MenuAdd = lazy(() =>
     import('./components/portalMenuOptions/menuAdd/MenuAdd')
@@ -59,6 +60,11 @@ const App = () => {
                             path="/portal/customers"
                             exact
                             component={PortalCustomer}
+                        />
+                        <Route
+                            path="/portal/orders"
+                            exact
+                            component={PortalOrder}
                         />
                         <Route path="/portal/menu/add" component={MenuAdd} />
                         <Route path="/portal/menu/view" component={MenuView} />

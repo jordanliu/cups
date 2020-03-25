@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Login.css';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../components/UserFunctions';
+import { GlobalContext } from '../../context/GlobalState';
 import { Form, Button, Input, message } from 'antd';
 
 const Login = () => {
     const [form] = Form.useForm();
     const history = useHistory();
+    const { order, addOrderItems } = useContext(GlobalContext);
+
+    const orderAmount = order.map(order => order.cost);
+    const orderTotal = orderAmount
+        .reduce((acc, item) => (acc += item), 0)
+        .toFixed(2);
+
+    const cart = {
+        items: order,
+        totalCost: orderTotal,
+    };
+    console.log(JSON.stringify(cart));
+
+    const handleConfirm = () => {
+        addOrderItems(JSON.stringify(cart));
+    };
+
     const onFinish = values => {
         form.validateFields().catch(() => {
             message.error('Error, please try again later!');
@@ -18,6 +36,7 @@ const Login = () => {
             }
 
             if (res.success === true) {
+                handleConfirm();
                 message.success({ content: 'Logged in', duration: 2 });
                 return history.push('/order/confirmed');
             }

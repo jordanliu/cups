@@ -8,15 +8,17 @@ const OrderComplete = () => {
         <div className="orderComplete">
             <Result
                 status="success"
-                title="Order #: 201712881"
-                subTitle="Order complete, thank you for making it CUPS!"
+                title="Order Complete"
+                subTitle="Order complete, your name will be called when your order is ready, thank you for making it CUPS! "
                 extra={[
                     <Link to="/" key={1}>
                         <Button type="primary" key="console">
                             Continue
                         </Button>
                     </Link>,
-                    <Button key="buy">Order Again</Button>,
+                    <Link to="/menu" key={2}>
+                        <Button key="buy">Order Again</Button>,
+                    </Link>,
                 ]}
             />
         </div>

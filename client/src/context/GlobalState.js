@@ -6,6 +6,7 @@ const initialState = {
     menuItems: [],
     customers: [],
     order: [],
+    orderItems: [],
     error: null,
     loading: true,
 };
@@ -117,11 +118,52 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
+    async function getOrderItems() {
+        try {
+            const res = await axios
+                .get('/api/order')
+                .catch(error => console.log(error.message));
+
+            dispatch({
+                type: 'GET_ORDER_ITEMS',
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'ERROR',
+                payload: err.response,
+            });
+        }
+    }
     function addOrder(order) {
         dispatch({
             type: 'ADD_ORDER',
             payload: order,
         });
+    }
+
+    async function addOrderItems(orderItem) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const res = await axios
+                .post('/api/order', orderItem, config)
+                .catch(error => console.log(error.message));
+
+            dispatch({
+                type: 'ADD_ORDER_ITEMS',
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({
+                type: 'ERROR',
+                payload: err.response,
+            });
+        }
     }
 
     return (
@@ -137,7 +179,9 @@ export const GlobalProvider = ({ children }) => {
                 addMenuItem,
                 editMenuItem,
                 getCustomers,
+                getOrderItems,
                 addOrder,
+                addOrderItems,
                 deleteMenuItem,
             }}
         >
