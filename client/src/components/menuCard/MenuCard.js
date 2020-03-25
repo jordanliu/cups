@@ -43,15 +43,16 @@ const MenuCard = item => {
                         src={API_URL + item.menu.photo}
                     />
                 }
-                actions={[<span>{iconType}</span>]}
+                actions={[
+                    <span>
+                        <strong>${item.menu.cost}</strong>
+                    </span>,
+                    <span>{iconType}</span>,
+                ]}
             >
                 <Meta
-                    title={item.menu.title}
-                    description={
-                        <span>
-                            ${item.menu.cost} - {item.menu.description}
-                        </span>
-                    }
+                    title={item.menu.name}
+                    description={<span>{item.menu.description}</span>}
                 />
             </Card>
         </Col>
