@@ -6,18 +6,29 @@ import './MenuCard.css';
 const { Meta } = Card;
 
 const MenuCard = item => {
-    const { addOrder } = useContext(GlobalContext);
+    const { addOrder, order, deleteOrder } = useContext(GlobalContext);
     const API_URL = process.env.REACT_APP_API_URL;
 
     const [iconType, setIconType] = useState('Add');
 
-    function handleClick(e) {
+    const handleClick = e => {
         e.preventDefault();
         setIconType(iconType === 'Add' ? 'Remove' : 'Add');
-        addOrder(item.menu);
-        console.log(item.menu._id);
-    }
 
+        if (iconType === 'Remove') {
+            deleteOrder(order);
+        }
+
+        if (iconType === 'Add') {
+            addOrder(item.menu);
+        }
+    };
+
+    // const handleRemove = (order, item) => {
+    //     console.log('removed');
+    //     console.log('item', item);
+    //     order.filter(order => order._id !== item._id);
+    // };
     return (
         <Col span={6}>
             <Card
@@ -32,15 +43,16 @@ const MenuCard = item => {
                         src={API_URL + item.menu.photo}
                     />
                 }
-                actions={[<span>{iconType}</span>]}
+                actions={[
+                    <span>
+                        <strong>${item.menu.cost}</strong>
+                    </span>,
+                    <span>{iconType}</span>,
+                ]}
             >
                 <Meta
-                    title={item.menu.title}
-                    description={
-                        <span>
-                            ${item.menu.cost} - {item.menu.description}
-                        </span>
-                    }
+                    title={item.menu.name}
+                    description={<span>{item.menu.description}</span>}
                 />
             </Card>
         </Col>

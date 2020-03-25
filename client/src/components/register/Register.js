@@ -4,6 +4,15 @@ import { useHistory } from 'react-router-dom';
 import { register } from '../../components/UserFunctions';
 import { Form, Button, Input, Upload, message } from 'antd';
 
+const layout = {
+    labelCol: {
+        span: 16,
+    },
+    wrapperCol: {
+        span: 24,
+    },
+};
+
 const Register = () => {
     const [form] = Form.useForm();
     const history = useHistory();
@@ -13,7 +22,10 @@ const Register = () => {
         });
 
         register(values).then(res => {
-            if (res.status === 200) {
+            if (res.success === false) {
+                message.error(res.errorMesssages.message);
+            }
+            if (res.success === true) {
                 message.success({ content: 'Registered', duration: 2 });
                 return history.push('/menu');
             }
@@ -24,9 +36,10 @@ const Register = () => {
         <div>
             <h1 className="register-title">CUPS</h1>
             <div className="register-wrapper">
-                <h2>Registration Form</h2>
+                <h2>Create a new account</h2>
                 <Form
-                    name="registeration-form"
+                    {...layout}
+                    name="registration-form"
                     layout="vertical"
                     scrollToFirstError
                     noValidate
@@ -143,7 +156,7 @@ const Register = () => {
                         </Form.Item>
                     </div>
 
-                    <Form.Item>
+                    <Form.Item className="register-submit">
                         <Button type="submit" htmlType="submit">
                             Register
                         </Button>

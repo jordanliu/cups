@@ -10,7 +10,8 @@
         "dboff": "killall mongod",
         "client": "cd client && npm start",
         "server": "nodemon server.js -V",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "doc": "jsdoc -c jsdoc.json"
     },
     "repository": {
         "type": "git",
@@ -32,6 +33,7 @@
         "express": "^4.17.1",
         "http-errors": "^1.7.3",
         "is-empty": "^1.2.0",
+        "jsdoc": "^3.6.3",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.9.5",
         "morgan": "^1.9.1",

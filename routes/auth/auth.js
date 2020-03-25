@@ -11,9 +11,17 @@ const validateLoginInput = require('../../validation/login');
 //Load customer model
 const Customer = require('../../models/customer');
 
-// @route GET api/auth/
-// @desc Get all customers
-// @access Public
+/**
+ * Auth.
+ * @namespace auth
+ */
+
+/**
+ *  @name getCustomers
+ *  @description GET /api/auth/ - This is a GET request for all customers
+ *  @access public
+ *  @memberof auth
+ */
 router.get('/', async (req, res) => {
     try {
         const customers = await Customer.find();
@@ -23,9 +31,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route POST api/auth/register
-// @desc Register customer
-// @access Public
+/**
+ *  @name postRegister
+ *  @description POST /api/auth/register - This is a POST request for register
+ *  @access public
+ *  @memberof auth
+ */
 router.post('/register', (req, res) => {
     //Form Validation
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -62,9 +73,12 @@ router.post('/register', (req, res) => {
     });
 });
 
-//@route POST api/auth/login
-//@desc Login customer and return JWT token
-//access Public
+/**
+ *  @name postLogin
+ *  @description GET /api/auth/ - This is a POST request for login
+ *  @access public
+ *  @memberof auth
+ */
 router.post('/login', (req, res) => {
     //Form validation
 

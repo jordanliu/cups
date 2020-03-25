@@ -7,23 +7,18 @@ import { List, Avatar, Button, Modal } from 'antd';
 const { confirm } = Modal;
 
 const Order = () => {
+    const history = useHistory();
+    const API_URL = process.env.REACT_APP_API_URL;
     const { order } = useContext(GlobalContext);
     const orderAmount = order.map(order => order.cost);
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
 
-    const cart = {
-        name: 'name',
-        date: 'date',
-        items: [order],
-    };
-    console.log(cart);
-    let history = useHistory();
-    function showCancelConfirm() {
-        function handleOk() {
+    const showCancelConfirm = () => {
+        const handleOk = () => {
             return history.push('/');
-        }
+        };
 
         confirm({
             title: 'Are you sure you want to cancel this order?',
@@ -37,7 +32,7 @@ const Order = () => {
             },
             onCancel() {},
         });
-    }
+    };
 
     return (
         <div className="order-wrapper">
@@ -47,17 +42,14 @@ const Order = () => {
                     itemLayout="horizontal"
                     dataSource={order}
                     renderItem={item => (
-                        <List.Item
-                            actions={[
-                                <span>Quantity: </span>,
-                                <a key="1" href="localhost:3000/order">
-                                    Edit
-                                </a>,
-                            ]}
-                        >
+                        <List.Item actions={[<span>Quantity: 1</span>]}>
                             <List.Item.Meta
                                 avatar={
-                                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                    <Avatar
+                                        shape="square"
+                                        size={64}
+                                        src={API_URL + item.photo}
+                                    />
                                 }
                                 title={
                                     <a href="localhost:3000/order">
@@ -76,6 +68,7 @@ const Order = () => {
 
             <div className="order-cta">
                 <Button onClick={showCancelConfirm}>Cancel Order</Button>
+
                 <Link to="/login">
                     <Button>Confirm Order</Button>
                 </Link>

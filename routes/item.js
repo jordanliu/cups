@@ -2,7 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
 
-//Retrieving all
+/**
+ * Item.
+ * @namespace item
+ */
+
+/**
+ *  @name getItem
+ *  @description GET /api/item/ - This is a GET request for all items
+ *  @access public
+ *  @memberof item
+ */
 router.get('/', async (req, res) => {
     try {
         const items = await Item.find();
@@ -12,14 +22,25 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Retrieving one
+/**
+ *  @name getItembyID
+ *  @description GET /api/item/:id - This is a GET request for all items by ID
+ *  @access public
+ *  @memberof item
+ */
 router.get('/:id', getItem, (req, res) => {
     res.send(res.item);
 });
 
-//Creating one
+/**
+ *  @name postItem
+ *  @description POST /api/item/:id - This is a post request for items
+ *  @access public
+ *  @memberof item
+ */
 router.post('/', async (req, res) => {
     console.log(req.file);
+
     const item = new Item({
         name: req.body.name,
         cost: req.body.cost,
@@ -38,7 +59,12 @@ router.post('/', async (req, res) => {
     }
 });
 
-//Updating one
+/**
+ *  @name patchItem
+ *  @description PATCH /api/item/:id - This is a patch request for items
+ *  @access public
+ *  @memberof item
+ */
 router.patch('/:id', getItem, async (req, res) => {
     if (req.body.name != null) {
         res.item.name = req.body.name;
@@ -67,7 +93,12 @@ router.patch('/:id', getItem, async (req, res) => {
     }
 });
 
-//Deleting one
+/**
+ *  @name deleteItem
+ *  @description DELETE /api/item/:id - This is a delete request for items
+ *  @access public
+ *  @memberof item
+ */
 router.delete('/:id', getItem, async (req, res) => {
     try {
         await res.item.remove();

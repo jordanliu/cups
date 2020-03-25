@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-// const customer = require(".routes/api/auth");
 require('dotenv').config();
 
 const app = express();
@@ -21,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+/** This is a description of the foo function. */
 try {
     const uri = process.env.MONGODB_URI;
     mongoose.connect(uri, {
@@ -33,24 +33,46 @@ try {
     process.exit(1);
 }
 
-// ROUTES
-//=============================================================
+/***
+ * ROUTES */
 
+/**
+ * Represents a route for authRouter.
+ * @router
+ * @param {function} authRouter - The name of the route.
+ */
 const authRouter = require('./routes/auth/auth');
 router.use('/auth', authRouter);
 
+/**
+ * Represents a route for customerRouter.
+ * @router
+ * @param {function} customerRouter - The name of the route.
+ */
 const customerRouter = require('./routes/customer');
 router.use('/customer', customerRouter);
 
-const categoryRouter = require('./routes/category');
-router.use('/category', categoryRouter);
-
+/**
+ * Represents a route for itemRouter.
+ * @router
+ * @param {function} itemRouter - The name of the route.
+ */
 const itemRouter = require('./routes/item');
 router.use('/item', itemRouter);
 
+/**
+ * Represents a route for orderRouter.
+ * @router
+ * @param {function} orderRouter - The name of the route.
+ */
 const orderRouter = require('./routes/order');
 router.use('/order', orderRouter);
 
+/**
+ * Represents a route for uploadRouter.
+ * @router
+ * @param {function} uploadRouter - The name of the route.
+ */
 const uploadRouter = require('./routes/upload');
 router.use('/upload', uploadRouter);
 
@@ -72,4 +94,5 @@ app.listen(port, () => {
 });
 
 app.use('/uploads', express.static('uploads'));
+app.use('/docs', express.static('docs'));
 app.use('/api', router);

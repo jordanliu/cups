@@ -28,12 +28,10 @@ const Search = () => {
                     align="middle"
                     className="search-details"
                 >
-                    <Link to="/search/name">
-                        <Button size="large" block>
-                                Search by name
-                        </Button>
-                    </Link>                      
-                    
+                    <Button size="large" block>
+                        <Link to="/search/name">Search by name</Link>
+                    </Button>
+
                     <Button size="large" block>
                         Search by image
                     </Button>
@@ -45,7 +43,5 @@ const Search = () => {
         </div>
     );
 };
-
-
 
 export default Search;

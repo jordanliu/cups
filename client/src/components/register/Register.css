@@ -1,11 +1,15 @@
 .register-wrapper {
     text-align: center;
-    margin-top: 1.0%;
-    padding: 25px;
+    margin-top: 1%;
+    padding: 50px;
 }
 
 .register-add-upload {
     display: inline-flex;
+}
+
+.register-add-upload .ant-btn {
+    margin: 5px;
 }
 
 .register-title {
@@ -13,20 +17,31 @@
     padding-top: 10px;
 }
 
-.register-wrapper form {
-    max-height: 590px;
-    max-width: 500px;
-    margin: auto;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: rgb(238, 237, 237);
+.register-wrapper h2 {
+    color: black;
 }
 
-.register-wrapper .ant-row {
-    margin: 5px;
+.register-wrapper form {
+    max-height: 640px;
+    max-width: 550px;
+    margin: auto;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: rgb(238, 237, 237);
 }
 
 .register-wrapper button {
     display: block;
     margin: auto;
+}
+
+.register-submit {
+    margin-top: -15px;
+}
+
+.register-wrapper .ant-form-item-explain {
+    text-align: left;
+}
+.register-wrapper .ant-form-item-required {
+    height: 0;
 }

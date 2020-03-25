@@ -1,7 +1,12 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-import { HomeOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
+import {
+    HomeOutlined,
+    MenuOutlined,
+    UserOutlined,
+    ShoppingOutlined,
+} from '@ant-design/icons';
 import './PortalNav.css';
 const { Sider } = Layout;
 
@@ -23,9 +28,17 @@ const PortalNav = withRouter(props => {
                         Menu
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="9">
-                    <UserOutlined />
-                    <span>Customers</span>
+                <Menu.Item key="/portal/customers">
+                    <Link to="/portal/customers">
+                        <UserOutlined />
+                        Customers
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="/portal/orders">
+                    <Link to="/portal/orders">
+                        <ShoppingOutlined />
+                        Orders
+                    </Link>
                 </Menu.Item>
             </Menu>
         </Sider>

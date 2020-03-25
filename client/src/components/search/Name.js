@@ -18,31 +18,32 @@ const { Search } = Input;
 //     "deh ya",
 //     "wohoo"
 //   ];
-  
-const Name = ()=> {
+
+const Name = () => {
     const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
-    const itemName = menuItems.map(menuItems => menuItems.description);  
+    const itemName = menuItems.map(menuItems => menuItems.name);
 
     useEffect(() => {
         getMenuItems();
         //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); 
-    
+    }, []);
 
-   const [searchTerm, setSearchTerm] = React.useState("");
-   const [searchResults, setSearchResults] = React.useState([]);
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [searchResults, setSearchResults] = React.useState([]);
 
-   const handleChange = event => {
-      setSearchTerm(event.target.value);
+    const handleChange = event => {
+        setSearchTerm(event.target.value);
     };
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const final = itemName.filter(names =>
             names.toLowerCase().includes(searchTerm)
         );
         setSearchResults(final);
     }, [searchTerm]);
 
+    console.log('searchResults', searchResults);
+    console.log('searchTerm', searchTerm);
 
     // React.useEffect(() => {
     //     const results = people.filter(person =>
@@ -50,10 +51,10 @@ const Name = ()=> {
     //     );
     //     setSearchResults(results);
     //   }, [searchTerm]);
-  
+
     return (
-      <div className="search-wrapper">
-          <Row
+        <div className="search-wrapper">
+            <Row
                 type="flex"
                 justify="space-around"
                 align="middle"
@@ -68,39 +69,35 @@ const Name = ()=> {
                     </Link>
                 </Col>
             </Row>
-            <div>                
+            <div>
                 <Row
-                type="flex"
-                justify="space-around"
-                align="middle"
-                className="search-details"
+                    type="flex"
+                    justify="space-around"
+                    align="middle"
+                    className="search-details"
                 >
                     <Search
-                    placeholder="Enter Item Name"
-                    onSearch={value => console.log(value)}
-                    style={{ width: 400 }}
-                    value = {searchTerm}
-                    onChange={handleChange}
+                        placeholder="Enter Item Name"
+                        onSearch={value => console.log(value)}
+                        style={{ width: 400 }}
+                        value={searchTerm}
+                        onChange={handleChange}
                     />
-                    
                 </Row>
-                <br/>
-                <Row> 
-
-                    {searchResults.map(p=> 
-                        <MenuCard menu={p} key={p._id} /> 
-                    )}                                               
-
-                </Row>                
+                <br />
+                <Row>
+                    {searchResults.map(p => (
+                        <MenuCard menu={p} key={p._id} />
+                    ))}
+                </Row>
                 {/* <ul>
                     {searchResults.map(item => (
                         <li>{item}</li>
                     ))}
                 </ul>     */}
-                    
             </div>
-        </div>  
+        </div>
     );
-  }
+};
 
 export default Name;

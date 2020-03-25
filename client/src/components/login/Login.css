@@ -1,7 +1,15 @@
 .login-wrapper {
     text-align: center;
-    margin-top: 5%;
-    padding: 25px;
+    margin-top: 1%;
+    padding: 50px;
+}
+
+.login-add-upload {
+    display: inline-flex;
+}
+
+.login-add-upload .ant-btn {
+    margin: 5px;
 }
 
 .login-title {
@@ -9,21 +17,27 @@
     padding-top: 10px;
 }
 
+.login-wrapper h2 {
+    color: black;
+}
+
 .login-wrapper form {
-    max-height: 500px;
-    max-width: 500px;
+    max-height: 245px;
+    max-width: 550px;
     margin: auto;
-    padding: 10px;
+    padding: 15px 20px;
     border-radius: 5px;
     background-color: rgb(238, 237, 237);
 }
 
-.login-wrapper .ant-form-item-control {
-    margin-bottom: 5px;
-}
-
-.login-button {
-    margin-top: 10px;
+.login-wrapper button {
     display: block;
     margin: auto;
+}
+
+.login-wrapper .ant-form-item-explain {
+    text-align: left;
+}
+.login-wrapper .ant-form-item-required {
+    height: 0;
 }
