@@ -5,6 +5,15 @@ import { login } from '../../components/UserFunctions';
 import { GlobalContext } from '../../context/GlobalState';
 import { Form, Button, Input, message } from 'antd';
 
+const layout = {
+    labelCol: {
+        span: 16,
+    },
+    wrapperCol: {
+        span: 24,
+    },
+};
+
 const Login = () => {
     const [form] = Form.useForm();
     const history = useHistory();
@@ -47,8 +56,9 @@ const Login = () => {
         <div>
             <h1 className="login-title">CUPS</h1>
             <div className="login-wrapper">
-                <h2>Registration Form</h2>
+                <h2>Login</h2>
                 <Form
+                    {...layout}
                     name="login-form"
                     layout="vertical"
                     scrollToFirstError
@@ -90,7 +100,7 @@ const Login = () => {
                         <Button
                             type="submit"
                             htmlType="submit"
-                            className="login-button"
+                            className="login-submit"
                         >
                             Login
                         </Button>

@@ -70,6 +70,7 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+
     async function editMenuItem(id, menuItem) {
         const config = {
             headers: {
@@ -135,9 +136,17 @@ export const GlobalProvider = ({ children }) => {
             });
         }
     }
+
     function addOrder(order) {
         dispatch({
             type: 'ADD_ORDER',
+            payload: order,
+        });
+    }
+
+    function deleteOrder(order) {
+        dispatch({
+            type: 'DELETE_ORDER',
             payload: order,
         });
     }
@@ -181,6 +190,7 @@ export const GlobalProvider = ({ children }) => {
                 getCustomers,
                 getOrderItems,
                 addOrder,
+                deleteOrder,
                 addOrderItems,
                 deleteMenuItem,
             }}

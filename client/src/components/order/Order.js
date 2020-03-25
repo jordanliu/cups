@@ -8,6 +8,7 @@ const { confirm } = Modal;
 
 const Order = () => {
     const history = useHistory();
+    const API_URL = process.env.REACT_APP_API_URL;
     const { order } = useContext(GlobalContext);
     const orderAmount = order.map(order => order.cost);
     const orderTotal = orderAmount
@@ -41,17 +42,14 @@ const Order = () => {
                     itemLayout="horizontal"
                     dataSource={order}
                     renderItem={item => (
-                        <List.Item
-                            actions={[
-                                <span>Quantity: </span>,
-                                <a key="1" href="localhost:3000/order">
-                                    Edit
-                                </a>,
-                            ]}
-                        >
+                        <List.Item actions={[<span>Quantity: 1</span>]}>
                             <List.Item.Meta
                                 avatar={
-                                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                    <Avatar
+                                        shape="square"
+                                        size={64}
+                                        src={API_URL + item.photo}
+                                    />
                                 }
                                 title={
                                     <a href="localhost:3000/order">

@@ -32,12 +32,19 @@ export default (state, action) => {
                 ...state,
                 order: [action.payload, ...state.order],
             };
-
+        case 'DELETE_ORDER':
+            return {
+                ...state,
+                order: state.order.filter(
+                    order => order._id === action.payload
+                ),
+            };
         case 'ADD_MENU':
             return {
                 ...state,
                 menuItems: [...state.menuItems, action.payload],
             };
+
         case 'EDIT_MENU':
             return {
                 ...state,
