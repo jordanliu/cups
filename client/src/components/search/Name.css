@@ -1,0 +1,15 @@
+.search-wrapper {
+    width: 900px;
+    margin: auto;
+    padding: 10px;    
+}
+
+.search-header {
+    padding-bottom: 25px;
+}
+
+.search-details input{
+    text-align: center;
+    margin-top: 1.0%;
+    padding: 25px;
+}

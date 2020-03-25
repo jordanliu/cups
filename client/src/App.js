@@ -28,6 +28,7 @@ const OrderComplete = lazy(() =>
 
 const Register = lazy(() => import('./components/register/Register'));
 const Search = lazy(() => import('./components/search/Search'));
+const Name = lazy(() => import('./components/search/Name'))
 
 const App = () => {
     return (
@@ -42,6 +43,8 @@ const App = () => {
                             exact
                             component={Register}
                         ></Route>
+                        {/* search by name */}
+                        <Route path="/search/name" exact component={Name}></Route>
                         <Route path="/search" exact component={Search}></Route>
                         <Route path="/menu" exact component={Menu}></Route>
                         <Route path="/portal" exact component={Portal}></Route>

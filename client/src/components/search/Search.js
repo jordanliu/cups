@@ -28,9 +28,12 @@ const Search = () => {
                     align="middle"
                     className="search-details"
                 >
-                    <Button size="large" block>
-                        Search by name
-                    </Button>
+                    <Link to="/search/name">
+                        <Button size="large" block>
+                                Search by name
+                        </Button>
+                    </Link>                      
+                    
                     <Button size="large" block>
                         Search by image
                     </Button>
@@ -42,5 +45,7 @@ const Search = () => {
         </div>
     );
 };
+
+
 
 export default Search;

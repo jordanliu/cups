@@ -24,7 +24,7 @@ const Login = () => {
         <div>
             <h1 className="login-title">CUPS</h1>
             <div className="login-wrapper">
-                <h2>Registration Form</h2>
+                <h2>Login</h2>
                 <Form
                     name="login-form"
                     layout="vertical"
