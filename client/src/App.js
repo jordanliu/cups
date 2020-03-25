@@ -32,7 +32,7 @@ const OrderComplete = lazy(() =>
 
 const Register = lazy(() => import('./components/register/Register'));
 const Search = lazy(() => import('./components/search/Search'));
-const Name = lazy(() => import('./components/search/Name'))
+const Name = lazy(() => import('./components/search/Name'));
 
 const App = () => {
     return (
@@ -40,29 +40,14 @@ const App = () => {
             <Suspense fallback={<Loader />}>
                 <Router>
                     <Switch>
-<<<<<<< HEAD
-                        <Route path="/" exact component={Home}></Route>
-                        <Route path="/login" exact component={Login}></Route>
-                        <Route
-                            path="/register"
-                            exact
-                            component={Register}
-                        ></Route>
-                        {/* search by name */}
-                        <Route path="/search/name" exact component={Name}></Route>
-                        <Route path="/search" exact component={Search}></Route>
-                        <Route path="/menu" exact component={Menu}></Route>
-                        <Route path="/portal" exact component={Portal}></Route>
-                        <Route path="/order" exact component={Order}></Route>
-=======
                         <Route path="/" exact component={Home} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
                         <Route path="/search" exact component={Search} />
+                        <Route path="/search/name" exact component={Name} />
                         <Route path="/menu" exact component={Menu} />
                         <Route path="/portal" exact component={Portal} />
                         <Route path="/order" exact component={Order} />
->>>>>>> master
                         <Route
                             path="/order/confirmed"
                             component={OrderComplete}

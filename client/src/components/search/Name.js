@@ -3,25 +3,14 @@ import { Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
 import './Name.css';
-import Loader from '../loader/Loader';
 import MenuCard from '../menuCard/MenuCard';
 import { GlobalContext } from '../../context/GlobalState';
 
 const { Search } = Input;
 
-// const people = [
-//     "bread",
-//     "cat",
-//     "corona",
-//     "pineapples",
-//     "searchMe",
-//     "deh ya",
-//     "wohoo"
-//   ];
-
 const Name = () => {
-    const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
-    const itemName = menuItems.map(menuItems => menuItems.name);
+    const { menuItems, getMenuItems } = useContext(GlobalContext);
+    const item = menuItems;
 
     useEffect(() => {
         getMenuItems();
@@ -35,22 +24,14 @@ const Name = () => {
         setSearchTerm(event.target.value);
     };
 
-    React.useEffect(() => {
-        const final = itemName.filter(names =>
-            names.toLowerCase().includes(searchTerm)
-        );
+    useEffect(() => {
+        const final = item
+            .map(menuItems => menuItems.name)
+            .filter(names => names.toLowerCase().includes(searchTerm));
+
         setSearchResults(final);
+        // eslint-disable-next-line
     }, [searchTerm]);
-
-    console.log('searchResults', searchResults);
-    console.log('searchTerm', searchTerm);
-
-    // React.useEffect(() => {
-    //     const results = people.filter(person =>
-    //       person.toLowerCase().includes(searchTerm)
-    //     );
-    //     setSearchResults(results);
-    //   }, [searchTerm]);
 
     return (
         <div className="search-wrapper">
@@ -90,11 +71,6 @@ const Name = () => {
                         <MenuCard menu={p} key={p._id} />
                     ))}
                 </Row>
-                {/* <ul>
-                    {searchResults.map(item => (
-                        <li>{item}</li>
-                    ))}
-                </ul>     */}
             </div>
         </div>
     );
