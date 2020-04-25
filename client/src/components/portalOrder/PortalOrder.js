@@ -28,14 +28,14 @@ const PortalOrder = () => {
         {
             title: 'Total Cost',
             dataIndex: 'totalCost',
-            render: totalCost => {
+            render: (totalCost) => {
                 return <span>${totalCost}</span>;
             },
         },
         {
             title: 'Actions',
             dataIndex: 'actions',
-            render: _ => {
+            render: (_) => {
                 return (
                     <span>
                         <span className="hyperlink">View Details</span>
@@ -59,7 +59,7 @@ const PortalOrder = () => {
                                 columns={columns}
                                 dataSource={orderItems}
                                 size="middle"
-                                rowKey={orderItems => orderItems._id}
+                                rowKey={(orderItems) => orderItems._id}
                             />
                         </div>
                     )}

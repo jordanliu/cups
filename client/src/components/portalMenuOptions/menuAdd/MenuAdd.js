@@ -38,7 +38,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
 
     var resData;
 
-    const uploadImage = async options => {
+    const uploadImage = async (options) => {
         const { onSuccess, onError, file } = options;
 
         const fmData = new FormData();
@@ -47,11 +47,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
         };
         fmData.append('file', file);
         try {
-            const res = await axios.post(
-                'http://localhost:5000/api/upload',
-                fmData,
-                config
-            );
+            const res = await axios.post('/api/upload', fmData, config);
 
             onSuccess('Ok');
             message.success(`${file.name} file uploaded successfully`);
@@ -64,7 +60,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
         setPhoto(resData);
     };
 
-    const uploadAslImage = async options => {
+    const uploadAslImage = async (options) => {
         const { onSuccess, onError, file } = options;
 
         const fmData = new FormData();
@@ -75,11 +71,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
         console.log(file);
         console.log(fmData);
         try {
-            const res = await axios.post(
-                'http://localhost:5000/api/upload',
-                fmData,
-                config
-            );
+            const res = await axios.post('/api/upload', fmData, config);
 
             onSuccess('Ok');
             message.success(`${file.name} file uploaded successfully`);
@@ -92,7 +84,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
         setAslPhoto(resData);
     };
 
-    const uploadAudio = async options => {
+    const uploadAudio = async (options) => {
         const { onSuccess, onError, file } = options;
 
         const fmData = new FormData();
@@ -103,11 +95,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
         console.log(file);
         console.log(fmData);
         try {
-            const res = await axios.post(
-                'http://localhost:5000/api/upload',
-                fmData,
-                config
-            );
+            const res = await axios.post('/api/upload', fmData, config);
 
             message.success(`${file.name} file uploaded successfully`);
             onSuccess('Ok');
@@ -126,7 +114,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
 
     const handleOnSubmit = () => {
         form.validateFields()
-            .then(values => {
+            .then((values) => {
                 form.resetFields();
                 values.photo = photo;
                 values.aslPhoto = aslPhoto;
@@ -136,7 +124,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
                 toggleClose();
                 message.success({ content: 'Item Added', duration: 2 });
             })
-            .catch(info => {
+            .catch((info) => {
                 console.log('Validate Failed:', info);
                 message.error('Error, please try again later');
             });
@@ -230,7 +218,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
                                         .indexOf(input.toLowerCase()) >= 0
                                 }
                             >
-                                {options.map(o => (
+                                {options.map((o) => (
                                     <Option key={o.value} value={o.value}>
                                         {o.value}
                                     </Option>
