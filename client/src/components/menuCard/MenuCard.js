@@ -5,13 +5,13 @@ import './MenuCard.css';
 
 const { Meta } = Card;
 
-const MenuCard = item => {
+const MenuCard = (item) => {
     const { addOrder, order, deleteOrder } = useContext(GlobalContext);
     const API_URL = process.env.REACT_APP_API_URL;
 
     const [iconType, setIconType] = useState('Add');
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         e.preventDefault();
         setIconType(iconType === 'Add' ? 'Remove' : 'Add');
 
