@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
@@ -17,19 +17,21 @@ const Name = () => {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [searchTerm, setSearchTerm] = React.useState('');
-    const [searchResults, setSearchResults] = React.useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
-    const handleChange = event => {
+    const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
     useEffect(() => {
-        const final = item
-            .map(menuItems => menuItems.name)
-            .filter(names => names.toLowerCase().includes(searchTerm));
+        const result = item
+            .map((menuItems) => menuItems)
+            .filter((item) =>
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
 
-        setSearchResults(final);
+        setSearchResults(result);
         // eslint-disable-next-line
     }, [searchTerm]);
 
@@ -59,7 +61,7 @@ const Name = () => {
                 >
                     <Search
                         placeholder="Enter Item Name"
-                        onSearch={value => console.log(value)}
+                        onSearch={(value) => console.log(value)}
                         style={{ width: 400 }}
                         value={searchTerm}
                         onChange={handleChange}
@@ -67,7 +69,7 @@ const Name = () => {
                 </Row>
                 <br />
                 <Row>
-                    {searchResults.map(p => (
+                    {searchResults.map((p) => (
                         <MenuCard menu={p} key={p._id} />
                     ))}
                 </Row>

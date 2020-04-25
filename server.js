@@ -47,13 +47,13 @@ try {
 const authRouter = require('./routes/auth/auth');
 router.use('/auth', authRouter);
 
-/**
- * Represents a route for customerRouter.
- * @router
- * @param {function} customerRouter - The name of the route.
- */
-const customerRouter = require('./routes/customer');
-router.use('/customer', customerRouter);
+// /**
+//  * Represents a route for customerRouter.
+//  * @router
+//  * @param {function} customerRouter - The name of the route.
+//  */
+// const customerRouter = require('./routes/customer');
+// router.use('/customer', customerRouter);
 
 /**
  * Represents a route for itemRouter.

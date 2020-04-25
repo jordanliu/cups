@@ -38,11 +38,12 @@ const customerSchema = new Schema({
     balance: {
         type: Number,
         trim: true,
+        default: 500,
     },
-    date:{
+    date: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('Customer', customerSchema);

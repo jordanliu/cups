@@ -31,6 +31,11 @@ const PortalMenu = () => {
             title: 'Email',
             dataIndex: 'email',
         },
+        {
+            title: 'Balance',
+            dataIndex: 'balance',
+            render: (balance) => <span>${balance}</span>,
+        },
     ];
 
     return (
@@ -47,7 +52,7 @@ const PortalMenu = () => {
                                 columns={columns}
                                 dataSource={customers}
                                 size="middle"
-                                rowKey={customers => customers._id}
+                                rowKey={(customers) => customers._id}
                             />
                         </div>
                     )}

@@ -23,7 +23,7 @@ const PortalMenu = () => {
     const [record, setRecord] = useState([]);
     const API_URL = process.env.REACT_APP_API_URL;
 
-    const onCreate = values => {
+    const onCreate = (values) => {
         editMenuItem(record._id, values);
         setVisibleModal(false);
     };
@@ -36,7 +36,7 @@ const PortalMenu = () => {
     };
 
     const onClose = useCallback(
-        event => {
+        (event) => {
             setVisibleDrawer(!visibleDrawer);
         },
         [visibleDrawer]
@@ -46,7 +46,7 @@ const PortalMenu = () => {
         getMenuItems();
         // eslint-disable-next-line
     }, []);
-    const handleDelete = record => {
+    const handleDelete = (record) => {
         try {
             message.success({ content: 'Item deleted', duration: 2 });
             deleteMenuItem(record._id);
@@ -59,7 +59,7 @@ const PortalMenu = () => {
         }
     };
 
-    const handleUpdate = record => {
+    const handleUpdate = (record) => {
         setRecord(record);
         showModal();
     };
@@ -76,7 +76,7 @@ const PortalMenu = () => {
         {
             title: 'Price',
             dataIndex: 'cost',
-            render: text => <span>${text}</span>,
+            render: (text) => <span>${text}</span>,
         },
         {
             title: 'Description',
@@ -90,7 +90,7 @@ const PortalMenu = () => {
         {
             title: 'Photo',
             dataIndex: 'photo',
-            render: photo => (
+            render: (photo) => (
                 <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -103,7 +103,7 @@ const PortalMenu = () => {
         {
             title: 'ASL',
             dataIndex: 'aslPhoto',
-            render: aslPhoto => (
+            render: (aslPhoto) => (
                 <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -117,7 +117,7 @@ const PortalMenu = () => {
         {
             title: 'Audio',
             dataIndex: 'audio',
-            render: audio => (
+            render: (audio) => (
                 <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -184,7 +184,7 @@ const PortalMenu = () => {
                                 columns={columns}
                                 dataSource={menuItems}
                                 size="middle"
-                                rowKey={menuItems => menuItems._id}
+                                rowKey={(menuItems) => menuItems._id}
                             />
                         </div>
                     )}
