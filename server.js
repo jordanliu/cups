@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -12,6 +13,8 @@ const port = process.env.PORT || 5000;
 const router = express.Router();
 
 app.use(cors());
+
+const CLIENT_BUILD_PATH = path.join(__dirname, '../app/client/build');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -85,7 +88,7 @@ connection.once('open', () => {
 
 app.use(passport.initialize()); //passport middleware
 require('./config/passport')(passport); //passport config
-app.use('/api/auth', authRouter); //hmm?
+app.use('/auth', authRouter); //hmm?
 
 app.listen(port, () => {
     console.log(
@@ -96,3 +99,7 @@ app.listen(port, () => {
 app.use('/uploads', express.static('uploads'));
 app.use('/docs', express.static('docs'));
 app.use('/api', router);
+app.use(express.static(CLIENT_BUILD_PATH));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
+});

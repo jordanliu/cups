@@ -1,19 +1,21 @@
-version: '2'
+version: '3.7'
 services:
-    nginx:
-        build:
-            context: nginx
-            dockerfile: Dockerfile
-        ports:
-            - '80:80'
-        command: nginx -g "daemon off";
-        depends_on:
-            - nodejs
-
-    nodejs:
+    web:
         build:
             context: .
             dockerfile: Dockerfile
-        expose:
-            - '5000'
-        command: npm start
+        ports:
+            - '8080:8080'
+        # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+        driver: local

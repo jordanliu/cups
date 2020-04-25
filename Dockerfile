@@ -1,12 +1,37 @@
-FROM node:alpine
+# Production Build
 
-LABEL cups.api.version="0.0.1-beta"
+# Stage 1: Build react client
+FROM node:10.16-alpine as client
 
-COPY package.json /nodejs/package.json
-COPY package-lock.json /nodejs/package-lock.json
-COPY . /nodejs/
+# Working directory be app
+WORKDIR /usr/app/client/
 
+COPY client/package*.json ./
 
+# Install dependencies
 RUN npm install
 
-EXPOSE 5000:5000
+# copy local files to app folder
+COPY client/ ./
+RUN ls
+
+RUN npm run-script build
+
+# Stage 2 : Build Server
+
+FROM node:alpine
+
+WORKDIR /usr/src/app/
+COPY --from=client /usr/app/client/build/ ./client/build/
+RUN ls
+
+WORKDIR /usr/src/app/
+COPY package*.json ./
+RUN npm install -qy
+COPY . ./
+
+ENV PORT 8080
+
+EXPOSE 8080
+
+CMD ["npm", "start"]
