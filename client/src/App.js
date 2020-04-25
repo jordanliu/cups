@@ -15,15 +15,11 @@ const PortalMenu = lazy(() => import('./components/portalMenu/PortalMenu'));
 const MenuAdd = lazy(() =>
     import('./components/portalMenuOptions/menuAdd/MenuAdd')
 );
-const MenuRemove = lazy(() =>
-    import('./components/portalMenuOptions/menuRemove/MenuRemove')
-);
+
 const MenuUpdate = lazy(() =>
     import('./components/portalMenuOptions/menuUpdate/MenuUpdate')
 );
-const MenuView = lazy(() =>
-    import('./components/portalMenuOptions/menuView/MenuView')
-);
+
 const Menu = lazy(() => import('./components/menu/Menu'));
 const Order = lazy(() => import('./components/order/Order'));
 const OrderComplete = lazy(() =>
@@ -69,11 +65,7 @@ const App = () => {
                             component={PortalOrder}
                         />
                         <Route path="/portal/menu/add" component={MenuAdd} />
-                        <Route path="/portal/menu/view" component={MenuView} />
-                        <Route
-                            path="/portal/menu/remove"
-                            component={MenuRemove}
-                        />
+
                         <Route
                             path="/portal/menu/update"
                             component={MenuUpdate}

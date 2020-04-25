@@ -46,7 +46,7 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
     }
 
-    Customer.findOne({ email: req.body.email }).then(customer => {
+    Customer.findOne({ email: req.body.email }).then((customer) => {
         if (customer) {
             return res.status(400).json({ message: 'Email already exist' });
         } else {
@@ -56,6 +56,7 @@ router.post('/register', (req, res) => {
                 email: req.body.email,
                 phone: req.body.phone,
                 password: req.body.password,
+                balance: req.body.balance,
             });
 
             //Hash password before saving to database
@@ -65,8 +66,8 @@ router.post('/register', (req, res) => {
                     newCustomer.password = hash;
                     newCustomer
                         .save()
-                        .then(customer => res.json(customer))
-                        .catch(err => console.log(err));
+                        .then((customer) => res.json(customer))
+                        .catch((err) => console.log(err));
                 });
             });
         }
@@ -93,14 +94,14 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
 
     //Find by email
-    Customer.findOne({ email }).then(customer => {
+    Customer.findOne({ email }).then((customer) => {
         //checkiing if the user exist
         if (!customer) {
             return res.status(404).json({ message: 'Email not found' });
         }
 
         //Check password
-        bcrypt.compare(password, customer.password).then(isMatch => {
+        bcrypt.compare(password, customer.password).then((isMatch) => {
             if (isMatch) {
                 //customer match
                 //create JWT payload
