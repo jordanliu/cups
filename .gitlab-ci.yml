@@ -1,6 +1,4 @@
-image: docker:latest
-services:
-    - docker:dind
+image: node:latest
 
 stages:
     - test
@@ -13,8 +11,8 @@ test-uat:
     tags:
         - uat
     script:
-        - npm install
         - cd client
+        - npm install
         - npm test
 
 step-uat:
