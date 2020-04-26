@@ -10,7 +10,7 @@ const Order = () => {
     const history = useHistory();
     const API_URL = process.env.REACT_APP_API_URL;
     const { order } = useContext(GlobalContext);
-    const orderAmount = order.map(order => order.cost);
+    const orderAmount = order.map((order) => order.cost);
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
@@ -41,7 +41,7 @@ const Order = () => {
                 <List
                     itemLayout="horizontal"
                     dataSource={order}
-                    renderItem={item => (
+                    renderItem={(item) => (
                         <List.Item actions={[<span>Quantity: 1</span>]}>
                             <List.Item.Meta
                                 avatar={

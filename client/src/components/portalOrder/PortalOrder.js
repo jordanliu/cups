@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Layout, Table, Skeleton } from 'antd';
+import moment from 'moment';
 import './PortalOrder.css';
 import PortalNav from '../portalNav/PortalNav';
 import { GlobalContext } from '../../context/GlobalState';
@@ -9,13 +10,11 @@ const { Content } = Layout;
 const PortalOrder = () => {
     const { orderItems, getOrderItems, loading } = useContext(GlobalContext);
 
-    //const orderItemsKey = orderItems.orders;
     useEffect(() => {
         getOrderItems();
         // eslint-disable-next-line
     }, []);
 
-    //console.log(orderItemsKey);
     const columns = [
         {
             title: 'ID',
@@ -24,6 +23,9 @@ const PortalOrder = () => {
         {
             title: 'Date Created',
             dataIndex: 'created',
+            render: (created) => {
+                return <span>{moment(created).format('LLL')}</span>;
+            },
         },
         {
             title: 'Total Cost',

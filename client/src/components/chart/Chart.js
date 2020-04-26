@@ -10,10 +10,16 @@ import {
     Tooltip,
     Legend,
 } from 'recharts';
+import moment from 'moment';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Chart = () => {
     const { orderItems, getOrderItems } = useContext(GlobalContext);
+
+    const orderItemsFormatted = orderItems.map((item) => ({
+        ...item,
+        created: moment(item.created).format('lll'),
+    }));
 
     useEffect(() => {
         getOrderItems();
@@ -25,7 +31,7 @@ const Chart = () => {
                 <BarChart
                     width={500}
                     height={300}
-                    data={orderItems}
+                    data={orderItemsFormatted}
                     margin={{
                         top: 5,
                         right: 30,
@@ -45,7 +51,7 @@ const Chart = () => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={orderItems}
+                    data={orderItemsFormatted}
                     margin={{
                         top: 5,
                         right: 30,

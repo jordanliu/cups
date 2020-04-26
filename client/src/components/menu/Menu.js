@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import './Menu.css';
-import { Link } from 'react-router-dom';
-import { Col, Row, Button } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { Col, Row, Button, message } from 'antd';
 import Loader from '../loader/Loader';
 import MenuCard from '../menuCard/MenuCard';
 import { SearchOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Menu = () => {
+    const history = useHistory();
     const { menuItems, getMenuItems, loading } = useContext(GlobalContext);
     const { order } = useContext(GlobalContext);
 
@@ -16,11 +17,19 @@ const Menu = () => {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const orderAmount = order.map(order => order.cost);
+    const orderAmount = order.map((order) => order.cost);
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
     const orderCount = order.length;
+
+    const handleOrder = () => {
+        if (order.length === 0) {
+            message.error('Please select a menu item');
+        } else {
+            history.push('/order');
+        }
+    };
 
     return (
         <div className="menu-wrapper">
@@ -50,7 +59,7 @@ const Menu = () => {
                     gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
                 >
                     {loading ? <Loader /> : null}
-                    {menuItems.map(item => (
+                    {menuItems.map((item) => (
                         <MenuCard menu={item} key={item._id} />
                     ))}
                 </Row>
@@ -61,9 +70,7 @@ const Menu = () => {
                         <h4>{orderCount} items added</h4>
                     </Col>
                     <Col span={4}>
-                        <Link to="/order">
-                            <Button>View Order</Button>
-                        </Link>
+                        <Button onClick={handleOrder}>View Order</Button>
                     </Col>
                     <Col span={4}>
                         <h4>${orderTotal}</h4>
