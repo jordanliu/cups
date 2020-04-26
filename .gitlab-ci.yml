@@ -10,7 +10,8 @@ test-uat:
     stage: test
     only:
         - uat
-    tags: uat
+    tags:
+        - uat
     script:
         - npm install
         - cd client
@@ -18,6 +19,8 @@ test-uat:
 
 step-uat:
     stage: deploy
+    dependencies:
+        - test-uat
     before_script:
         - export DYNAMIC_ENV_VAR=UAT
     only:
