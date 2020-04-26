@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const register = async user => {
+export const register = async (user) => {
     return axios
         .post('api/auth/register', {
             fname: user.fname,
@@ -10,14 +10,14 @@ export const register = async user => {
             password: user.password,
             confirm: user.confirm,
         })
-        .then(res => {
+        .then((res) => {
             return {
                 success: true,
                 data: res,
             };
             // return res;
         })
-        .catch(err => {
+        .catch((err) => {
             return {
                 success: false,
                 data: null,
@@ -27,19 +27,19 @@ export const register = async user => {
         });
 };
 
-export const login = async user => {
+export const login = async (user) => {
     return axios
         .post('api/auth/login', {
             email: user.email,
             password: user.password,
         })
-        .then(res => {
+        .then((res) => {
             return {
                 success: true,
                 data: res,
             };
         })
-        .catch(err => {
+        .catch((err) => {
             return {
                 success: false,
                 data: null,

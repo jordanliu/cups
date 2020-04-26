@@ -19,7 +19,7 @@ const Login = () => {
     const history = useHistory();
     const { order, addOrderItems } = useContext(GlobalContext);
 
-    const orderAmount = order.map(order => order.cost);
+    const orderAmount = order.map((order) => order.cost);
     const orderTotal = orderAmount
         .reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
@@ -34,12 +34,12 @@ const Login = () => {
         addOrderItems(JSON.stringify(cart));
     };
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         form.validateFields().catch(() => {
             message.error('Error, please try again later!');
         });
 
-        login(values).then(res => {
+        login(values).then((res) => {
             if (res.success === false) {
                 message.error(res.errorMesssages.message);
             }
