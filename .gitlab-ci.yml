@@ -6,16 +6,11 @@ stages:
     - test
     - deploy
 
-step-develop:
+test:
     stage: test
-    before_script:
-        - export DYNAMIC_ENV_VAR=DEVELOP
-    only:
-        - develop
-    tags:
-        - develop
     script:
-        - echo running tests in $DYNAMIC_ENV_VAR
+        - cd client
+        - npm test
 
 step-uat:
     stage: deploy
@@ -25,6 +20,8 @@ step-uat:
         - uat
     tags:
         - uat
+    dependencies:
+        - test
     script:
         - echo setting up env $DYNAMIC_ENV_VAR
         - sudo apt-get install -y python-pip
