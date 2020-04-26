@@ -28,9 +28,10 @@ RUN ls
 WORKDIR /usr/src/app/
 COPY package*.json ./
 
-RUN echo "PORT=8080
-API_URL=http://localhost:8080
-MONGODB_URI=mongodb+srv://admin:aKR76p1Sud1hnXsP@cups-ltxx7.mongodb.net/test?retryWrites=true&w=majority" > .env
+RUN echo "PORT=8080" > .env
+RUN echo "API_URL=http://localhost:8080" >> .env
+RUN echo "MONGODB_URI=mongodb+srv://admin:aKR76p1Sud1hnXsP@cups-ltxx7.mongodb.net/test?retryWrites=true&w=majority" >> .env
+
 
 RUN npm install -qy
 COPY . ./
