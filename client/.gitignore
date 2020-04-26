@@ -4,6 +4,7 @@
 node_modules
 
 # testing
+.env
 coverage
 
 # production

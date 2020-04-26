@@ -10,7 +10,7 @@ COPY client/package*.json ./
 
 # Install dependencies
 RUN npm install
-
+RUN  echo "http://138.197.77.172:8080/" > .env
 # copy local files to app folder
 COPY client/ ./
 RUN ls
