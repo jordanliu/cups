@@ -13,10 +13,10 @@ const Home = () => {
                         <h1>CUPS</h1>
                         <h3>Select an option below to start ordering!</h3>
                         <Link to="/menu">
-                            <button>ORDER</button>
+                            <button id="order">ORDER</button>
                         </Link>
                         <Link to="/register">
-                            <button>REGISTER</button>
+                            <button id="register">REGISTER</button>
                         </Link>
                         <h3 className="home-footer">
                             Need assistance? Ask an employee for help
