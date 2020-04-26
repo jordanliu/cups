@@ -34,17 +34,6 @@ const PortalOrder = () => {
                 return <span>${totalCost}</span>;
             },
         },
-        {
-            title: 'Actions',
-            dataIndex: 'actions',
-            render: (_) => {
-                return (
-                    <span>
-                        <span className="hyperlink">View Details</span>
-                    </span>
-                );
-            },
-        },
     ];
 
     return (

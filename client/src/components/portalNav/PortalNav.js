@@ -6,11 +6,12 @@ import {
     MenuOutlined,
     UserOutlined,
     ShoppingOutlined,
+    RollbackOutlined,
 } from '@ant-design/icons';
 import './PortalNav.css';
 const { Sider } = Layout;
 
-const PortalNav = withRouter(props => {
+const PortalNav = withRouter((props) => {
     const { location } = props;
     return (
         <Sider>
@@ -38,6 +39,12 @@ const PortalNav = withRouter(props => {
                     <Link to="/portal/orders">
                         <ShoppingOutlined />
                         Orders
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="/">
+                    <Link to="/">
+                        <RollbackOutlined />
+                        Homepage
                     </Link>
                 </Menu.Item>
             </Menu>
