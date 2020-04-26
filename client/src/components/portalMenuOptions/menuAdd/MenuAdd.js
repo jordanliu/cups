@@ -121,6 +121,7 @@ const MenuAdd = ({ visible, toggleClose }) => {
                 values.audio = audio;
                 console.log(values);
                 addMenuItem(values);
+                setDefaultFileList([]);
                 toggleClose();
                 message.success({ content: 'Item Added', duration: 2 });
             })
