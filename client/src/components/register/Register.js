@@ -16,21 +16,18 @@ const layout = {
 const Register = () => {
     const [form] = Form.useForm();
     const history = useHistory();
-    const phoneNumber = '+876';
+
     const onFinish = (values) => {
         form.validateFields().catch(() => {
             message.error('Error, please try again later!');
         });
 
         register(values).then((res) => {
-            // if (res.errorMesssages.password) {
-            //     message.error(res.errorMesssages.password);
-            // } else if (res.errorMesssages.message) {
-            //     message.error(res.errorMesssages.message);
-            // }
             if (res.success === false) {
                 message.error(
-                    res.errorMesssages.password || res.errorMesssages.message
+                    res.errorMesssages.password ||
+                        res.errorMesssages.message ||
+                        res.errorMesssages.phone
                 );
             }
 
@@ -54,6 +51,9 @@ const Register = () => {
                     noValidate
                     form={form}
                     onFinish={onFinish}
+                    initialValues={{
+                        phone: '+876',
+                    }}
                 >
                     <Form.Item
                         name="fname"
