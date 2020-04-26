@@ -6,12 +6,6 @@ stages:
     - test
     - deploy
 
-test:
-    stage: test
-    script:
-        - cd client
-        - npm test
-
 step-uat:
     stage: deploy
     before_script:
