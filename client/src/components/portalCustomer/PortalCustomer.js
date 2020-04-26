@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Layout, Table, Skeleton } from 'antd';
+import moment from 'moment';
 import './PortalCustomer.css';
 import PortalNav from '../portalNav/PortalNav';
 import { GlobalContext } from '../../context/GlobalState';
@@ -8,6 +9,7 @@ const { Content } = Layout;
 
 const PortalMenu = () => {
     const { customers, getCustomers, loading } = useContext(GlobalContext);
+    const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         getCustomers();
@@ -35,6 +37,37 @@ const PortalMenu = () => {
             title: 'Balance',
             dataIndex: 'balance',
             render: (balance) => <span>${balance}</span>,
+        },
+        {
+            title: 'Photo',
+            dataIndex: 'photo',
+            render: (photo) => (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={API_URL + photo}
+                >
+                    View Photo
+                </a>
+            ),
+        },
+        {
+            title: 'Audio',
+            dataIndex: 'audio',
+            render: (audio) => (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={API_URL + audio}
+                >
+                    View Audio
+                </a>
+            ),
+        },
+        {
+            title: 'Created',
+            dataIndex: 'date',
+            render: (date) => <span>{moment(date).format('lll')}</span>,
         },
     ];
 

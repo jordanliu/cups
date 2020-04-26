@@ -9,6 +9,8 @@ export const register = async (user) => {
             phone: user.phone,
             password: user.password,
             confirm: user.confirm,
+            photo: user.photo,
+            audio: user.audio,
         })
         .then((res) => {
             return {

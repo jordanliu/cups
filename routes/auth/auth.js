@@ -56,7 +56,8 @@ router.post('/register', (req, res) => {
                 email: req.body.email,
                 phone: req.body.phone,
                 password: req.body.password,
-                balance: req.body.balance,
+                photo: req.body.photo,
+                audio: req.body.audio,
             });
 
             //Hash password before saving to database

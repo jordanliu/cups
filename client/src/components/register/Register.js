@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './Register.css';
 import { useHistory } from 'react-router-dom';
 import { register } from '../../components/UserFunctions';
@@ -15,27 +16,88 @@ const layout = {
 
 const Register = () => {
     const [form] = Form.useForm();
+    const [photo, setPhoto] = useState('');
+    const [audio, setAudio] = useState('');
+    const [defaultFileList, setDefaultFileList] = useState([]);
     const history = useHistory();
 
-    const onFinish = (values) => {
-        form.validateFields().catch(() => {
-            message.error('Error, please try again later!');
-        });
+    var resData;
 
-        register(values).then((res) => {
-            if (res.success === false) {
-                message.error(
-                    res.errorMesssages.password ||
-                        res.errorMesssages.message ||
-                        res.errorMesssages.phone
-                );
-            }
+    const uploadImage = async (options) => {
+        const { onSuccess, onError, file } = options;
 
-            if (res.success === true) {
-                message.success({ content: 'Registered', duration: 2 });
-                return history.push('/menu');
-            }
-        });
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        };
+        fmData.append('file', file);
+        try {
+            const res = await axios.post('/api/upload', fmData, config);
+
+            onSuccess('Ok');
+            message.success(`${file.name} file uploaded successfully`);
+            resData = res.data.file;
+        } catch (err) {
+            console.log('Error: ', err);
+            message.error(`${file.name}  file upload failed.`);
+            onError({ err });
+        }
+        setPhoto(resData);
+    };
+
+    const uploadAudio = async (options) => {
+        const { onSuccess, onError, file } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        };
+        fmData.append('file', file);
+        console.log(file);
+        console.log(fmData);
+        try {
+            const res = await axios.post('/api/upload', fmData, config);
+
+            message.success(`${file.name} file uploaded successfully`);
+            onSuccess('Ok');
+            resData = res.data.file;
+        } catch (err) {
+            console.log('Error: ', err);
+            message.error(`${file.name}  file upload failed.`);
+            onError({ err });
+        }
+        setAudio(resData);
+    };
+
+    const handleOnChange = ({ file, fileList, event }) => {
+        setDefaultFileList(fileList);
+    };
+
+    const onFinish = () => {
+        form.validateFields()
+            .then((values) => {
+                values.photo = photo;
+                values.audio = audio;
+
+                console.log(values);
+                register(values).then((res) => {
+                    if (res.success === false) {
+                        message.error(
+                            res.errorMesssages.password ||
+                                res.errorMesssages.message ||
+                                res.errorMesssages.phone
+                        );
+                    }
+
+                    if (res.success === true) {
+                        message.success({ content: 'Registered', duration: 2 });
+                        return history.push('/menu');
+                    }
+                });
+            })
+            .catch(() => {
+                message.error('Error, please try again later!');
+            });
     };
 
     return (
@@ -154,12 +216,24 @@ const Register = () => {
 
                     <div className="register-add-upload">
                         <Form.Item>
-                            <Upload>
+                            <Upload
+                                accept="image/*"
+                                name="photo"
+                                customRequest={uploadImage}
+                                onChange={handleOnChange}
+                                defaultFileList={defaultFileList}
+                            >
                                 <Button>Upload Photo</Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item>
-                            <Upload>
+                            <Upload
+                                accept="audio/*"
+                                name="audio"
+                                customRequest={uploadAudio}
+                                onChange={handleOnChange}
+                                defaultFileList={defaultFileList}
+                            >
                                 <Button>Upload Audio</Button>
                             </Upload>
                         </Form.Item>

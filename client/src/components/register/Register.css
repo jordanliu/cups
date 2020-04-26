@@ -22,7 +22,7 @@
 }
 
 .register-wrapper form {
-    max-height: 640px;
+    max-height: 660px;
     max-width: 550px;
     margin: auto;
     padding: 15px 20px;
@@ -44,4 +44,15 @@
 }
 .register-wrapper .ant-form-item-required {
     height: 0;
+}
+
+.register-wrapper .ant-upload-text-icon {
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+.register-wrapper .ant-upload-list-item {
+    margin-top: 0px;
+    padding-top: 0px;
 }

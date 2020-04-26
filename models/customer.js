@@ -40,6 +40,12 @@ const customerSchema = new Schema({
         trim: true,
         default: 500,
     },
+    photo: {
+        type: String,
+    },
+    audio: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now,
