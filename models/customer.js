@@ -46,6 +46,12 @@ const customerSchema = new Schema({
     audio: {
         type: String,
     },
+    photoMD5: {
+        type: String,
+    },
+    audioMD5: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now,

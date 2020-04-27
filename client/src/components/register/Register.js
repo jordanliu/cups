@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css';
+import CryptoJS from 'crypto-js';
 import { useHistory } from 'react-router-dom';
 import { register } from '../../components/UserFunctions';
 import { Form, Button, Input, Upload, message } from 'antd';
@@ -17,7 +18,9 @@ const layout = {
 const Register = () => {
     const [form] = Form.useForm();
     const [photo, setPhoto] = useState('');
+    const [photoMD5, setPhotoMD5] = useState('');
     const [audio, setAudio] = useState('');
+    const [audioMD5, setAudioMD5] = useState('');
     const [defaultFileList, setDefaultFileList] = useState([]);
     const history = useHistory();
 
@@ -42,6 +45,12 @@ const Register = () => {
             message.error(`${file.name}  file upload failed.`);
             onError({ err });
         }
+
+        var reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onloadend = () => {
+            setPhotoMD5(CryptoJS.MD5(reader.result).toString());
+        };
         setPhoto(resData);
     };
 
@@ -53,8 +62,6 @@ const Register = () => {
             headers: { 'content-type': 'multipart/form-data' },
         };
         fmData.append('file', file);
-        console.log(file);
-        console.log(fmData);
         try {
             const res = await axios.post('/api/upload', fmData, config);
 
@@ -66,6 +73,11 @@ const Register = () => {
             message.error(`${file.name}  file upload failed.`);
             onError({ err });
         }
+        var reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onloadend = () => {
+            setAudioMD5(CryptoJS.MD5(reader.result).toString());
+        };
         setAudio(resData);
     };
 
@@ -78,6 +90,8 @@ const Register = () => {
             .then((values) => {
                 values.photo = photo;
                 values.audio = audio;
+                values.photoMD5 = photoMD5;
+                values.audioMD5 = audioMD5;
 
                 console.log(values);
                 register(values).then((res) => {

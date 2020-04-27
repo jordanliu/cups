@@ -11,6 +11,8 @@ export const register = async (user) => {
             confirm: user.confirm,
             photo: user.photo,
             audio: user.audio,
+            photoMD5: user.photoMD5,
+            audioMD5: user.audioMD5,
         })
         .then((res) => {
             return {

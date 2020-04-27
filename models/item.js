@@ -41,6 +41,12 @@ var itemSchema = new Schema({
         type: Number,
         trim: true,
     },
+    aslMD5: {
+        type: String,
+    },
+    audioMD5: {
+        type: String,
+    },
 });
 
 module.exports = mongoose.model('Item', itemSchema);

@@ -50,6 +50,8 @@ router.post('/', async (req, res) => {
         aslPhoto: req.body.aslPhoto,
         audio: req.body.audio,
         stockQuantity: req.body.stockQuantity,
+        aslMD5: req.body.aslMD5,
+        audioMD5: req.body.audioMD5,
     });
     try {
         const newItem = await item.save();

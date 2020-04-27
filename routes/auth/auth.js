@@ -7,6 +7,8 @@ const keys = require('../../config/keys');
 //Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const validatePhotoInput = require('../../validation/photo');
+const validateAudioInput = require('../../validation/audio');
 
 //Load customer model
 const Customer = require('../../models/customer');
@@ -58,6 +60,8 @@ router.post('/register', (req, res) => {
                 password: req.body.password,
                 photo: req.body.photo,
                 audio: req.body.audio,
+                photoMD5: req.body.photoMD5,
+                audioMD5: req.body.audioMD5,
             });
 
             //Hash password before saving to database
@@ -127,6 +131,78 @@ router.post('/login', (req, res) => {
                 return res.status(400).json({ message: 'Password incorrect' });
             }
         });
+    });
+});
+
+router.post('/photo', (req, res) => {
+    //Form validation
+
+    const { errors, isValid } = validatePhotoInput(req.body);
+
+    //Check validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    const photoMD5 = req.body.photoMD5;
+
+    //Find by photo
+    Customer.findOne({ photoMD5 }).then((customer) => {
+        //checkiing if the photo exist
+        if (!customer) {
+            return res.status(404).json({ message: 'Photo md5 not found' });
+        }
+        const payload = {
+            id: customer.id,
+            fname: customer.fname,
+        };
+        jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 31556926 }, //1 year in seconds
+            (err, token) => {
+                res.json({
+                    success: true,
+                    token: 'Bearer : ' + token,
+                });
+            }
+        );
+    });
+});
+
+router.post('/audio', (req, res) => {
+    //Form validation
+
+    const { errors, isValid } = validateAudioInput(req.body);
+
+    //Check validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    const audioMD5 = req.body.audioMD5;
+
+    //Find by audio
+    Customer.findOne({ audioMD5 }).then((customer) => {
+        //checkiing if the audio exist
+        if (!customer) {
+            return res.status(404).json({ message: 'Audio md5 not found' });
+        }
+        const payload = {
+            id: customer.id,
+            fname: customer.fname,
+        };
+        jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 31556926 }, //1 year in seconds
+            (err, token) => {
+                res.json({
+                    success: true,
+                    token: 'Bearer : ' + token,
+                });
+            }
+        );
     });
 });
 
