@@ -41,3 +41,7 @@
 .login-wrapper .ant-form-item-required {
     height: 0;
 }
+
+.login-wrapper .login-alt {
+    margin-top: 15px;
+}

@@ -51,3 +51,43 @@ export const login = async (user) => {
             };
         });
 };
+
+export const photo = async (user) => {
+    return axios
+        .post('api/auth/photo', {
+            photoMD5: user.photoMD5,
+        })
+        .then((res) => {
+            return {
+                success: true,
+                data: res,
+            };
+        })
+        .catch((err) => {
+            return {
+                success: false,
+                data: null,
+                errorMesssages: err.response.data,
+            };
+        });
+};
+
+export const audio = async (user) => {
+    return axios
+        .post('api/auth/audio', {
+            audioMD5: user.audioMD5,
+        })
+        .then((res) => {
+            return {
+                success: true,
+                data: res,
+            };
+        })
+        .catch((err) => {
+            return {
+                success: false,
+                data: null,
+                errorMesssages: err.response.data,
+            };
+        });
+};
