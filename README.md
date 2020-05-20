@@ -4,7 +4,7 @@
   CUPS
 </h1>
 
-CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey (1701406), Tarique Jemison (1703228) and Jordan Liu (1506757).
+CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey (1701406), Tarique Jemison (1703228) and Jordan Liu (1506757). 
 <br>
 
 ## Project Description
@@ -21,17 +21,6 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey 
     Group Lead: Jordan Liu<br>
     Integration Lead: Jordan Liu
 
-2.  **Resources**
-
-    Link to [ERD](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_ERD.pdf) <br>
-    Link to [Wireframe](https://gitlab.com/jordanxliu/cups/blob/master/design/CUPS_WIREFRAME.pdf) <br>
-    Link to [Project Charter](https://drive.google.com/open?id=1Tp3Zqfjc2klFwmkhTNpndEzlTV93ZHWy) <br>
-    Link to [Manual](https://drive.google.com/open?id=1C6-Gc3WuNNyER66571hHuXsyQ2OH1KVj) <br>
-    Link to [Demo Video](https://youtu.be/BdBmjmrWqVQ) <br>
-    Link to [Code Review Video](https://youtu.be/OvFA_5_JNbI) <br>
-
-    Live Demo: [http://138.197.77.172:8080/](http://138.197.77.172:8080/) - to access the manager's portal, add a "/portal", [http://138.197.77.172:8080/portal](http://138.197.77.172:8080/portal), access the docs with [http://138.197.77.172:8080/docs](http://138.197.77.172:8080/docs)
-    <br>
 
 ## Quick start
 
