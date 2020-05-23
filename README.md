@@ -4,8 +4,6 @@
   CUPS
 </h1>
 
-CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey (1701406), Tarique Jemison (1703228) and Jordan Liu (1506757). 
-<br>
 
 ## Project Description
 
@@ -17,9 +15,6 @@ CIT3009: Advanced Programming Group Project - built with MERN by Racquel Bailey 
     95 Moolean Avenue in the heart of Montego Bay. Kat would like to encourage an empowering environment through self service. Your consulting team providing pro bono services has
     considered to incorporate Artificial Intelligence through Computer Vision and Speech Processing to accomplish this. The touch-screen self service kiosk will allow customers to
     order their favourite treats and verify using their Digital Id.
-
-    Group Lead: Jordan Liu<br>
-    Integration Lead: Jordan Liu
 
 
 ## Quick start
