@@ -7,6 +7,8 @@
 
 ## Project Description
 
+Built in MERN with Ant Design
+
 1.  **Overview**
 
     **Title:** Enabling Services for the Disabled: A Cup of Uplifting Coffee (C.U.P) <br><br>
