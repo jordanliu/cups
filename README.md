@@ -19,6 +19,8 @@
 
 ## Quick start
 
+Live Demo: http://138.197.77.172:8080/ - to access the manager's portal, add a "/portal", http://138.197.77.172:8080/portal, access the docs with http://138.197.77.172:8080/docs
+
 1.  **Start developing.**
 
     Navigate into the project’s directory and install the dependencies.
