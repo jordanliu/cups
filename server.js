@@ -32,7 +32,7 @@ try {
         useCreateIndex: true,
     });
 } catch (err) {
-    console.log('Error: ${err.message}');
+    console.log('Error: ', err.message);
     process.exit(1);
 }
 
